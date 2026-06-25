@@ -3,7 +3,7 @@ const STORAGE_KEY = 'cafe-icml-guestbook';
 const ISSUE_URL = 'https://github.com/team-attention/cafeicml/issues/new';
 
 const seedEntries = [
-  { name: 'Team Attention', affiliation: 'host', note: 'Welcome to cafe @icml. Show your ICML badge and the drinks are $0.' },
+  { name: 'Team Attention', affiliation: 'host', note: 'Welcome to cafe @icml. Show your ICML ticket and coffee is free.' },
   { name: 'A visiting researcher', affiliation: 'ICML attendee', note: 'Looking for people to run with, talk evals, and find the best Korean food nearby.' }
 ];
 
