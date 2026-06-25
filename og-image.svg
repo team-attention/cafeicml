@@ -1,18 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
-    <radialGradient id="mint" cx="16%" cy="10%" r="65%">
-      <stop stop-color="#d7edf0"/>
-      <stop offset="0.55" stop-color="#fff8e8"/>
-      <stop offset="1" stop-color="#edf2e8"/>
+    <radialGradient id="burst" cx="50%" cy="15%" r="70%">
+      <stop stop-color="#00d4ff" stop-opacity=".55"/>
+      <stop offset=".42" stop-color="#07204d"/>
+      <stop offset="1" stop-color="#030712"/>
     </radialGradient>
+    <linearGradient id="flame" x1="0" x2="1">
+      <stop stop-color="#ffd34d"/>
+      <stop offset=".48" stop-color="#ffb000"/>
+      <stop offset="1" stop-color="#ff4d1f"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="1200" height="630" fill="url(#mint)"/>
-  <path d="M-40 126H520c32 0 51 15 58 44 32-30 70-43 115-39 54 4 96 28 126 70h421" fill="none" stroke="#2f6f63" stroke-width="8" stroke-linecap="round"/>
-  <text x="72" y="180" fill="none" stroke="#2f6f63" stroke-width="5" font-family="Arial Black, Arial, sans-serif" font-size="92" font-style="italic">CAFE</text>
-  <text x="760" y="180" fill="none" stroke="#2f6f63" stroke-width="5" font-family="Arial Black, Arial, sans-serif" font-size="92" font-style="italic">@ICML</text>
-  <text x="72" y="315" fill="#5f675d" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="72">Free coffee for</text>
-  <text x="72" y="405" fill="#4b3427" font-family="Inter, Arial, sans-serif" font-weight="900" font-size="88">ICML ticket holders.</text>
-  <text x="76" y="490" fill="#5f675d" font-family="Inter, Arial, sans-serif" font-size="34">Relaxed researcher cafe · Gangnam, Seoul</text>
-  <rect x="72" y="520" width="292" height="58" rx="14" fill="#2f6f63"/>
-  <text x="105" y="558" fill="#fffdf5" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="24">Get free coffee</text>
+  <rect width="1200" height="630" fill="url(#burst)"/>
+  <g opacity=".38" stroke="#00d4ff" stroke-width="2">
+    <path d="M600 50 32 500M600 50 1180 490M600 50 120 125M600 50 1080 120M600 50 600 630"/>
+    <path d="M-80 542h1360M-10 488h1220M80 434h1040M170 380h860"/>
+    <path d="M175 630 520 210M1025 630 680 210"/>
+  </g>
+  <g opacity=".65" stroke="#ffd34d" stroke-width="10" stroke-linecap="round" filter="url(#glow)">
+    <path d="M-20 505c190 30 326 10 430-58 80-52 159-61 238-26 85 38 177 28 276-28 90-51 190-52 300-2"/>
+  </g>
+  <g transform="skewX(-11)">
+    <text x="85" y="155" fill="none" stroke="#74ecff" stroke-width="5" font-family="Impact, Avenir Next Condensed, sans-serif" font-size="96" font-style="italic">CAFE @ICML</text>
+    <text x="85" y="250" fill="url(#flame)" stroke="#fff3cf" stroke-width="2" font-family="Impact, Avenir Next Condensed, sans-serif" font-size="104" font-style="italic">FREE COFFEE</text>
+    <text x="85" y="345" fill="#fff8e8" font-family="Impact, Avenir Next Condensed, sans-serif" font-size="76" font-style="italic">FOR ICML TICKET HOLDERS</text>
+  </g>
+  <rect x="78" y="410" width="400" height="86" rx="12" fill="#030712" stroke="#00d4ff" stroke-width="3"/>
+  <text x="104" y="463" fill="#00d4ff" font-family="Courier New, monospace" font-size="28" font-weight="700">88mph cafeicml.com</text>
+  <rect x="512" y="410" width="300" height="86" rx="12" fill="#030712" stroke="#ffd34d" stroke-width="3"/>
+  <text x="540" y="463" fill="#ffd34d" font-family="Courier New, monospace" font-size="28" font-weight="700">GANGNAM SEOUL</text>
+  <path d="M890 175c78-28 174-25 230 7 31 18 34 47 6 70-42 34-143 37-212 5-54-26-63-63-24-82Z" fill="none" stroke="#ffd34d" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M1025 198c59-10 99 6 101 31 2 22-35 41-91 43" fill="none" stroke="#ffd34d" stroke-width="10" stroke-linecap="round"/>
+  <path d="M953 160c-13-35 0-57 38-66M1035 155c-11-32 2-52 35-60" fill="none" stroke="#74ecff" stroke-width="8" stroke-linecap="round"/>
 </svg>

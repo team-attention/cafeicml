@@ -4,19 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>cafe @icml</title>
-    <meta name="description" content="Free coffee for ICML ticket holders in Seoul. A relaxed cafe for AI researchers to meet, talk, and find people during ICML." />
+    <meta name="description" content="Free coffee for ICML ticket holders in Seoul. cafe @icml is an 88mph retro-future hallway-track cafe for researchers, locals, events, and sponsor drinks." />
     <meta property="og:title" content="cafe @icml" />
-    <meta property="og:description" content="Free coffee for ICML ticket holders. Meet AI researchers, hosts, teams, and Seoul locals during ICML." />
+    <meta property="og:description" content="Free coffee for ICML ticket holders. A neon retro-future cafe at cafeicml.com for AI researchers in Seoul." />
     <meta property="og:url" content="https://cafeicml.com" />
     <meta property="og:image" content="https://cafeicml.com/og-image.svg" />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#2f6f63" />
+    <meta name="theme-color" content="#07204d" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="poster-field" aria-hidden="true">
+      <div class="light-rays"></div>
+      <div class="flux-grid"></div>
+      <div class="speed-lines"></div>
+    </div>
+
     <header class="topbar">
       <a href="#hero" class="brand" aria-label="cafe @icml home">
-        <span class="seal">@</span>
+        <span class="seal">88</span>
         <span class="brand-text">cafe @icml</span>
       </a>
       <nav aria-label="Main navigation">
@@ -30,37 +36,57 @@
 
     <main>
       <section id="hero" class="hero">
+        <div class="hero-stage" aria-hidden="true">
+          <div class="neon-sign">cafeicml.com</div>
+          <div class="time-circuit">
+            <span>TIME CIRCUIT</span>
+            <strong>ICML 2026</strong>
+            <em>SEOUL</em>
+          </div>
+          <div class="speedometer">
+            <span>88mph</span>
+            <i></i>
+          </div>
+        </div>
+
         <div class="wordmark" aria-hidden="true">
           <span>CAFE</span>
-          <svg viewBox="0 0 240 92" role="img" aria-label="Seoul cafe cup sketch">
-            <path d="M47 28c37-13 83-12 122 2 17 6 23 17 18 32-6 18-34 27-72 24-40-4-76-17-88-34-8-11 1-20 20-24Z"/>
-            <path d="M174 40c28-7 46-3 49 9 2 10-11 20-37 21"/>
-            <path d="M76 27c-7-14-4-22 9-24M115 23c-5-14-2-21 10-22M150 27c-7-12-5-20 6-24"/>
+          <svg viewBox="0 0 260 120" role="img" aria-label="original neon coffee flux sketch">
+            <path d="M39 46c38-17 98-17 144 0 24 9 33 25 22 43-12 21-54 29-101 20-45-9-80-31-82-51-1-6 5-10 17-12Z"/>
+            <path d="M190 56c30-6 51 1 52 15 1 12-18 23-47 23"/>
+            <path d="M82 38c-10-21-4-34 17-39M132 34c-9-19-3-31 18-36M174 39c-8-18-2-29 15-35"/>
+            <path d="M58 84h44l25-24 27 40 21-23 41 1"/>
           </svg>
           <span>@ICML</span>
         </div>
 
         <div class="hero-copy">
+          <p class="eyebrow">retro future hallway track</p>
           <h1>
             <span>Free coffee for</span>
             <span class="ticket-chip">ICML ticket holders</span>
-            <span>in Seoul_</span>
+            <span>in Seoul.</span>
           </h1>
-          <p class="subhead"><strong>Show your ICML ticket. Coffee is free.</strong> Stay for relaxed conversations with researchers, hiring teams, and locals who can actually show you Korea.</p>
+          <p class="subhead"><strong>Show your ICML ticket. Coffee is free.</strong> Stay for researcher conversations, sponsor drinks, Seoul tips, and small rituals between sessions.</p>
           <div class="hero-actions">
             <a class="pill orange" href="#menu">Get free coffee</a>
             <a class="pill light" href="#guestbook">Leave a guestbook note</a>
           </div>
           <div class="mini-icons" aria-label="What happens here">
-            <span>☕ free coffee</span>
-            <span>🏃 researcher runs</span>
-            <span>💬 casual recruiting</span>
-            <span>🇰🇷 Seoul guide</span>
+            <span>free coffee</span>
+            <span>researcher runs</span>
+            <span>casual recruiting</span>
+            <span>Seoul guide</span>
           </div>
         </div>
       </section>
 
       <section id="menu" class="section menu-section">
+        <div class="section-title dashboard-title">
+          <p class="eyebrow">time-circuit menu board</p>
+          <h2>All drinks land at <span>$0</span></h2>
+        </div>
+
         <div class="menu-board card">
           <div class="menu-col">
             <h2>Coffees</h2>
@@ -89,7 +115,10 @@
         </div>
 
         <div class="exclusive card">
-          <h2>Exclusive Drinks</h2>
+          <div class="section-title compact">
+            <p class="eyebrow">sponsor drink console</p>
+            <h2>Exclusive Drinks</h2>
+          </div>
           <div class="drink-grid">
             <article class="drink featured">
               <div class="cup arize">AI</div>
@@ -152,14 +181,13 @@
       <section id="location" class="section location-section">
         <div class="location-card card">
           <div>
-            <h2 class="eyebrow">Address</h2>
-            <button class="select-chip">📍 Gangnam, Seoul</button>
+            <p class="eyebrow">arrival coordinate</p>
             <h2>서울 강남구 영동대로106길 5 아이파크타워2</h2>
-            <p>I-Park Tower 2 — close enough for hallway-track energy, quiet enough for real conversations.</p>
+            <p>I-Park Tower 2 - a Gangnam stop for hallway-track energy, quiet chats, and free coffee after the next session.</p>
           </div>
           <div class="location-actions">
             <button class="pill light" id="copyAddress">Copy address</button>
-            <a class="pill orange" href="https://naver.me/GXADQcFI" target="_blank" rel="noreferrer">Open in maps</a>
+            <a class="pill orange" href="https://naver.me/GXADQcFI" target="_blank" rel="noreferrer">Open in Naver Map</a>
           </div>
         </div>
       </section>
@@ -167,14 +195,15 @@
       <section id="guestbook" class="section guestbook-section">
         <div class="card form-card">
           <div class="section-title">
+            <p class="eyebrow">guestbook relay</p>
             <h2>Guestbook</h2>
             <p>Coming to ICML? Leave your name, affiliation, and what you want to talk about. The form opens a public GitHub guestbook issue and previews your note here.</p>
           </div>
           <form id="guestbookForm">
             <input required name="name" placeholder="Your name" />
             <input name="affiliation" placeholder="Affiliation / lab / company" />
-            <textarea required name="note" placeholder="I’m looking for collaborators, hiring conversations, Seoul tips…"></textarea>
-            <button class="pill orange" type="submit">Sign guestbook →</button>
+            <textarea required name="note" placeholder="I am looking for collaborators, hiring conversations, Seoul tips..."></textarea>
+            <button class="pill orange" type="submit">Sign guestbook</button>
           </form>
           <div id="guestbookEntries" class="entries" aria-live="polite"></div>
         </div>
@@ -182,12 +211,13 @@
 
       <section id="events" class="section events-section">
         <div class="section-title">
+          <p class="eyebrow">future events</p>
           <h2>Events at cafe @icml</h2>
           <p>Casual rituals for researchers who want more than another hotel-lobby meetup.</p>
         </div>
         <div class="event-grid">
           <article class="card event"><span>01</span><h3>Running with Researchers</h3><p>Morning Gangnam run + coffee. Meet people before the first session.</p><a href="#guestbook">Join interest list</a></article>
-          <article class="card event"><span>02</span><h3>codex “/goal” workshop</h3><p>Hands-on agentic coding workshop: turn a research or ops goal into a working artifact.</p><a href="#guestbook">Join interest list</a></article>
+          <article class="card event"><span>02</span><h3>codex "/goal" workshop</h3><p>Hands-on agentic coding workshop: turn a research or ops goal into a working artifact.</p><a href="#guestbook">Join interest list</a></article>
           <article class="card event"><span>03</span><h3>Claude Code cafe hours</h3><p>Bring a repo, paper idea, or demo. Ship something while the coffee is free.</p><a href="#guestbook">Join interest list</a></article>
         </div>
       </section>
@@ -195,7 +225,8 @@
 
     <footer>
       <div class="footer-hero">
-        <h2>The cafe for <em>AI researchers</em>_</h2>
+        <p class="eyebrow">cafeicml.com</p>
+        <h2>The retro-future cafe for <em>AI researchers</em></h2>
         <div><a class="pill light" href="https://naver.me/GXADQcFI" target="_blank" rel="noreferrer">Directions</a><a class="pill orange" href="#events">Events</a></div>
       </div>
       <div class="footer-grid">
