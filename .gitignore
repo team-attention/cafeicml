@@ -1,0 +1,5 @@
+# Static site: no build step required.
+
+node_modules/
+.DS_Store
+.vercel/

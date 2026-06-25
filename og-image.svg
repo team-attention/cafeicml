@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f6f6f6"/>
+  <path d="M-40 126H520c32 0 51 15 58 44 32-30 70-43 115-39 54 4 96 28 126 70h421" fill="none" stroke="#ff5c00" stroke-width="8" stroke-linecap="round"/>
+  <text x="72" y="180" fill="none" stroke="#ff5c00" stroke-width="5" font-family="Arial Black, Arial, sans-serif" font-size="92" font-style="italic">CAFE</text>
+  <text x="760" y="180" fill="none" stroke="#ff5c00" stroke-width="5" font-family="Arial Black, Arial, sans-serif" font-size="92" font-style="italic">@ICML</text>
+  <text x="72" y="325" fill="#4a4a4a" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="74">ICML ticket holders</text>
+  <text x="72" y="408" fill="#191919" font-family="Inter, Arial, sans-serif" font-weight="900" font-size="90">get free cafe drinks.</text>
+  <text x="76" y="490" fill="#4a4a4a" font-family="Inter, Arial, sans-serif" font-size="34">Gangnam, Seoul · cafeicml.com</text>
+  <rect x="72" y="520" width="260" height="58" rx="14" fill="#ff5c00"/>
+  <text x="105" y="558" fill="white" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="24">See the $0 menu</text>
+</svg>
