@@ -1,0 +1,10 @@
+{
+  "name": "cafeicml",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/static-page.test.mjs",
+    "build": "node tests/static-page.test.mjs"
+  }
+}
