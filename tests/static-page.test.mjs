@@ -14,10 +14,10 @@ for (const id of requiredSections) {
   assert.match(html, new RegExp(`id=["']${id}["']`), `missing #${id} section`);
 }
 
-assert.match(html, /cafe @icml/i, 'title/brand should remain cafe @icml');
+assert.match(html, /CAFE @ICML/, 'header brand should show CAFE @ICML');
 assert.match(html, /Free coffee/i, 'hero must emphasize Free coffee');
 assert.match(html, /ICML ticket holders/i, 'hero must name ICML ticket holders');
-assert.match(html, /서울 강남구 영동대로106길 5 아이파크타워2/, 'exact address must remain');
+assert.match(html, /I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul/, 'English location address must remain');
 assert.match(html, /https:\/\/naver\.me\/GXADQcFI/, 'Naver Map link must remain');
 assert.match(html, /Running with Researchers/i, 'event must remain');
 assert.match(html, /codex .{0,20}goal/i, 'codex /goal workshop must remain');
@@ -25,6 +25,8 @@ assert.match(html, /Claude Code/i, 'Claude Code event must remain');
 assert.match(html, /Arize/i, 'Arize main sponsor drink must remain');
 assert.equal(countMatches(html, /Sponsor wanted/g), 5, 'five non-Arize exclusive drinks should say Sponsor wanted');
 assert.ok(countMatches(html, /<strong>\$0<\/strong>/g) >= 12, 'menu and drinks should all show $0 pricing');
+assert.equal(countMatches(html, /class=["']cup\b/g), 0, 'exclusive drink cards should not use awkward initial cup markers');
+assert.equal(countMatches(html, /class=["']logo-dot\b/g), 0, 'exclusive drink cards should not use decorative symbol prefixes');
 
 const retroTokens = [
   /88\s?mph/i,

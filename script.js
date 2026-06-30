@@ -1,4 +1,4 @@
-const ADDRESS = '서울 강남구 영동대로106길 5 아이파크타워2';
+const ADDRESS = 'I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul';
 const STORAGE_KEY = 'cafe-icml-guestbook';
 const ISSUE_URL = 'https://github.com/team-attention/cafeicml/issues/new';
 
