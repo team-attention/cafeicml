@@ -512,6 +512,19 @@
         min-height: 3.5rem;
       }
 
+      .drink-image {
+        display: grid;
+        place-items: center;
+        min-height: 13rem;
+        margin: calc(var(--space-2) * -1) 0;
+      }
+
+      .drink-image img {
+        width: min(100%, 13rem);
+        height: auto;
+        filter: drop-shadow(0 1.1rem 2rem rgba(0, 0, 0, 0.32));
+      }
+
       .card-heading {
         display: grid;
         gap: var(--space-3);
@@ -941,6 +954,15 @@
             <div class="menu-body">
               <div class="menu-meta">
                 <span class="badge primary-text">Main sponsor drink</span>
+              </div>
+              <div class="drink-image">
+                <img
+                  src="./assets/menu/arize-espresso-trace.png"
+                  alt="Arize Espresso Trace iced cold brew with a purple Arize cup sleeve"
+                  width="1024"
+                  height="1535"
+                  loading="lazy"
+                >
               </div>
               <div class="card-heading">
                 <h3 class="primary-text">Arize Espresso Trace</h3>
