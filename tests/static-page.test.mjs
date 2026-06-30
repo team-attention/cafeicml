@@ -19,12 +19,15 @@ assert.match(html, /Show your ICML ticket\. Coffee is free\./i, 'ticket/free cof
 assert.match(html, /I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul/, 'English location address must remain');
 
 assert.equal(countMatches(html, /class=["'][^"']*\bmenu-card\b/g), 6, 'menu should render six drink cards');
-assert.match(html, /Main sponsor drink/, 'Arize card should use the main sponsor badge');
+assert.match(html, /Exclusive Drinks/, 'menu should use the exclusive drinks heading');
+assert.match(html, /menu-panel/, 'menu should use the Corgi-inspired rounded panel');
+assert.match(html, /By Arize/, 'Arize card should use the sponsor line');
 assert.match(html, /Arize Grapefruit Ade/, 'Arize main sponsor drink must remain');
 assert.match(html, /assets\/menu\/arize-grapefruit-ade-cutout\.png/, 'Arize card should include the generated drink image');
 assert.match(html, /Arize Grapefruit Ade with a navy-to-purple Arize cup sleeve/, 'Arize drink image needs useful alt text');
-assert.equal(countMatches(html, /Sponsor wanted/g), 5, 'five non-Arize exclusive drinks should say Sponsor wanted');
+assert.equal(countMatches(html, /By Sponsor wanted/g), 5, 'five non-Arize exclusive drinks should say Sponsor wanted');
 assert.equal(countMatches(html, /<strong class=["']price["']>\$0<\/strong>/g), 6, 'all drink cards should show $0 pricing');
+assert.equal(countMatches(html, /class=["']drink-image drink-placeholder["']/g), 5, 'sponsor-wanted rows should keep small drink visuals');
 
 assert.equal(countMatches(html, /class=["']cup\b/g), 0, 'exclusive drink cards should not use awkward initial cup markers');
 assert.equal(countMatches(html, /class=["']logo-dot\b/g), 0, 'exclusive drink cards should not use decorative symbol prefixes');
