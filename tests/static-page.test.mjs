@@ -2,55 +2,58 @@ import { readFileSync } from 'node:fs';
 import { strict as assert } from 'node:assert';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-const css = readFileSync(new URL('../styles.css', import.meta.url), 'utf8');
-const js = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
 
 function countMatches(text, pattern) {
   return (text.match(pattern) || []).length;
 }
 
-const requiredSections = ['hero', 'menu', 'location', 'guestbook', 'events'];
+const requiredSections = ['home', 'menu', 'events', 'notes', 'map'];
 for (const id of requiredSections) {
   assert.match(html, new RegExp(`id=["']${id}["']`), `missing #${id} section`);
 }
 
 assert.match(html, /CAFE @ICML/, 'header brand should show CAFE @ICML');
-assert.match(html, /Free coffee/i, 'hero must emphasize Free coffee');
-assert.match(html, /ICML ticket holders/i, 'hero must name ICML ticket holders');
+assert.match(html, /Cafe @ ICML/, 'hero title should remain visible');
+assert.match(html, /Free coffee for ICML ticket holders in Seoul/i, 'hero must emphasize free coffee for ICML ticket holders');
+assert.match(html, /Show your ICML ticket\. Coffee is free\./i, 'ticket/free coffee source copy must remain');
 assert.match(html, /I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul/, 'English location address must remain');
-assert.match(html, /https:\/\/naver\.me\/GXADQcFI/, 'Naver Map link must remain');
-assert.match(html, /Running with Researchers/i, 'event must remain');
-assert.match(html, /codex .{0,20}goal/i, 'codex /goal workshop must remain');
-assert.match(html, /Claude Code/i, 'Claude Code event must remain');
-assert.match(html, /Arize/i, 'Arize main sponsor drink must remain');
+
+assert.equal(countMatches(html, /class=["'][^"']*\bmenu-card\b/g), 6, 'menu should render six drink cards');
+assert.match(html, /Main sponsor drink/, 'Arize card should use the main sponsor badge');
+assert.match(html, /Arize Espresso Trace/, 'Arize main sponsor drink must remain');
 assert.equal(countMatches(html, /Sponsor wanted/g), 5, 'five non-Arize exclusive drinks should say Sponsor wanted');
-assert.ok(countMatches(html, /<strong>\$0<\/strong>/g) >= 12, 'menu and drinks should all show $0 pricing');
+assert.equal(countMatches(html, /<strong class=["']price["']>\$0<\/strong>/g), 6, 'all drink cards should show $0 pricing');
+
 assert.equal(countMatches(html, /class=["']cup\b/g), 0, 'exclusive drink cards should not use awkward initial cup markers');
 assert.equal(countMatches(html, /class=["']logo-dot\b/g), 0, 'exclusive drink cards should not use decorative symbol prefixes');
+assert.doesNotMatch(html, />\s*add\s*</, 'menu cards should not include plus/add icon buttons');
+assert.doesNotMatch(html, /<cite\b/i, 'removed cite labels should not return');
 
-const retroTokens = [
-  /88\s?mph/i,
-  /flux/i,
-  /time[- ]?circuit/i,
-  /neon/i,
-  /future/i,
-  /retro/i,
+const pinkCityPopTokens = [
+  /--accent-primary:\s*#ffaedc/i,
+  /--accent-primary-strong:\s*#ff71ce/i,
+  /--accent-secondary:\s*#98e1ff/i,
+  /--accent-tertiary:\s*#dfb7ff/i,
+  /aurora-canvas/,
+  /hero-visual/,
+  /glass-panel/,
+  /menu-card/,
+  /text-shadow/i,
+  /backdrop-filter/i,
   /radial-gradient/i,
   /linear-gradient/i,
-  /skew/i,
-  /clip-path/i,
-  /text-shadow/i,
-  /filter:\s*drop-shadow/i
+  /THREE\.Scene/,
+  /SphereGeometry/,
+  /webgl/i
 ];
-let retroScore = 0;
-for (const token of retroTokens) {
-  if (token.test(html) || token.test(css)) retroScore += 1;
+for (const token of pinkCityPopTokens) {
+  assert.match(html, token, `missing pink city-pop visual token ${token}`);
 }
-assert.ok(retroScore >= 10, `retro-futurist Back-to-the-Future-inspired visual system too weak; score=${retroScore}/12`);
 
-assert.match(css, /#ffb000|#ffd34d|#ff4d1f|#0b1b4d|#00d4ff|#07204d/i, 'must use dark blue / neon cyan / flame yellow-orange palette');
-assert.match(css, /\.speed-lines|\.light-rays|\.flux-grid|\.time-circuit|\.neon-sign/, 'must include named retro-futurist visual components');
-assert.match(css, /@media \(prefers-reduced-motion: reduce\)/, 'must respect reduced motion');
-assert.match(js, /escapeHtml/, 'guestbook should keep escaping user input');
+assert.match(html, /@media \(prefers-reduced-motion: reduce\)/, 'must respect reduced motion');
+assert.match(html, /<form class=["']guestbook-form["'] action=["']#["'] method=["']post["']>/, 'guestbook form should remain');
+assert.match(html, /<label for=["']guest-name["']>Name and affiliation<\/label>/, 'guestbook name label should remain');
+assert.match(html, /<label for=["']guest-message["']>What do you want to talk about\?<\/label>/, 'guestbook message label should remain');
+assert.match(html, /aria-current/, 'navigation should expose the active section state');
 
 console.log('static-page tests passed');

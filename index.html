@@ -1,241 +1,1451 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko" class="theme-dark">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta
+      name="description"
+      content="Free coffee for ICML ticket holders in Seoul. Stay for researcher conversations, sponsor drinks, Seoul tips, and small rituals between sessions."
+    >
+    <meta property="og:title" content="cafe @icml">
+    <meta
+      property="og:description"
+      content="The retro-future cafe for AI researchers."
+    >
+    <meta property="og:type" content="website">
     <title>cafe @icml</title>
-    <meta name="description" content="Free coffee for ICML ticket holders in Seoul. cafe @icml is an 88mph retro-future hallway-track cafe for researchers, locals, events, and sponsor drinks." />
-    <meta property="og:title" content="cafe @icml" />
-    <meta property="og:description" content="Free coffee for ICML ticket holders. A neon retro-future cafe at cafeicml.com for AI researchers in Seoul." />
-    <meta property="og:url" content="https://cafeicml.com" />
-    <meta property="og:image" content="https://cafeicml.com/og-image.svg" />
-    <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#07204d" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307204d'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-size='26' font-family='Arial,sans-serif' font-weight='700' fill='%23ffd34d'%3EC%3C/text%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310102b'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-size='28' font-family='Arial,sans-serif' font-weight='700' fill='%23ffaedc'%3EC%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Sora:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    >
+    <style>
+      :root {
+        color-scheme: dark;
+        --surface-primary: #10102b;
+        --surface-base: #0b0b25;
+        --surface-raised: rgba(28, 29, 56, 0.72);
+        --surface-strong: #272743;
+        --text-primary: #e1dfff;
+        --text-secondary: #dabfcc;
+        --text-inverse: #3b002c;
+        --accent-primary: #ffaedc;
+        --accent-primary-strong: #ff71ce;
+        --accent-secondary: #98e1ff;
+        --accent-tertiary: #dfb7ff;
+        --border-subtle: rgba(255, 255, 255, 0.12);
+        --border-primary: rgba(255, 174, 220, 0.36);
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.25rem;
+        --space-6: 1.5rem;
+        --space-8: 2rem;
+        --space-10: 2.5rem;
+        --space-12: 3rem;
+        --space-16: 4rem;
+        --space-20: 5rem;
+        --max-page: 1120px;
+        --radius-sm: 0.5rem;
+        --radius-md: 0.75rem;
+        --radius-lg: 1rem;
+        --radius-xl: 1.5rem;
+        --glass-shadow: inset 0 0 24px rgba(152, 225, 255, 0.05), 0 16px 44px rgba(0, 0, 0, 0.22);
+        --brand-glow: 0 0 18px rgba(255, 113, 206, 0.35);
+        --secondary-glow: 0 0 18px rgba(0, 203, 252, 0.28);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100dvh;
+        margin: 0;
+        overflow-x: hidden;
+        background: var(--surface-primary);
+        color: var(--text-primary);
+        font-family: "Be Vietnam Pro", system-ui, sans-serif;
+        line-height: 1.6;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -3;
+        pointer-events: none;
+        content: "";
+        background:
+          radial-gradient(circle at 18% 20%, rgba(255, 113, 206, 0.22), transparent 28rem),
+          radial-gradient(circle at 84% 12%, rgba(0, 203, 252, 0.18), transparent 24rem),
+          linear-gradient(180deg, var(--surface-primary), var(--surface-base) 58%, #08081d);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .skip-link {
+        position: fixed;
+        top: var(--space-4);
+        left: var(--space-4);
+        z-index: 100;
+        padding: var(--space-3) var(--space-4);
+        border-radius: var(--radius-sm);
+        background: var(--accent-secondary);
+        color: #003544;
+        transform: translateY(-160%);
+        transition: transform 140ms ease-out;
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      .material-symbols-outlined {
+        font-size: 1.4rem;
+        font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24;
+        line-height: 1;
+      }
+
+      .icon-filled {
+        font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24;
+      }
+
+      .aurora-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        width: 100%;
+        height: 100%;
+        opacity: 0.42;
+        pointer-events: none;
+      }
+
+      .site-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 40;
+        border-bottom: 1px solid var(--border-subtle);
+        background: rgba(16, 16, 43, 0.78);
+        backdrop-filter: blur(18px) saturate(135%);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(100% - 2rem, var(--max-page));
+        min-height: 4rem;
+        margin-inline: auto;
+        gap: var(--space-4);
+      }
+
+      .brand-link,
+      .nav-link,
+      .account-button,
+      .bottom-link,
+      .button {
+        outline: none;
+      }
+
+      .brand-link:focus-visible,
+      .nav-link:focus-visible,
+      .account-button:focus-visible,
+      .bottom-link:focus-visible,
+      .button:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid var(--accent-secondary);
+        outline-offset: 3px;
+      }
+
+      .brand-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        color: var(--accent-primary);
+        font-family: "Sora", system-ui, sans-serif;
+        font-size: clamp(1.1rem, 5vw, 1.6rem);
+        font-weight: 800;
+        letter-spacing: 0;
+        text-shadow: 0 0 12px rgba(255, 174, 220, 0.72);
+      }
+
+      .header-nav {
+        display: none;
+        align-items: center;
+        gap: var(--space-2);
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      .nav-link {
+        padding: var(--space-2) var(--space-3);
+        border-radius: var(--radius-sm);
+        color: var(--text-secondary);
+        transition: color 180ms ease, background 180ms ease;
+      }
+
+      .nav-link:hover,
+      .nav-link[aria-current="page"] {
+        background: rgba(152, 225, 255, 0.1);
+        color: var(--accent-secondary);
+      }
+
+      .account-button {
+        display: inline-flex;
+        width: 2.75rem;
+        height: 2.75rem;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--text-secondary);
+        transition: transform 140ms ease-out, color 180ms ease, border-color 180ms ease;
+      }
+
+      .account-button:hover {
+        border-color: var(--border-subtle);
+        color: var(--accent-secondary);
+      }
+
+      .account-button:active {
+        transform: translateY(1px) scale(0.96);
+      }
+
+      main {
+        padding-bottom: calc(7.5rem + env(safe-area-inset-bottom));
+      }
+
+      .section {
+        width: min(100% - 2rem, var(--max-page));
+        margin-inline: auto;
+        padding-block: var(--space-16);
+      }
+
+      .section-header {
+        max-width: 42rem;
+        margin: 0 auto var(--space-10);
+        text-align: center;
+      }
+
+      .eyebrow {
+        display: block;
+        margin-bottom: var(--space-3);
+        color: var(--accent-secondary);
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        text-shadow: 0 0 14px rgba(152, 225, 255, 0.72);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Sora", system-ui, sans-serif;
+      }
+
+      h1 {
+        max-width: 9ch;
+        margin-inline: auto;
+        font-size: clamp(2.8rem, 13vw, 6.5rem);
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        text-shadow: 0 0 16px rgba(255, 174, 220, 0.74), 0 0 32px rgba(255, 113, 206, 0.34);
+      }
+
+      h2 {
+        font-size: clamp(1.75rem, 6vw, 2.75rem);
+        font-weight: 800;
+        line-height: 1.12;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 800;
+        line-height: 1.3;
+      }
+
+      .lead {
+        max-width: 38rem;
+        margin-inline: auto;
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+      }
+
+      .hero {
+        position: relative;
+        display: grid;
+        min-height: 100dvh;
+        place-items: center;
+        overflow: hidden;
+        padding: 7rem 1rem 5rem;
+        text-align: center;
+      }
+
+      .hero-visual {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: 0.8;
+        pointer-events: none;
+      }
+
+      .hero-visual canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .hero-content {
+        display: grid;
+        justify-items: center;
+        gap: var(--space-6);
+        width: min(100%, 42rem);
+      }
+
+      .hero-copy {
+        max-width: 34rem;
+        color: var(--text-secondary);
+        font-size: clamp(1rem, 3.5vw, 1.2rem);
+      }
+
+      .hero-actions,
+      .form-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--space-4);
+        width: 100%;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 3.25rem;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-2);
+        border: 1px solid transparent;
+        border-radius: var(--radius-md);
+        padding: var(--space-4) var(--space-6);
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-weight: 700;
+        transition:
+          transform 140ms ease-out,
+          border-color 180ms ease,
+          background 180ms ease,
+          color 180ms ease,
+          box-shadow 180ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button:active {
+        transform: translateY(1px) scale(0.98);
+      }
+
+      .button-primary {
+        background: var(--accent-primary-strong);
+        color: var(--text-inverse);
+        box-shadow: var(--brand-glow);
+      }
+
+      .button-secondary {
+        border-color: rgba(152, 225, 255, 0.7);
+        background: rgba(152, 225, 255, 0.08);
+        color: var(--accent-secondary);
+      }
+
+      .glass-panel {
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        background: var(--surface-raised);
+        box-shadow: var(--glass-shadow);
+        backdrop-filter: blur(18px) saturate(135%);
+      }
+
+      .feature-grid {
+        display: grid;
+        gap: var(--space-6);
+      }
+
+      .feature-card {
+        padding: var(--space-6);
+        border-left: 4px solid var(--accent-primary);
+      }
+
+      .feature-card.secondary {
+        border-left-color: var(--accent-secondary);
+      }
+
+      .feature-card.tertiary {
+        border-left-color: var(--accent-tertiary);
+      }
+
+      .feature-title {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        margin-bottom: var(--space-3);
+      }
+
+      .feature-title .material-symbols-outlined,
+      .feature-card.primary h3 {
+        color: var(--accent-primary);
+      }
+
+      .feature-card.secondary .material-symbols-outlined,
+      .feature-card.secondary h3 {
+        color: var(--accent-secondary);
+      }
+
+      .feature-card.tertiary .material-symbols-outlined,
+      .feature-card.tertiary h3 {
+        color: var(--accent-tertiary);
+      }
+
+      .muted {
+        color: var(--text-secondary);
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-auto-columns: minmax(18rem, 85vw);
+        grid-auto-flow: column;
+        gap: var(--space-6);
+        overflow-x: auto;
+        padding: 0 var(--space-1) var(--space-5);
+        scroll-snap-type: x mandatory;
+        scrollbar-color: var(--accent-primary-strong) transparent;
+      }
+
+      .menu-card {
+        position: relative;
+        min-height: 20rem;
+        overflow: hidden;
+        scroll-snap-align: center;
+        transition: transform 180ms ease-out, border-color 180ms ease, box-shadow 180ms ease;
+      }
+
+      .menu-card::before {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        background:
+          radial-gradient(circle at 18% 12%, rgba(255, 174, 220, 0.16), transparent 12rem),
+          radial-gradient(circle at 92% 88%, rgba(152, 225, 255, 0.12), transparent 11rem);
+        opacity: 0.82;
+      }
+
+      .menu-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(152, 225, 255, 0.28);
+        box-shadow:
+          var(--glass-shadow),
+          0 0 28px rgba(152, 225, 255, 0.12);
+      }
+
+      .menu-card.featured-drink {
+        border-color: rgba(255, 174, 220, 0.34);
+      }
+
+      .menu-body {
+        position: relative;
+        display: grid;
+        min-height: 100%;
+        gap: var(--space-5);
+        padding: var(--space-6);
+      }
+
+      .menu-meta {
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        min-height: 3.5rem;
+      }
+
+      .card-heading {
+        display: grid;
+        gap: var(--space-3);
+      }
+
+      .badge {
+        border: 1px solid currentColor;
+        border-radius: var(--radius-sm);
+        padding: var(--space-2) var(--space-3);
+        background: rgba(255, 255, 255, 0.035);
+        box-shadow: 0 0 14px currentColor;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .primary-text {
+        color: var(--accent-primary);
+      }
+
+      .secondary-text {
+        color: var(--accent-secondary);
+      }
+
+      .tertiary-text {
+        color: var(--accent-tertiary);
+      }
+
+      .card-footer {
+        display: block;
+        align-self: end;
+      }
+
+      .price {
+        font-family: "Sora", system-ui, sans-serif;
+        font-size: 1.65rem;
+        font-weight: 800;
+      }
+
+      .timeline {
+        position: relative;
+        display: grid;
+        gap: var(--space-8);
+        max-width: 46rem;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+      }
+
+      .timeline::before {
+        position: absolute;
+        top: var(--space-2);
+        bottom: var(--space-2);
+        left: 1.25rem;
+        width: 2px;
+        content: "";
+        background: linear-gradient(var(--accent-primary), var(--accent-secondary));
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-left: var(--space-12);
+      }
+
+      .timeline-icon {
+        position: absolute;
+        top: var(--space-1);
+        left: 0;
+        z-index: 1;
+        display: grid;
+        width: 2.5rem;
+        height: 2.5rem;
+        place-items: center;
+        border: 2px solid currentColor;
+        border-radius: 999px;
+        background: var(--surface-strong);
+        box-shadow: var(--secondary-glow);
+      }
+
+      .timeline-card {
+        padding: var(--space-6);
+      }
+
+      .event-time {
+        display: block;
+        margin-bottom: var(--space-1);
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .guestbook {
+        display: grid;
+        gap: var(--space-10);
+        max-width: 48rem;
+        margin-inline: auto;
+        padding: var(--space-8);
+      }
+
+      .guestbook-title {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+      }
+
+      .guestbook-form {
+        display: grid;
+        gap: var(--space-6);
+      }
+
+      .field {
+        display: grid;
+        gap: var(--space-2);
+      }
+
+      label {
+        color: var(--accent-secondary);
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 0;
+        border-bottom: 2px solid var(--border-primary);
+        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        background: rgba(39, 39, 67, 0.74);
+        color: var(--text-primary);
+        padding: var(--space-4);
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: rgba(218, 191, 204, 0.48);
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: var(--accent-primary);
+      }
+
+      .note-list {
+        display: grid;
+        gap: var(--space-4);
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .note {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: var(--space-4);
+      }
+
+      .map-panel {
+        max-width: 48rem;
+        margin-inline: auto;
+      }
+
+      .map-figure {
+        position: relative;
+        min-height: 20rem;
+        overflow: hidden;
+        margin: 0 0 var(--space-6);
+      }
+
+      .map-image {
+        position: absolute;
+        inset: 0;
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYLsI6ILnja0MUt_xxmR8fGpej_0H5W4Tou8Uge8nl3KyyatTex6gov3pjybVq4uRLsGv4cJ1Hdsi9fbYENVjlFYFBvXBFZQiscFR6GXiVDVbZexmWeMRGPvDKbYopC_DnxqXocB2t03jCIj94Q79wlprms4R882a86n7kBXFQbTtMc6z7GpSsegRVlVdc6hAK3h9dNkcUkE0ccEoR_zSMjGhzw4RbiSZXeaPEPmZon0zfdViE0Qk5gajUw0p06q_diykBHMCKsmrD");
+        background-position: center;
+        background-size: cover;
+        filter: grayscale(1) sepia(0.3) hue-rotate(260deg) invert(0.9);
+        opacity: 0.42;
+      }
+
+      .map-marker {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        min-height: 20rem;
+        place-items: center;
+        text-align: center;
+      }
+
+      .map-marker .material-symbols-outlined {
+        color: var(--accent-secondary);
+        font-size: 3.25rem;
+        animation: marker-bob 1800ms ease-in-out infinite;
+      }
+
+      address {
+        color: var(--text-secondary);
+        font-style: normal;
+        text-align: center;
+      }
+
+      address strong {
+        display: block;
+        color: var(--text-primary);
+        font-size: 1.1rem;
+      }
+
+      .bottom-nav {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 45;
+        border-top: 1px solid var(--border-primary);
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        background: rgba(16, 16, 43, 0.84);
+        box-shadow: 0 -12px 36px rgba(0, 203, 252, 0.16);
+        backdrop-filter: blur(20px) saturate(140%);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      .bottom-nav-list {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: var(--space-1);
+        width: min(100%, 34rem);
+        min-height: 5rem;
+        padding: var(--space-2) var(--space-3);
+        margin: 0 auto;
+        list-style: none;
+      }
+
+      .bottom-link {
+        display: grid;
+        min-width: 0;
+        place-items: center;
+        border-radius: var(--radius-md);
+        color: rgba(218, 191, 204, 0.68);
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-size: 0.74rem;
+        font-weight: 700;
+        transition: transform 140ms ease-out, color 180ms ease, background 180ms ease;
+      }
+
+      .bottom-link:hover,
+      .bottom-link[aria-current="page"] {
+        background: rgba(152, 225, 255, 0.09);
+        color: var(--accent-secondary);
+        text-shadow: 0 0 10px rgba(152, 225, 255, 0.72);
+      }
+
+      .bottom-link:active {
+        transform: scale(0.95);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .particle {
+        position: fixed;
+        z-index: -1;
+        border-radius: 999px;
+        pointer-events: none;
+      }
+
+      @keyframes marker-bob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      @media (min-width: 720px) {
+        .header-nav {
+          display: flex;
+        }
+
+        .hero-actions,
+        .form-actions {
+          width: auto;
+        }
+
+        .button {
+          min-width: 11rem;
+        }
+
+        .feature-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .menu-grid {
+          grid-auto-flow: initial;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          overflow: visible;
+          padding-bottom: 0;
+        }
+      }
+
+      @media (min-width: 960px) {
+        .section {
+          padding-block: var(--space-20);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="poster-field" aria-hidden="true">
-      <div class="light-rays"></div>
-      <div class="flux-grid"></div>
-      <div class="speed-lines"></div>
-    </div>
+    <a class="skip-link" href="#main-content">본문으로 이동</a>
+    <canvas class="aurora-canvas" id="aurora-canvas" aria-hidden="true"></canvas>
 
-    <header class="topbar">
-      <a href="#hero" class="brand" aria-label="CAFE @ICML home">
-        <span class="seal">88</span>
-        <span class="brand-text">CAFE @ICML</span>
-      </a>
-      <nav aria-label="Main navigation">
-        <a href="#menu">Menu</a>
-        <a href="#location">Location</a>
-        <a href="#guestbook">Guestbook</a>
-        <a href="#events">Events</a>
-      </nav>
-      <a class="pill dark" href="#menu">Free coffee menu</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand-link" href="#home" aria-label="CAFE @ICML home">
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+          <span>CAFE @ICML</span>
+        </a>
+        <nav class="header-nav" aria-label="Main sections">
+          <a class="nav-link" href="#menu">Menu</a>
+          <a class="nav-link" href="#events">Events</a>
+          <a class="nav-link" href="#notes">Guestbook</a>
+          <a class="nav-link" href="#map">Location</a>
+        </nav>
+        <button class="account-button" type="button" aria-label="Open account menu">
+          <span class="material-symbols-outlined" aria-hidden="true">account_circle</span>
+        </button>
+      </div>
     </header>
 
-    <main>
-      <section id="hero" class="hero">
-        <div class="hero-stage" aria-hidden="true">
-          <div class="neon-sign">cafeicml.com</div>
-          <div class="time-circuit">
-            <span>TIME CIRCUIT</span>
-            <strong>ICML 2026</strong>
-            <em>SEOUL</em>
-          </div>
-          <div class="speedometer">
-            <span>88mph</span>
-            <i></i>
-          </div>
-        </div>
-
-        <div class="wordmark" aria-hidden="true">
-          <span>CAFE</span>
-          <svg viewBox="0 0 260 120" role="img" aria-label="original neon coffee flux sketch">
-            <path d="M39 46c38-17 98-17 144 0 24 9 33 25 22 43-12 21-54 29-101 20-45-9-80-31-82-51-1-6 5-10 17-12Z"/>
-            <path d="M190 56c30-6 51 1 52 15 1 12-18 23-47 23"/>
-            <path d="M82 38c-10-21-4-34 17-39M132 34c-9-19-3-31 18-36M174 39c-8-18-2-29 15-35"/>
-            <path d="M58 84h44l25-24 27 40 21-23 41 1"/>
-          </svg>
-          <span>@ICML</span>
-        </div>
-
-        <div class="hero-copy">
-          <p class="eyebrow">retro future hallway track</p>
-          <h1>
-            <span>Free coffee for</span>
-            <span class="ticket-chip">ICML ticket holders</span>
-            <span>in Seoul.</span>
-          </h1>
-          <p class="subhead"><strong>Show your ICML ticket. Coffee is free.</strong> Stay for researcher conversations, sponsor drinks, Seoul tips, and small rituals between sessions.</p>
-          <div class="hero-actions">
-            <a class="pill orange" href="#menu">Get free coffee</a>
-            <a class="pill light" href="#guestbook">Leave a guestbook note</a>
-          </div>
-          <div class="mini-icons" aria-label="What happens here">
-            <span>free coffee</span>
-            <span>researcher runs</span>
-            <span>casual recruiting</span>
-            <span>Seoul guide</span>
+    <main id="main-content">
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <div class="hero-visual" id="orb-stage" aria-hidden="true"></div>
+        <div class="hero-content reveal is-visible">
+          <span class="eyebrow">Time Circuit ICML 2026 Seoul</span>
+          <h1 id="hero-title">Cafe @ ICML</h1>
+          <p class="hero-copy">
+            Free coffee for ICML ticket holders in Seoul. Show your ICML ticket. Coffee is free.
+            Stay for researcher conversations, sponsor drinks, Seoul tips, and small rituals between sessions.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button button-primary" href="#menu">Get free coffee</a>
+            <a class="button button-secondary" href="#notes">Leave a guestbook note</a>
           </div>
         </div>
       </section>
 
-      <section id="menu" class="section menu-section">
-        <div class="section-title dashboard-title">
-          <p class="eyebrow">time-circuit menu board</p>
-          <h2>All drinks land at <span>$0</span></h2>
+      <section class="section reveal" aria-labelledby="philosophy-title">
+        <div class="section-header">
+          <h2 id="philosophy-title">All drinks land at $0</h2>
+          <p class="lead">free coffee researcher runs casual recruiting Seoul guide</p>
         </div>
 
-        <div class="menu-board card">
-          <div class="menu-col">
-            <h2>Coffees</h2>
-            <div class="table-head"><span>ITEM</span><span>PRICE</span></div>
-            <div class="menu-row"><span>Americano</span><i></i><strong>$0</strong></div>
-            <div class="menu-row"><span>Latte</span><i></i><strong>$0</strong></div>
-            <div class="menu-row"><span>Cold Brew</span><i></i><strong>$0</strong></div>
-            <div class="menu-row"><span>Espresso</span><i></i><strong>$0</strong></div>
-          </div>
-          <div class="menu-col">
-            <h2>Drinks</h2>
-            <div class="table-head"><span>ITEM</span><span>PRICE</span></div>
-            <div class="menu-row"><span>Matcha Latte</span><i></i><strong>$0</strong></div>
-            <div class="menu-row"><span>Yuja Ade</span><i></i><strong>$0</strong></div>
-            <div class="menu-row"><span>Iced Tea</span><i></i><strong>$0</strong></div>
-            <div class="menu-row"><span>Hot Chocolate</span><i></i><strong>$0</strong></div>
-          </div>
-          <div class="menu-col">
-            <h2>Snacks</h2>
-            <div class="table-head"><span>ITEM</span><span>PRICE</span></div>
-            <div class="menu-row"><span>Croissant</span><i></i><strong>$0</strong></div>
-            <div class="menu-row"><span>Cookie</span><i></i><strong>$0</strong></div>
-            <div class="menu-row"><span>Banana</span><i></i><strong>$0</strong></div>
-            <div class="menu-row"><span>Energy Bar</span><i></i><strong>$0</strong></div>
-          </div>
-        </div>
+        <div class="feature-grid">
+          <article class="glass-panel feature-card primary">
+            <div class="feature-title">
+              <span class="material-symbols-outlined icon-filled" aria-hidden="true">cloud_off</span>
+              <h3>Badge Boost</h3>
+            </div>
+            <p class="muted">
+              Show ICML ticket or badge.
+            </p>
+          </article>
 
-        <div class="exclusive card">
-          <div class="section-title compact">
-            <p class="eyebrow">sponsor drink console</p>
-            <h2>Exclusive Drinks</h2>
-          </div>
-          <div class="drink-grid">
-            <article class="drink featured">
-              <div class="drink-body">
-                <em>Main sponsor drink</em>
-                <h3>Arize Espresso Trace</h3>
-                <p>By Arize. Double espresso, tonic, orange zest, and a tiny eval loop.</p>
-              </div>
-              <strong>$0</strong>
-            </article>
-            <article class="drink">
-              <div class="drink-body">
-                <em>Sponsor wanted</em>
-                <h3>Gradient Matcha</h3>
-                <p>Matcha, milk, vanilla, and Seoul green energy.</p>
-              </div>
-              <strong>$0</strong>
-            </article>
-            <article class="drink">
-              <div class="drink-body">
-                <em>Sponsor wanted</em>
-                <h3>Yuja Poster Session</h3>
-                <p>Yuja ade, sparkling water, mint, late-afternoon optimism.</p>
-              </div>
-              <strong>$0</strong>
-            </article>
-            <article class="drink">
-              <div class="drink-body">
-                <em>Sponsor wanted</em>
-                <h3>Latte Descent</h3>
-                <p>Milk, espresso, cinnamon, and a smooth convergence curve.</p>
-              </div>
-              <strong>$0</strong>
-            </article>
-            <article class="drink">
-              <div class="drink-body">
-                <em>Sponsor wanted</em>
-                <h3>Berry Benchmark</h3>
-                <p>Berry smoothie, yogurt, banana, and leaderboard drama.</p>
-              </div>
-              <strong>$0</strong>
-            </article>
-            <article class="drink">
-              <div class="drink-body">
-                <em>Sponsor wanted</em>
-                <h3>Attention Iced Tea</h3>
-                <p>Black tea, lemon, peach, and multi-head refreshment.</p>
-              </div>
-              <strong>$0</strong>
-            </article>
-          </div>
-          <div class="boosters">
-            <article><h3>Badge Boost</h3><strong>$0</strong><p>Show ICML ticket or badge.</p></article>
-            <article><h3>Free Coffee</h3><strong>$0</strong><p>Your ICML ticket turns coffee into the easiest hello.</p></article>
-            <article><h3>Seoul Guide</h3><strong>$0</strong><p>Ask locals where to eat, run, and meet.</p></article>
-          </div>
+          <article class="glass-panel feature-card secondary">
+            <div class="feature-title">
+              <span class="material-symbols-outlined icon-filled" aria-hidden="true">groups</span>
+              <h3>Free Coffee</h3>
+            </div>
+            <p class="muted">
+              Your ICML ticket turns coffee into the easiest hello.
+            </p>
+          </article>
+
+          <article class="glass-panel feature-card tertiary">
+            <div class="feature-title">
+              <span class="material-symbols-outlined icon-filled" aria-hidden="true">bolt</span>
+              <h3>Seoul Guide</h3>
+            </div>
+            <p class="muted">
+              Ask locals where to eat, run, and meet.
+            </p>
+          </article>
         </div>
       </section>
 
-      <section id="location" class="section location-section">
-        <div class="location-card card">
-          <div>
-            <p class="eyebrow">arrival coordinate</p>
-            <h2>I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul</h2>
-            <p>A Gangnam stop for hallway-track energy, quiet chats, and free coffee after the next session.</p>
-          </div>
-          <div class="location-actions">
-            <button class="pill light" id="copyAddress">Copy address</button>
-            <a class="pill orange" href="https://naver.me/GXADQcFI" target="_blank" rel="noreferrer">Open in Naver Map</a>
-          </div>
+      <section class="section reveal" id="menu" aria-labelledby="menu-title">
+        <div class="section-header">
+          <h2 id="menu-title">Concept Menu</h2>
+          <p class="lead">Free coffee menu. Exclusive drinks. Sponsor drink console.</p>
+        </div>
+
+        <div class="menu-grid" aria-label="Free coffee menu">
+          <article class="glass-panel menu-card featured-drink">
+            <div class="menu-body">
+              <div class="menu-meta">
+                <span class="badge primary-text">Main sponsor drink</span>
+              </div>
+              <div class="card-heading">
+                <h3 class="primary-text">Arize Espresso Trace</h3>
+                <p class="muted">By Arize. Double espresso, tonic, orange zest, and a tiny eval loop.</p>
+              </div>
+              <div class="card-footer">
+                <strong class="price">$0</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-panel menu-card">
+            <div class="menu-body">
+              <div class="menu-meta">
+                <span class="badge secondary-text">Sponsor wanted</span>
+              </div>
+              <div class="card-heading">
+                <h3 class="secondary-text">Gradient Matcha</h3>
+                <p class="muted">Matcha, milk, vanilla, and Seoul green energy.</p>
+              </div>
+              <div class="card-footer">
+                <strong class="price">$0</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-panel menu-card">
+            <div class="menu-body">
+              <div class="menu-meta">
+                <span class="badge tertiary-text">Sponsor wanted</span>
+              </div>
+              <div class="card-heading">
+                <h3 class="tertiary-text">Yuja Poster Session</h3>
+                <p class="muted">Yuja ade, sparkling water, mint, late-afternoon optimism.</p>
+              </div>
+              <div class="card-footer">
+                <strong class="price">$0</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-panel menu-card">
+            <div class="menu-body">
+              <div class="menu-meta">
+                <span class="badge primary-text">Sponsor wanted</span>
+              </div>
+              <div class="card-heading">
+                <h3 class="primary-text">Latte Descent</h3>
+                <p class="muted">Milk, espresso, cinnamon, and a smooth convergence curve.</p>
+              </div>
+              <div class="card-footer">
+                <strong class="price">$0</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-panel menu-card">
+            <div class="menu-body">
+              <div class="menu-meta">
+                <span class="badge secondary-text">Sponsor wanted</span>
+              </div>
+              <div class="card-heading">
+                <h3 class="secondary-text">Berry Benchmark</h3>
+                <p class="muted">Berry smoothie, yogurt, banana, and leaderboard drama.</p>
+              </div>
+              <div class="card-footer">
+                <strong class="price">$0</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-panel menu-card">
+            <div class="menu-body">
+              <div class="menu-meta">
+                <span class="badge tertiary-text">Sponsor wanted</span>
+              </div>
+              <div class="card-heading">
+                <h3 class="tertiary-text">Attention Iced Tea</h3>
+                <p class="muted">Black tea, lemon, peach, and multi-head refreshment.</p>
+              </div>
+              <div class="card-footer">
+                <strong class="price">$0</strong>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section id="guestbook" class="section guestbook-section">
-        <div class="card form-card">
-          <div class="section-title">
-            <p class="eyebrow">guestbook relay</p>
-            <h2>Guestbook</h2>
-            <p>Coming to ICML? Leave your name, affiliation, and what you want to talk about. The form opens a public GitHub guestbook issue and previews your note here.</p>
-          </div>
-          <form id="guestbookForm">
-            <input required name="name" placeholder="Your name" />
-            <input name="affiliation" placeholder="Affiliation / lab / company" />
-            <textarea required name="note" placeholder="I am looking for collaborators, hiring conversations, Seoul tips..."></textarea>
-            <button class="pill orange" type="submit">Sign guestbook</button>
+      <section class="section reveal" id="events" aria-labelledby="events-title">
+        <div class="section-header">
+          <h2 id="events-title">Session Events</h2>
+          <p class="lead">Casual rituals for researchers who want more than another hotel-lobby meetup.</p>
+        </div>
+
+        <ol class="timeline">
+          <li class="timeline-item">
+            <span class="timeline-icon primary-text" aria-hidden="true">
+              <span class="material-symbols-outlined">calendar_today</span>
+            </span>
+            <article class="glass-panel timeline-card">
+              <time class="event-time primary-text" datetime="2026-07-07T08:00:00+09:00">01</time>
+              <h3>Running with Researchers</h3>
+              <p class="muted">Morning Gangnam run + coffee. Meet people before the first session.</p>
+            </article>
+          </li>
+
+          <li class="timeline-item">
+            <span class="timeline-icon secondary-text" aria-hidden="true">
+              <span class="material-symbols-outlined">code</span>
+            </span>
+            <article class="glass-panel timeline-card">
+              <time class="event-time secondary-text" datetime="2026-07-08T14:00:00+09:00">02</time>
+              <h3>codex "/goal" workshop</h3>
+              <p class="muted">Hands-on agentic coding workshop: turn a research or ops goal into a working artifact.</p>
+            </article>
+          </li>
+
+          <li class="timeline-item">
+            <span class="timeline-icon tertiary-text" aria-hidden="true">
+              <span class="material-symbols-outlined">stars</span>
+            </span>
+            <article class="glass-panel timeline-card">
+              <time class="event-time tertiary-text" datetime="2026-07-09T16:00:00+09:00">03</time>
+              <h3>Claude Code cafe hours</h3>
+              <p class="muted">Bring a repo, paper idea, or demo. Ship something while the coffee is free.</p>
+            </article>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section reveal" id="notes" aria-labelledby="notes-title">
+        <div class="glass-panel guestbook">
+          <h2 class="guestbook-title" id="notes-title">
+            <span class="material-symbols-outlined primary-text" aria-hidden="true">edit_note</span>
+            Guestbook
+          </h2>
+          <p class="muted">
+            Coming to ICML? Leave your name, affiliation, and what you want to talk about.
+            The form opens a public GitHub guestbook issue and previews your note here.
+          </p>
+
+          <form class="guestbook-form" action="#" method="post">
+            <div class="field">
+              <label for="guest-name">Name and affiliation</label>
+              <input id="guest-name" name="name" type="text" autocomplete="name" placeholder="Your name, lab, or company">
+            </div>
+            <div class="field">
+              <label for="guest-message">What do you want to talk about?</label>
+              <textarea id="guest-message" name="message" rows="4" placeholder="Research, demos, Seoul tips, recruiting, runs..."></textarea>
+            </div>
+            <div class="form-actions">
+              <button class="button button-primary" type="submit">Sign guestbook</button>
+            </div>
           </form>
-          <div id="guestbookEntries" class="entries" aria-live="polite"></div>
+
+          <ul class="note-list" aria-label="최근 방명록">
+            <li class="note">
+              <blockquote>
+                <p class="muted">"The retro-future cafe for AI researchers."</p>
+              </blockquote>
+            </li>
+            <li class="note">
+              <blockquote>
+                <p class="muted">"Your ICML ticket turns coffee into the easiest hello."</p>
+              </blockquote>
+            </li>
+          </ul>
         </div>
       </section>
 
-      <section id="events" class="section events-section">
-        <div class="section-title">
-          <p class="eyebrow">future events</p>
-          <h2>Events at cafe @icml</h2>
-          <p>Casual rituals for researchers who want more than another hotel-lobby meetup.</p>
+      <section class="section reveal" id="map" aria-labelledby="map-title">
+        <div class="section-header">
+          <h2 id="map-title">Location</h2>
+          <p class="lead">arrival coordinate</p>
         </div>
-        <div class="event-grid">
-          <article class="card event"><span>01</span><h3>Running with Researchers</h3><p>Morning Gangnam run + coffee. Meet people before the first session.</p><a href="#guestbook">Join interest list</a></article>
-          <article class="card event"><span>02</span><h3>codex "/goal" workshop</h3><p>Hands-on agentic coding workshop: turn a research or ops goal into a working artifact.</p><a href="#guestbook">Join interest list</a></article>
-          <article class="card event"><span>03</span><h3>Claude Code cafe hours</h3><p>Bring a repo, paper idea, or demo. Ship something while the coffee is free.</p><a href="#guestbook">Join interest list</a></article>
+
+        <div class="map-panel">
+          <figure class="glass-panel map-figure">
+            <div class="map-image" aria-hidden="true"></div>
+            <figcaption class="map-marker">
+              <span>
+                <span class="material-symbols-outlined icon-filled" aria-hidden="true">location_on</span>
+                <strong class="secondary-text">I-Park Tower 2</strong>
+              </span>
+            </figcaption>
+          </figure>
+
+          <address>
+            <strong>I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul</strong>
+            A Gangnam stop for hallway-track energy, quiet chats, and free coffee after the next session.
+          </address>
         </div>
       </section>
     </main>
 
-    <footer>
-      <div class="footer-hero">
-        <p class="eyebrow">cafeicml.com</p>
-        <h2>The retro-future cafe for <em>AI researchers</em></h2>
-        <div><a class="pill light" href="https://naver.me/GXADQcFI" target="_blank" rel="noreferrer">Directions</a><a class="pill orange" href="#events">Events</a></div>
-      </div>
-      <div class="footer-grid">
-        <div class="footer-logo">@<br /><strong>ICML</strong></div>
-        <div><h4>CAFE</h4><a href="#menu">Menu</a><a href="#guestbook">Guestbook</a><a href="#events">Events</a></div>
-        <div><h4>VISIT</h4><a href="https://naver.me/GXADQcFI" target="_blank" rel="noreferrer">Naver Map</a><span>Gangnam, Seoul</span></div>
-        <div><h4>CONTACT</h4><a href="mailto:hello@team-attention.com">hello@team-attention.com</a><a href="https://cafeicml.com">cafeicml.com</a></div>
-      </div>
-    </footer>
-    <script src="./script.js"></script>
+    <nav class="bottom-nav" aria-label="Bottom section navigation">
+      <ul class="bottom-nav-list">
+        <li>
+          <a class="bottom-link" href="#home">
+            <span class="material-symbols-outlined icon-filled" aria-hidden="true">home</span>
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a class="bottom-link" href="#menu">
+            <span class="material-symbols-outlined" aria-hidden="true">restaurant_menu</span>
+            <span>Menu</span>
+          </a>
+        </li>
+        <li>
+          <a class="bottom-link" href="#events">
+            <span class="material-symbols-outlined" aria-hidden="true">event</span>
+            <span>Events</span>
+          </a>
+        </li>
+        <li>
+          <a class="bottom-link" href="#notes">
+            <span class="material-symbols-outlined" aria-hidden="true">edit_note</span>
+            <span>Guestbook</span>
+          </a>
+        </li>
+        <li>
+          <a class="bottom-link" href="#map">
+            <span class="material-symbols-outlined" aria-hidden="true">map</span>
+            <span>Location</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js" defer></script>
+    <script>
+      (() => {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function startAuroraShader() {
+          const canvas = document.getElementById("aurora-canvas");
+          const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+
+          if (!gl) {
+            return;
+          }
+
+          const vertexShaderSource = `
+            attribute vec2 a_position;
+            varying vec2 v_texCoord;
+            void main() {
+              v_texCoord = a_position * 0.5 + 0.5;
+              gl_Position = vec4(a_position, 0.0, 1.0);
+            }
+          `;
+
+          const fragmentShaderSource = `
+            precision highp float;
+            uniform float u_time;
+            uniform vec2 u_resolution;
+            varying vec2 v_texCoord;
+
+            void main() {
+              vec2 uv = v_texCoord;
+              vec3 navy = vec3(0.06, 0.06, 0.17);
+              vec3 pink = vec3(1.0, 0.44, 0.81);
+              vec3 cyan = vec3(0.0, 1.0, 0.8);
+
+              float noise = sin(uv.x * 10.0 + u_time) * cos(uv.y * 10.0 + u_time) * 0.5 + 0.5;
+              vec3 finalColor = mix(navy, pink, noise * 0.5);
+              finalColor = mix(finalColor, cyan, sin(u_time * 0.5 + uv.x * 5.0) * 0.3 + 0.3);
+
+              float wave = sin(uv.x * 3.0 + u_time * 0.5) * 0.2 + 0.5;
+              float aurora = 1.0 - smoothstep(0.0, 0.1, abs(uv.y - wave));
+              finalColor += aurora * cyan * 0.5;
+
+              gl_FragColor = vec4(finalColor, 1.0);
+            }
+          `;
+
+          function createShader(type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            return shader;
+          }
+
+          function syncSize() {
+            const width = canvas.clientWidth || window.innerWidth || 1280;
+            const height = canvas.clientHeight || window.innerHeight || 720;
+            if (canvas.width !== width || canvas.height !== height) {
+              canvas.width = width;
+              canvas.height = height;
+            }
+          }
+
+          const program = gl.createProgram();
+          gl.attachShader(program, createShader(gl.VERTEX_SHADER, vertexShaderSource));
+          gl.attachShader(program, createShader(gl.FRAGMENT_SHADER, fragmentShaderSource));
+          gl.linkProgram(program);
+          gl.useProgram(program);
+
+          const buffer = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+
+          const position = gl.getAttribLocation(program, "a_position");
+          gl.enableVertexAttribArray(position);
+          gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+          const timeUniform = gl.getUniformLocation(program, "u_time");
+          const resolutionUniform = gl.getUniformLocation(program, "u_resolution");
+
+          if ("ResizeObserver" in window) {
+            new ResizeObserver(syncSize).observe(canvas);
+          }
+
+          function render(timestamp) {
+            syncSize();
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            gl.uniform1f(timeUniform, prefersReducedMotion ? 0 : timestamp * 0.001);
+            gl.uniform2f(resolutionUniform, canvas.width, canvas.height);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+            if (!prefersReducedMotion) {
+              requestAnimationFrame(render);
+            }
+          }
+
+          render(0);
+        }
+
+        function startOrb() {
+          const stage = document.getElementById("orb-stage");
+
+          if (!stage || !window.THREE) {
+            return;
+          }
+
+          const scene = new THREE.Scene();
+          const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+          const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+          const geometry = new THREE.SphereGeometry(2, 64, 64);
+          const material = new THREE.MeshPhongMaterial({
+            color: 0x00ffff,
+            emissive: 0x00ffff,
+            emissiveIntensity: 0.5,
+            opacity: 0.8,
+            shininess: 100,
+            transparent: true,
+            wireframe: true
+          });
+
+          const sphere = new THREE.Mesh(geometry, material);
+          const pointLight = new THREE.PointLight(0xff00ff, 2, 100);
+          const ambientLight = new THREE.AmbientLight(0x404040);
+
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+          stage.appendChild(renderer.domElement);
+          scene.add(sphere);
+          pointLight.position.set(5, 5, 5);
+          scene.add(pointLight, ambientLight);
+          camera.position.z = 5;
+
+          function resize() {
+            const width = stage.clientWidth || window.innerWidth;
+            const height = stage.clientHeight || window.innerHeight;
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+          }
+
+          function animate() {
+            if (!prefersReducedMotion) {
+              sphere.rotation.y += 0.01;
+              sphere.rotation.x += 0.005;
+            }
+
+            renderer.render(scene, camera);
+
+            if (!prefersReducedMotion) {
+              requestAnimationFrame(animate);
+            }
+          }
+
+          resize();
+          window.addEventListener("resize", resize, { passive: true });
+          animate();
+        }
+
+        function observeSections() {
+          const revealObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                }
+              });
+            },
+            { threshold: 0.12 }
+          );
+
+          document.querySelectorAll(".reveal").forEach((section) => {
+            revealObserver.observe(section);
+          });
+        }
+
+        function syncActiveNavigation() {
+          const links = [...document.querySelectorAll(".nav-link, .bottom-link")];
+          const sections = [...document.querySelectorAll("main section[id]")];
+          let manualActiveUntil = 0;
+
+          function setActive(hash) {
+            links.forEach((link) => {
+              const isActive = link.getAttribute("href") === hash;
+              const icon = link.querySelector(".material-symbols-outlined");
+
+              if (isActive) {
+                link.setAttribute("aria-current", "page");
+                icon?.classList.add("icon-filled");
+              } else {
+                link.removeAttribute("aria-current");
+                icon?.classList.remove("icon-filled");
+              }
+            });
+          }
+
+          const sectionObserver = new IntersectionObserver(
+            (entries) => {
+              if (Date.now() < manualActiveUntil) {
+                return;
+              }
+
+              const visible = entries
+                .filter((entry) => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+              if (!visible) {
+                return;
+              }
+
+              const activeHash = `#${visible.target.id}`;
+              setActive(activeHash);
+            },
+            { rootMargin: "-30% 0px -55% 0px", threshold: [0.2, 0.5, 0.8] }
+          );
+
+          sections.forEach((section) => sectionObserver.observe(section));
+          links.forEach((link) => {
+            link.addEventListener("click", () => {
+              manualActiveUntil = Date.now() + 1600;
+              setActive(link.getAttribute("href"));
+            });
+          });
+          window.addEventListener("hashchange", () => {
+            manualActiveUntil = Date.now() + 1600;
+            setActive(window.location.hash || "#home");
+          });
+          setActive(window.location.hash || "#home");
+        }
+
+        function startParticles() {
+          if (prefersReducedMotion) {
+            return;
+          }
+
+          window.setInterval(() => {
+            const particle = document.createElement("span");
+            const size = Math.random() * 4 + 2;
+            const color = Math.random() > 0.5 ? "var(--accent-primary)" : "var(--accent-secondary)";
+            const duration = Math.random() * 10000 + 5000;
+
+            particle.className = "particle";
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            particle.style.backgroundColor = color;
+            particle.style.boxShadow = `0 0 10px ${color}`;
+            particle.style.opacity = `${Math.random() * 0.5}`;
+            document.body.appendChild(particle);
+
+            particle
+              .animate(
+                [
+                  { opacity: 0, transform: "translate(0, 0)" },
+                  {
+                    opacity: 0.8,
+                    transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * -300}px)`,
+                    offset: 0.5
+                  },
+                  {
+                    opacity: 0,
+                    transform: `translate(${Math.random() * 400 - 200}px, ${Math.random() * -600}px)`
+                  }
+                ],
+                { duration, easing: "linear" }
+              )
+              .addEventListener("finish", () => particle.remove());
+          }, 1000);
+        }
+
+        startAuroraShader();
+        observeSections();
+        syncActiveNavigation();
+        startParticles();
+
+        window.addEventListener("load", startOrb, { once: true });
+      })();
+    </script>
   </body>
 </html>
