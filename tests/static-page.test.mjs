@@ -22,7 +22,7 @@ assert.equal(countMatches(html, /class=["'][^"']*\bmenu-card\b/g), 6, 'menu shou
 assert.match(html, /Main sponsor drink/, 'Arize card should use the main sponsor badge');
 assert.match(html, /Arize Grapefruit Ade/, 'Arize main sponsor drink must remain');
 assert.match(html, /assets\/menu\/arize-grapefruit-ade-cutout\.png/, 'Arize card should include the generated drink image');
-assert.match(html, /Arize Grapefruit Ade with a hot-pink Arize cup sleeve/, 'Arize drink image needs useful alt text');
+assert.match(html, /Arize Grapefruit Ade with a navy-to-purple Arize cup sleeve/, 'Arize drink image needs useful alt text');
 assert.equal(countMatches(html, /Sponsor wanted/g), 5, 'five non-Arize exclusive drinks should say Sponsor wanted');
 assert.equal(countMatches(html, /<strong class=["']price["']>\$0<\/strong>/g), 6, 'all drink cards should show $0 pricing');
 
