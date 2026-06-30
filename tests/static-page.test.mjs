@@ -21,6 +21,7 @@ assert.match(html, /I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul
 assert.equal(countMatches(html, /class=["'][^"']*\bmenu-card\b/g), 6, 'menu should render six drink cards');
 assert.match(html, /Exclusive Drinks/, 'menu should use the exclusive drinks heading');
 assert.match(html, /menu-panel/, 'menu should use the Corgi-inspired rounded panel');
+assert.match(html, /background:\s*#d8dec8/i, 'menu panel should use the muted pistachio khaki background');
 assert.match(html, /By Arize/, 'Arize card should use the sponsor line');
 assert.match(html, /Arize Grapefruit Ade/, 'Arize main sponsor drink must remain');
 assert.match(html, /assets\/menu\/arize-grapefruit-ade-cutout\.png/, 'Arize card should include the generated drink image');
