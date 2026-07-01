@@ -19,7 +19,7 @@ assert.match(html, /Show your ICML ticket\. Coffee is free\./i, 'ticket/free cof
 assert.match(html, /https:\/\/maps\.app\.goo\.gl\/RaefhMoRSksakyhv6/, 'location should use the provided Google Maps link');
 assert.doesNotMatch(html, /I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul/, 'location section should not expose the address text');
 
-assert.equal(countMatches(html, /class=["'][^"']*\bmenu-card\b/g), 6, 'menu should render six drink cards');
+assert.equal(countMatches(html, /class=["'][^"']*\bmenu-card\b/g), 7, 'menu should render seven drink cards');
 assert.match(html, /Exclusive Drinks/, 'menu should use the exclusive drinks heading');
 assert.match(html, /menu-panel/, 'menu should use the Corgi-inspired rounded panel');
 assert.doesNotMatch(html, /#d8dec8/i, 'menu section should not use the rejected khaki fill');
@@ -29,8 +29,12 @@ assert.match(html, /By Arize/, 'Arize card should use the sponsor line');
 assert.match(html, /Arize Grapefruit Ade/, 'Arize main sponsor drink must remain');
 assert.match(html, /assets\/menu\/arize-grapefruit-ade-cutout\.png/, 'Arize card should include the generated drink image');
 assert.match(html, /Arize Grapefruit Ade with a navy-to-purple Arize cup sleeve/, 'Arize drink image needs useful alt text');
+assert.match(html, /By IronClaw/, 'IronClaw card should use the sponsor line');
+assert.match(html, /IronClaw Latte/, 'IronClaw sponsor drink must be added');
+assert.match(html, /assets\/menu\/ironclaw-latte-cutout\.png/, 'IronClaw card should include the generated drink image');
+assert.match(html, /IronClaw Latte with an IronClaw logo cup sleeve/, 'IronClaw drink image needs useful alt text');
 assert.equal(countMatches(html, /By Sponsor wanted/g), 5, 'five non-Arize exclusive drinks should say Sponsor wanted');
-assert.equal(countMatches(html, /<strong class=["']price["']>\$0<\/strong>/g), 6, 'all drink cards should show $0 pricing');
+assert.equal(countMatches(html, /<strong class=["']price["']>\$0<\/strong>/g), 7, 'all drink cards should show $0 pricing');
 assert.equal(countMatches(html, /class=["']drink-spacer["']/g), 5, 'sponsor-wanted rows should reserve source-style drink image space without fake cups');
 assert.match(html, /drink-name-group/, 'menu should use Corgi-style drink title and sponsor grouping');
 assert.match(html, /price-mobile/, 'menu should split mobile and desktop prices like the source section');
