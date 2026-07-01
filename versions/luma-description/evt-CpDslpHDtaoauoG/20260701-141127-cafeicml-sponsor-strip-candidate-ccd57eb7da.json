@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-07-01T14:11:27.293165+09:00",
+  "event_id": "evt-CpDslpHDtaoauoG",
+  "label": "cafeicml-sponsor-strip",
+  "stage": "candidate",
+  "source": "/Users/bong/team-attention/cafeicml/generated/cafeicml-luma-description-sponsor-strip.md",
+  "sha256": "ccd57eb7dac496f4e83f4e93821a02233d990e24790f228a1237c8566e33c20f",
+  "bytes": 8972,
+  "chars": 8859,
+  "markdown_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-141127-cafeicml-sponsor-strip-candidate-ccd57eb7da.md",
+  "metadata_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-141127-cafeicml-sponsor-strip-candidate-ccd57eb7da.json"
+}
