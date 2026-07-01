@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-07-01T12:31:45.849138+09:00",
+  "event_id": "evt-CpDslpHDtaoauoG",
+  "label": "cafeicml-sponsor-spacing",
+  "stage": "candidate",
+  "source": "/Users/bong/team-attention/cafeicml/generated/cafeicml-luma-description-sponsor-spacing.md",
+  "sha256": "fd8fe251d0da77deeea6b7e17c647bdb6c3d7f07b2682df7e8b1d945b244a6a6",
+  "bytes": 9201,
+  "chars": 9089,
+  "markdown_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-123145-cafeicml-sponsor-spacing-candidate-fd8fe251d0.md",
+  "metadata_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-123145-cafeicml-sponsor-spacing-candidate-fd8fe251d0.json"
+}
