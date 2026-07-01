@@ -455,17 +455,41 @@
         color: var(--text-secondary);
       }
 
+      #menu {
+        position: relative;
+        z-index: 20;
+        display: flex;
+        width: 100%;
+        max-width: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 var(--space-4) var(--space-6);
+      }
+
+      #menu::before {
+        position: absolute;
+        inset: 2.25rem 0 0;
+        z-index: -1;
+        pointer-events: none;
+        content: "";
+        background: #d8dec8;
+      }
+
       .menu-panel {
         position: relative;
         overflow: hidden;
-        max-width: 78rem;
+        width: 100%;
+        max-width: 72rem;
         margin-inline: auto;
-        border: 1px solid rgba(24, 24, 26, 0.14);
+        border: 1px solid #d0d0d0;
         border-radius: 2.25rem;
-        background: #d8dec8;
-        box-shadow: 0 1.25rem 3.5rem rgba(4, 6, 18, 0.18);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(164, 164, 164, 0.2)),
+          linear-gradient(90deg, #d8dec8 0% 100%);
+        box-shadow: inset 5px -5px 8px rgba(25, 25, 25, 0.18);
         color: #18181a;
-        padding: var(--space-8);
+        padding: var(--space-6);
       }
 
       .menu-panel::before {
@@ -476,84 +500,88 @@
         position: relative;
         display: grid;
         z-index: 1;
-        gap: var(--space-12);
+        gap: 2.25rem;
       }
 
       .menu-panel h2 {
         color: #18181a;
-        font-size: clamp(3rem, 6vw, 4.75rem);
+        font-size: 1.875rem;
         font-weight: 500;
         line-height: 1;
+        letter-spacing: -0.96px;
       }
 
       .menu-panel h3 {
         color: #18181a;
-        font-size: clamp(1.45rem, 2.4vw, 1.85rem);
-        font-weight: 700;
+        font-size: 1.125rem;
+        font-weight: 600;
         line-height: 1;
+        letter-spacing: -0.576px;
       }
 
       .menu-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: var(--space-10);
+        column-gap: var(--space-12);
+        row-gap: var(--space-8);
         padding: 0;
       }
 
       .menu-card {
-        display: grid;
-        grid-template-columns: 4.75rem minmax(0, 1fr) auto;
-        align-items: center;
-        gap: var(--space-5);
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        gap: var(--space-3);
         min-width: 0;
       }
 
       .drink-image {
         position: relative;
         display: grid;
-        width: 4.75rem;
-        height: 6.1rem;
+        width: 3.1875rem;
+        height: 4.75rem;
         place-items: center;
+        flex-shrink: 0;
         overflow: visible;
       }
 
       .drink-image img {
         width: auto;
-        max-width: 4.9rem;
-        max-height: 6.1rem;
+        max-width: 3.1875rem;
+        max-height: 4.75rem;
         height: auto;
-        filter: drop-shadow(0 0.55rem 0.8rem rgba(0, 0, 0, 0.14));
+        filter: drop-shadow(0 0.45rem 0.75rem rgba(0, 0, 0, 0.12));
       }
 
-      .featured-drink .drink-image img {
-        transform: scale(1.34);
-      }
-
-      .drink-placeholder::before {
-        display: block;
-        width: 3.15rem;
+      .drink-spacer {
+        display: none;
+        width: 3.1875rem;
         height: 4.75rem;
-        border: 1px solid rgba(24, 24, 26, 0.18);
-        border-radius: 0.45rem 0.45rem 0.85rem 0.85rem;
-        content: "";
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent 22%),
-          linear-gradient(180deg, #f3f0ed, #ddd8d2);
-        box-shadow: 0 0.45rem 0.8rem rgba(0, 0, 0, 0.1);
+        flex-shrink: 0;
       }
 
       .card-heading {
-        display: grid;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
         min-width: 0;
-        gap: var(--space-3);
+        gap: var(--space-2);
       }
 
       .drink-title-row {
         display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        min-width: 0;
+        gap: var(--space-2);
+      }
+
+      .drink-name-group {
+        display: flex;
         align-items: center;
         flex-wrap: wrap;
         min-width: 0;
-        gap: var(--space-3);
+        gap: 0.375rem;
       }
 
       .sponsor-line {
@@ -564,17 +592,20 @@
         background: rgba(255, 255, 255, 0.34);
         color: #18181a;
         font-family: "Sora", system-ui, sans-serif;
-        font-size: 0.9rem;
-        font-weight: 700;
+        font-size: 0.75rem;
+        font-weight: 600;
         line-height: 1;
-        padding: 0.42rem 0.72rem;
+        letter-spacing: -0.384px;
+        padding: 4px 7px;
       }
 
       .ingredients {
-        max-width: 24rem;
+        width: 100%;
+        max-width: 229px;
         color: #18181a;
-        font-size: 1rem;
-        line-height: 1.18;
+        font-size: 0.8125rem;
+        line-height: 1.08;
+        letter-spacing: -0.416px;
       }
 
       .badge {
@@ -602,16 +633,21 @@
       }
 
       .card-footer {
-        display: block;
-        align-self: end;
+        display: none;
+        flex-shrink: 0;
       }
 
       .price {
         font-family: "Sora", system-ui, sans-serif;
         color: #18181a;
-        font-size: 1.6rem;
-        font-weight: 800;
+        font-size: 1.125rem;
+        font-weight: 500;
         line-height: 1;
+        letter-spacing: -0.576px;
+      }
+
+      .price-mobile {
+        display: block;
       }
 
       .timeline {
@@ -884,40 +920,90 @@
         }
 
         .menu-panel {
-          padding: var(--space-12);
+          padding: 2.25rem;
+        }
+
+        .menu-panel-inner {
+          gap: 2.25rem;
+        }
+
+        .menu-panel h2 {
+          font-size: 3rem;
+          letter-spacing: -1.536px;
+        }
+
+        .menu-panel h3 {
+          font-size: 1.5rem;
+          letter-spacing: -0.768px;
+          white-space: nowrap;
         }
 
         .menu-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: var(--space-10) var(--space-20);
+          column-gap: var(--space-12);
+          row-gap: var(--space-8);
         }
 
         .menu-card {
-          grid-template-columns: 5.5rem minmax(0, 1fr) auto;
-          gap: var(--space-6);
+          align-items: center;
+          gap: var(--space-5);
         }
 
         .drink-image {
-          width: 5.5rem;
-          height: 7rem;
+          width: 4.1875rem;
+          height: 6.25rem;
         }
 
         .drink-image img {
-          max-width: 5.4rem;
-          max-height: 7rem;
+          max-width: 4.1875rem;
+          max-height: 6.25rem;
         }
 
-        .drink-placeholder::before {
-          width: 3.5rem;
-          height: 5.7rem;
+        .drink-spacer {
+          display: block;
+          width: 4.1875rem;
+          height: 6.25rem;
+        }
+
+        .card-heading {
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: var(--space-2);
+        }
+
+        .drink-title-row {
+          width: 100%;
+          justify-content: flex-start;
+        }
+
+        .drink-name-group {
+          gap: var(--space-2);
+        }
+
+        .sponsor-line {
+          font-size: 1rem;
+          letter-spacing: -0.512px;
+          padding: 4.942px 9.884px;
+        }
+
+        .ingredients {
+          font-size: 0.875rem;
+          line-height: 1;
+          letter-spacing: -0.448px;
         }
 
         .price {
-          font-size: 1.9rem;
+          font-size: 1.5rem;
+          letter-spacing: -0.768px;
         }
 
-        .menu-panel h3 {
-          white-space: nowrap;
+        .price-mobile {
+          display: none;
+        }
+
+        .card-footer {
+          display: block;
         }
       }
 
@@ -1039,10 +1125,15 @@
                 </div>
                 <div class="card-heading">
                   <div class="drink-title-row">
-                    <h3 class="primary-text">Arize Grapefruit Ade</h3>
-                    <span class="sponsor-line">By Arize</span>
+                    <div class="drink-name-group">
+                      <h3 class="primary-text">Arize Grapefruit Ade</h3>
+                      <span class="sponsor-line">By Arize</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
                   </div>
-                  <p class="ingredients">grapefruit, sparkling water,<br>citrus, ice</p>
+                  <div class="drink-details">
+                    <p class="ingredients">grapefruit, sparkling water,<br>citrus, ice</p>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <strong class="price">$0</strong>
@@ -1050,13 +1141,18 @@
               </article>
 
               <article class="menu-card">
-                <div class="drink-image drink-placeholder" style="--drink-top: #b7f7de; --drink-bottom: #66d79e;" aria-hidden="true"></div>
+                <div class="drink-spacer" aria-hidden="true"></div>
                 <div class="card-heading">
                   <div class="drink-title-row">
-                    <h3 class="secondary-text">Gradient Matcha</h3>
-                    <span class="sponsor-line">By Sponsor wanted</span>
+                    <div class="drink-name-group">
+                      <h3 class="secondary-text">Gradient Matcha</h3>
+                      <span class="sponsor-line">By Sponsor wanted</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
                   </div>
-                  <p class="ingredients">matcha, milk, vanilla,<br>Seoul green energy</p>
+                  <div class="drink-details">
+                    <p class="ingredients">matcha, milk, vanilla,<br>Seoul green energy</p>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <strong class="price">$0</strong>
@@ -1064,13 +1160,18 @@
               </article>
 
               <article class="menu-card">
-                <div class="drink-image drink-placeholder" style="--drink-top: #ffd8a8; --drink-bottom: #ff8fd2;" aria-hidden="true"></div>
+                <div class="drink-spacer" aria-hidden="true"></div>
                 <div class="card-heading">
                   <div class="drink-title-row">
-                    <h3 class="tertiary-text">Yuja Poster Session</h3>
-                    <span class="sponsor-line">By Sponsor wanted</span>
+                    <div class="drink-name-group">
+                      <h3 class="tertiary-text">Yuja Poster Session</h3>
+                      <span class="sponsor-line">By Sponsor wanted</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
                   </div>
-                  <p class="ingredients">yuja ade, sparkling water,<br>mint, late-afternoon optimism</p>
+                  <div class="drink-details">
+                    <p class="ingredients">yuja ade, sparkling water,<br>mint, late-afternoon optimism</p>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <strong class="price">$0</strong>
@@ -1078,13 +1179,18 @@
               </article>
 
               <article class="menu-card">
-                <div class="drink-image drink-placeholder" style="--drink-top: #f6d8ba; --drink-bottom: #9a6a4f;" aria-hidden="true"></div>
+                <div class="drink-spacer" aria-hidden="true"></div>
                 <div class="card-heading">
                   <div class="drink-title-row">
-                    <h3 class="primary-text">Latte Descent</h3>
-                    <span class="sponsor-line">By Sponsor wanted</span>
+                    <div class="drink-name-group">
+                      <h3 class="primary-text">Latte Descent</h3>
+                      <span class="sponsor-line">By Sponsor wanted</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
                   </div>
-                  <p class="ingredients">milk, espresso, cinnamon,<br>smooth convergence curve</p>
+                  <div class="drink-details">
+                    <p class="ingredients">milk, espresso, cinnamon,<br>smooth convergence curve</p>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <strong class="price">$0</strong>
@@ -1092,13 +1198,18 @@
               </article>
 
               <article class="menu-card">
-                <div class="drink-image drink-placeholder" style="--drink-top: #f0b7ff; --drink-bottom: #846cff;" aria-hidden="true"></div>
+                <div class="drink-spacer" aria-hidden="true"></div>
                 <div class="card-heading">
                   <div class="drink-title-row">
-                    <h3 class="secondary-text">Berry Benchmark</h3>
-                    <span class="sponsor-line">By Sponsor wanted</span>
+                    <div class="drink-name-group">
+                      <h3 class="secondary-text">Berry Benchmark</h3>
+                      <span class="sponsor-line">By Sponsor wanted</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
                   </div>
-                  <p class="ingredients">berry smoothie, yogurt,<br>banana, leaderboard drama</p>
+                  <div class="drink-details">
+                    <p class="ingredients">berry smoothie, yogurt,<br>banana, leaderboard drama</p>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <strong class="price">$0</strong>
@@ -1106,13 +1217,18 @@
               </article>
 
               <article class="menu-card">
-                <div class="drink-image drink-placeholder" style="--drink-top: #fee0a6; --drink-bottom: #e89a5b;" aria-hidden="true"></div>
+                <div class="drink-spacer" aria-hidden="true"></div>
                 <div class="card-heading">
                   <div class="drink-title-row">
-                    <h3 class="tertiary-text">Attention Iced Tea</h3>
-                    <span class="sponsor-line">By Sponsor wanted</span>
+                    <div class="drink-name-group">
+                      <h3 class="tertiary-text">Attention Iced Tea</h3>
+                      <span class="sponsor-line">By Sponsor wanted</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
                   </div>
-                  <p class="ingredients">black tea, lemon, peach,<br>multi-head refreshment</p>
+                  <div class="drink-details">
+                    <p class="ingredients">black tea, lemon, peach,<br>multi-head refreshment</p>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <strong class="price">$0</strong>
