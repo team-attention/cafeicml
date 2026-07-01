@@ -468,12 +468,7 @@
       }
 
       #menu::before {
-        position: absolute;
-        inset: 2.25rem 0 0;
-        z-index: -1;
-        pointer-events: none;
-        content: "";
-        background: #d8dec8;
+        display: none;
       }
 
       .menu-panel {
@@ -482,13 +477,18 @@
         width: 100%;
         max-width: 72rem;
         margin-inline: auto;
-        border: 1px solid #d0d0d0;
+        border: 1px solid rgba(255, 255, 255, 0.16);
         border-radius: 2.25rem;
         background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(164, 164, 164, 0.2)),
-          linear-gradient(90deg, #d8dec8 0% 100%);
-        box-shadow: inset 5px -5px 8px rgba(25, 25, 25, 0.18);
-        color: #18181a;
+          linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.025)),
+          rgba(4, 5, 18, 0.54);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.12),
+          inset 5px -5px 10px rgba(0, 0, 0, 0.18),
+          0 1.25rem 4rem rgba(0, 0, 0, 0.28);
+        color: #f5f3ff;
+        backdrop-filter: blur(22px) saturate(132%);
+        -webkit-backdrop-filter: blur(22px) saturate(132%);
         padding: var(--space-6);
       }
 
@@ -504,7 +504,7 @@
       }
 
       .menu-panel h2 {
-        color: #18181a;
+        color: #f5f3ff;
         font-size: 1.875rem;
         font-weight: 500;
         line-height: 1;
@@ -512,7 +512,7 @@
       }
 
       .menu-panel h3 {
-        color: #18181a;
+        color: #f5f3ff;
         font-size: 1.125rem;
         font-weight: 600;
         line-height: 1;
@@ -587,10 +587,10 @@
       .sponsor-line {
         display: inline-flex;
         align-items: center;
-        border: 1px solid rgba(24, 24, 26, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.34);
-        color: #18181a;
+        background: rgba(255, 255, 255, 0.08);
+        color: #f5f3ff;
         font-family: "Sora", system-ui, sans-serif;
         font-size: 0.75rem;
         font-weight: 600;
@@ -602,7 +602,7 @@
       .ingredients {
         width: 100%;
         max-width: 229px;
-        color: #18181a;
+        color: rgba(245, 243, 255, 0.78);
         font-size: 0.8125rem;
         line-height: 1.08;
         letter-spacing: -0.416px;
@@ -621,15 +621,15 @@
       }
 
       .primary-text {
-        color: #18181a;
+        color: #f5f3ff;
       }
 
       .secondary-text {
-        color: #18181a;
+        color: #f5f3ff;
       }
 
       .tertiary-text {
-        color: #18181a;
+        color: #f5f3ff;
       }
 
       .card-footer {
@@ -639,7 +639,7 @@
 
       .price {
         font-family: "Sora", system-ui, sans-serif;
-        color: #18181a;
+        color: #f5f3ff;
         font-size: 1.125rem;
         font-weight: 500;
         line-height: 1;
