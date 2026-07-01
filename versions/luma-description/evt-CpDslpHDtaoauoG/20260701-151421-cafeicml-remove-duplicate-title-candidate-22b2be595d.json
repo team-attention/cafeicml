@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-07-01T15:14:21.841657+09:00",
+  "event_id": "evt-CpDslpHDtaoauoG",
+  "label": "cafeicml-remove-duplicate-title",
+  "stage": "candidate",
+  "source": "/Users/bong/team-attention/cafeicml/generated/cafeicml-luma-description-remove-duplicate-title.md",
+  "sha256": "22b2be595d3c320e2f96a1d03541cfc0da0935d886e604785ddae94cec391571",
+  "bytes": 9014,
+  "chars": 8901,
+  "markdown_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-151421-cafeicml-remove-duplicate-title-candidate-22b2be595d.md",
+  "metadata_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-151421-cafeicml-remove-duplicate-title-candidate-22b2be595d.json"
+}
