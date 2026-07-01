@@ -16,7 +16,8 @@ assert.match(html, /CAFE @ICML/, 'header brand should show CAFE @ICML');
 assert.match(html, /Cafe @ ICML/, 'hero title should remain visible');
 assert.match(html, /Free coffee for ICML ticket holders in Seoul/i, 'hero must emphasize free coffee for ICML ticket holders');
 assert.match(html, /Show your ICML ticket\. Coffee is free\./i, 'ticket/free coffee source copy must remain');
-assert.match(html, /I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul/, 'English location address must remain');
+assert.match(html, /https:\/\/maps\.app\.goo\.gl\/RaefhMoRSksakyhv6/, 'location should use the provided Google Maps link');
+assert.doesNotMatch(html, /I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul/, 'location section should not expose the address text');
 
 assert.equal(countMatches(html, /class=["'][^"']*\bmenu-card\b/g), 6, 'menu should render six drink cards');
 assert.match(html, /Exclusive Drinks/, 'menu should use the exclusive drinks heading');

@@ -822,6 +822,34 @@
         font-size: 1.1rem;
       }
 
+      .map-link-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        padding: var(--space-5);
+        background: rgba(255, 255, 255, 0.045);
+        color: var(--text-secondary);
+        transition: transform 160ms ease, border-color 180ms ease, background 180ms ease;
+      }
+
+      .map-link-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--border-primary);
+        background: rgba(255, 255, 255, 0.075);
+      }
+
+      .map-link-card strong {
+        display: block;
+        color: var(--text-primary);
+      }
+
+      .map-link-card .material-symbols-outlined {
+        color: var(--accent-secondary);
+      }
+
       .bottom-nav {
         position: fixed;
         right: 0;
@@ -1333,15 +1361,18 @@
             <figcaption class="map-marker">
               <span>
                 <span class="material-symbols-outlined icon-filled" aria-hidden="true">location_on</span>
-                <strong class="secondary-text">I-Park Tower 2</strong>
+                <strong class="secondary-text">Google Maps</strong>
               </span>
             </figcaption>
           </figure>
 
-          <address>
-            <strong>I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul</strong>
-            A Gangnam stop for hallway-track energy, quiet chats, and free coffee after the next session.
-          </address>
+          <a class="map-link-card" href="https://maps.app.goo.gl/RaefhMoRSksakyhv6" target="_blank" rel="noopener noreferrer">
+            <span>
+              <strong>Open the cafe pin</strong>
+              Google Maps link for the exact location.
+            </span>
+            <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+          </a>
         </div>
       </section>
     </main>
