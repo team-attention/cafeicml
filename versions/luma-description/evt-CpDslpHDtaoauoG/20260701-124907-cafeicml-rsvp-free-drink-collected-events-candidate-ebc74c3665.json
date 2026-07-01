@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-07-01T12:49:07.025199+09:00",
+  "event_id": "evt-CpDslpHDtaoauoG",
+  "label": "cafeicml-rsvp-free-drink-collected-events",
+  "stage": "candidate",
+  "source": "/Users/bong/team-attention/cafeicml/generated/cafeicml-luma-description-rsvp-free-drink-collected.md",
+  "sha256": "ebc74c366577566904d4f12b895fb68e07d06131474ff7277562a3420ffb092d",
+  "bytes": 9273,
+  "chars": 9161,
+  "markdown_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-124907-cafeicml-rsvp-free-drink-collected-events-candidate-ebc74c3665.md",
+  "metadata_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-124907-cafeicml-rsvp-free-drink-collected-events-candidate-ebc74c3665.json"
+}
