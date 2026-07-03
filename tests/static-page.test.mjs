@@ -20,12 +20,17 @@ assert.match(html, /Google Maps link for the exact location\./, 'location sectio
 assert.match(html, /https:\/\/maps\.app\.goo\.gl\/RaefhMoRSksakyhv6/, 'location should use the provided Google Maps link');
 assert.doesNotMatch(html, /I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul/, 'location section should not expose the address text');
 
-assert.equal(countMatches(html, /<article class=["']menu-card\b/g), 5, 'menu should render five drink cards');
+assert.equal(countMatches(html, /<article class=["']menu-card\b/g), 6, 'menu should render six drink cards');
 assert.match(html, /Exclusive Drinks/, 'menu should use the exclusive drinks heading');
 assert.match(html, /menu-panel/, 'menu should use the production rounded glass panel');
 assert.match(html, /rgba\(4, 5, 18, 0\.54\)/, 'menu panel should use the current dark glass background');
 assert.match(html, /backdrop-filter:\s*blur\(22px\)/i, 'menu panel should blur the page background behind it');
 assert.match(html, /aria-label=["']Free drink menu["']/, 'menu should describe the updated drink list');
+assert.match(
+  html,
+  /ICML Cold Brew Americano[\s\S]*Ironclaw Iced Latte[\s\S]*Arize Grapefruit Ade[\s\S]*Minds Orange Juice[\s\S]*Dalpa Peach Iced Tea[\s\S]*Corona Extra/,
+  'drink cards should render in the requested sponsor order'
+);
 assert.match(html, /ICML Cold Brew Americano/, 'ICML cold brew Americano should be the first menu item');
 assert.match(html, /assets\/menu\/cafeicml-americano-cutout\.png/, 'ICML Americano card should include the CAFE@ICML drink image');
 assert.match(html, /ICML Cold Brew Americano with a pastel city-pop CAFE@ICML cup sleeve/, 'ICML Americano image needs useful alt text');
@@ -45,17 +50,22 @@ assert.match(html, /Minds Orange Juice/, 'Minds orange juice should be the fourt
 assert.match(html, /assets\/menu\/minds-yuja-poster-session-cutout\.png/, 'Minds card should include the orange juice image');
 assert.match(html, /Minds Orange Juice with a deep blue Minds cup sleeve/, 'Minds image needs useful alt text');
 assert.match(html, /orange juice,<br>citrus, ice/, 'Minds copy should match the new menu');
-assert.match(html, /Corona Extra/, 'Corona Extra should be the fifth menu item');
+assert.match(html, /By Dalpa/, 'Dalpa card should use the sponsor line');
+assert.match(html, /Dalpa Peach Iced Tea/, 'Dalpa peach iced tea should be the fifth menu item');
+assert.match(html, /assets\/menu\/dalpa-peach-iced-tea-cutout\.png/, 'Dalpa card should include the provided drink image');
+assert.match(html, /Dalpa Peach Iced Tea with a Dalpa cup sleeve/, 'Dalpa image needs useful alt text');
+assert.match(html, /peach iced tea,<br>ice, clean finish/, 'Dalpa copy should match the new menu');
+assert.match(html, /Corona Extra/, 'Corona Extra should be the sixth menu item');
 assert.match(html, /assets\/menu\/corona-extra-cutout\.png/, 'Corona card should include the bottle cutout image');
 assert.match(html, /Corona Extra beer bottle with lime/, 'Corona image needs useful alt text');
 assert.doesNotMatch(html, /By Corona/, 'Corona card should not show a sponsor line');
 assert.match(html, /lager, lime,<br>cold bottle/, 'Corona copy should match the new menu');
-assert.equal(countMatches(html, /class=["']drink-image["']/g), 5, 'five menu cards should include product photos');
+assert.equal(countMatches(html, /class=["']drink-image["']/g), 6, 'six menu cards should include product photos');
 assert.equal(countMatches(html, /class=["']drink-image placeholder-drink["']/g), 0, 'menu should not use sponsor-wanted placeholders');
 assert.equal(countMatches(html, /By Sponsor wanted/g), 0, 'sponsor-wanted rows should be removed');
 assert.equal(countMatches(html, /class=["']drink-placeholder["']/g), 0, 'sponsor-wanted rows should not use CSS-drawn cup placeholders');
-assert.equal(countMatches(html, /<strong class=["']price["']>\$0<\/strong>/g), 5, 'all drink cards should show desktop $0 pricing');
-assert.equal(countMatches(html, /<span class=["']price price-mobile["']>\$0<\/span>/g), 5, 'all drink cards should show mobile $0 pricing');
+assert.equal(countMatches(html, /<strong class=["']price["']>\$0<\/strong>/g), 6, 'all drink cards should show desktop $0 pricing');
+assert.equal(countMatches(html, /<span class=["']price price-mobile["']>\$0<\/span>/g), 6, 'all drink cards should show mobile $0 pricing');
 assert.match(html, /drink-name-group/, 'menu should use grouped drink title and sponsor layout');
 assert.match(html, /price-mobile/, 'menu should split mobile and desktop prices like the source section');
 
