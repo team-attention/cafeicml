@@ -500,11 +500,11 @@
         position: relative;
         display: grid;
         z-index: 1;
-        gap: 2.25rem;
+        gap: var(--space-8);
       }
 
       .menu-panel h2 {
-        color: #f5f3ff;
+        color: #e1dfff;
         font-size: 1.875rem;
         font-weight: 500;
         line-height: 1;
@@ -531,7 +531,7 @@
         display: flex;
         align-items: flex-start;
         width: 100%;
-        gap: var(--space-3);
+        gap: var(--space-4);
         min-width: 0;
       }
 
@@ -553,11 +553,8 @@
         filter: drop-shadow(0 0.45rem 0.75rem rgba(0, 0, 0, 0.12));
       }
 
-      .drink-spacer {
-        display: none;
-        width: 3.1875rem;
-        height: 4.75rem;
-        flex-shrink: 0;
+      .placeholder-drink img {
+        opacity: 1;
       }
 
       .card-heading {
@@ -948,11 +945,11 @@
         }
 
         .menu-panel {
-          padding: 2.25rem;
+          padding: var(--space-6);
         }
 
         .menu-panel-inner {
-          gap: 2.25rem;
+          gap: var(--space-8);
         }
 
         .menu-panel h2 {
@@ -961,15 +958,14 @@
         }
 
         .menu-panel h3 {
-          font-size: 1.5rem;
-          letter-spacing: -0.768px;
-          white-space: nowrap;
+          font-size: 1.35rem;
+          letter-spacing: -0.64px;
+          text-wrap: balance;
         }
 
         .menu-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          column-gap: var(--space-12);
-          row-gap: var(--space-8);
+          column-gap: var(--space-8);
+          row-gap: var(--space-6);
         }
 
         .menu-card {
@@ -985,12 +981,6 @@
         .drink-image img {
           max-width: 4.1875rem;
           max-height: 6.25rem;
-        }
-
-        .drink-spacer {
-          display: block;
-          width: 4.1875rem;
-          height: 6.25rem;
         }
 
         .card-heading {
@@ -1039,6 +1029,35 @@
         .section {
           padding-block: var(--space-20);
         }
+
+        .menu-panel {
+          max-width: 72rem;
+          padding: 2.25rem;
+        }
+
+        .menu-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          column-gap: var(--space-12);
+          row-gap: var(--space-8);
+        }
+
+        .menu-card {
+          gap: var(--space-5);
+        }
+
+        .card-heading {
+          flex: 0 1 21rem;
+        }
+
+        .menu-panel h3 {
+          font-size: 1.5rem;
+          letter-spacing: -0.64px;
+        }
+
+        .sponsor-line {
+          font-size: 1rem;
+          padding: 4.942px 9.884px;
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -1065,7 +1084,6 @@
     <header class="site-header">
       <div class="header-inner">
         <a class="brand-link" href="#home" aria-label="CAFE @ICML home">
-          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
           <span>CAFE @ICML</span>
         </a>
         <nav class="header-nav" aria-label="Main sections">
@@ -1074,9 +1092,6 @@
           <a class="nav-link" href="#notes">Guestbook</a>
           <a class="nav-link" href="#map">Location</a>
         </nav>
-        <button class="account-button" type="button" aria-label="Open account menu">
-          <span class="material-symbols-outlined" aria-hidden="true">account_circle</span>
-        </button>
       </div>
     </header>
 
@@ -1140,7 +1155,61 @@
         <div class="menu-panel">
           <div class="menu-panel-inner">
             <h2 id="menu-title">Exclusive Drinks</h2>
-            <div class="menu-grid" aria-label="Free coffee menu">
+            <div class="menu-grid" aria-label="Free drink menu">
+              <article class="menu-card featured-drink">
+                <div class="drink-image">
+                  <img
+                    src="./assets/menu/cafeicml-americano-cutout.png"
+                    alt="ICML Cold Brew Americano with a pastel city-pop CAFE@ICML cup sleeve"
+                    width="1024"
+                    height="1536"
+                    loading="lazy"
+                  >
+                </div>
+                <div class="card-heading">
+                  <div class="drink-title-row">
+                    <div class="drink-name-group">
+                      <h3 class="primary-text">ICML Cold Brew Americano</h3>
+                      <span class="sponsor-line">By CAFE@ICML</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
+                  </div>
+                  <div class="drink-details">
+                    <p class="ingredients">cold brew, water,<br>ice, clean finish</p>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <strong class="price">$0</strong>
+                </div>
+              </article>
+
+              <article class="menu-card featured-drink">
+                <div class="drink-image">
+                  <img
+                    src="./assets/menu/ironclaw-latte-descent-cutout.png"
+                    alt="Ironclaw Iced Latte with a blue IronClaw cup sleeve"
+                    width="1024"
+                    height="1536"
+                    loading="lazy"
+                  >
+                </div>
+                <div class="card-heading">
+                  <div class="drink-title-row">
+                    <div class="drink-name-group">
+                      <h3 class="secondary-text">Ironclaw Iced Latte</h3>
+                      <span class="sponsor-line">By IronClaw</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
+                  </div>
+                  <div class="drink-details">
+                    <p class="ingredients">milk, espresso,<br>ice, smooth finish</p>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <strong class="price">$0</strong>
+                </div>
+              </article>
+
               <article class="menu-card featured-drink">
                 <div class="drink-image">
                   <img
@@ -1154,7 +1223,7 @@
                 <div class="card-heading">
                   <div class="drink-title-row">
                     <div class="drink-name-group">
-                      <h3 class="primary-text">Arize Grapefruit Ade</h3>
+                      <h3 class="tertiary-text">Arize Grapefruit Ade</h3>
                       <span class="sponsor-line">By Arize</span>
                     </div>
                     <span class="price price-mobile">$0</span>
@@ -1171,8 +1240,8 @@
               <article class="menu-card featured-drink">
                 <div class="drink-image">
                   <img
-                    src="./assets/menu/ironclaw-latte-cutout.png"
-                    alt="IronClaw Latte with an IronClaw logo cup sleeve"
+                    src="./assets/menu/minds-yuja-poster-session-cutout.png"
+                    alt="Minds Orange Juice with a deep blue Minds cup sleeve"
                     width="1024"
                     height="1536"
                     loading="lazy"
@@ -1181,13 +1250,13 @@
                 <div class="card-heading">
                   <div class="drink-title-row">
                     <div class="drink-name-group">
-                      <h3 class="secondary-text">IronClaw Latte</h3>
-                      <span class="sponsor-line">By IronClaw</span>
+                      <h3 class="primary-text">Minds Orange Juice</h3>
+                      <span class="sponsor-line">By Minds</span>
                     </div>
                     <span class="price price-mobile">$0</span>
                   </div>
                   <div class="drink-details">
-                    <p class="ingredients">milk, espresso, vanilla,<br>ice</p>
+                    <p class="ingredients">orange juice,<br>citrus, ice</p>
                   </div>
                 </div>
                 <div class="card-footer">
@@ -1195,94 +1264,25 @@
                 </div>
               </article>
 
-              <article class="menu-card">
-                <div class="drink-spacer" aria-hidden="true"></div>
+              <article class="menu-card featured-drink">
+                <div class="drink-image">
+                  <img
+                    src="./assets/menu/corona-extra-cutout.png"
+                    alt="Corona Extra beer bottle with lime"
+                    width="1024"
+                    height="1536"
+                    loading="lazy"
+                  >
+                </div>
                 <div class="card-heading">
                   <div class="drink-title-row">
                     <div class="drink-name-group">
-                      <h3 class="secondary-text">Gradient Matcha</h3>
-                      <span class="sponsor-line">By Sponsor wanted</span>
+                      <h3 class="tertiary-text">Corona Extra</h3>
                     </div>
                     <span class="price price-mobile">$0</span>
                   </div>
                   <div class="drink-details">
-                    <p class="ingredients">matcha, milk, vanilla,<br>Seoul green energy</p>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <strong class="price">$0</strong>
-                </div>
-              </article>
-
-              <article class="menu-card">
-                <div class="drink-spacer" aria-hidden="true"></div>
-                <div class="card-heading">
-                  <div class="drink-title-row">
-                    <div class="drink-name-group">
-                      <h3 class="tertiary-text">Yuja Poster Session</h3>
-                      <span class="sponsor-line">By Sponsor wanted</span>
-                    </div>
-                    <span class="price price-mobile">$0</span>
-                  </div>
-                  <div class="drink-details">
-                    <p class="ingredients">yuja ade, sparkling water,<br>mint, late-afternoon optimism</p>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <strong class="price">$0</strong>
-                </div>
-              </article>
-
-              <article class="menu-card">
-                <div class="drink-spacer" aria-hidden="true"></div>
-                <div class="card-heading">
-                  <div class="drink-title-row">
-                    <div class="drink-name-group">
-                      <h3 class="primary-text">Latte Descent</h3>
-                      <span class="sponsor-line">By Sponsor wanted</span>
-                    </div>
-                    <span class="price price-mobile">$0</span>
-                  </div>
-                  <div class="drink-details">
-                    <p class="ingredients">milk, espresso, cinnamon,<br>smooth convergence curve</p>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <strong class="price">$0</strong>
-                </div>
-              </article>
-
-              <article class="menu-card">
-                <div class="drink-spacer" aria-hidden="true"></div>
-                <div class="card-heading">
-                  <div class="drink-title-row">
-                    <div class="drink-name-group">
-                      <h3 class="secondary-text">Berry Benchmark</h3>
-                      <span class="sponsor-line">By Sponsor wanted</span>
-                    </div>
-                    <span class="price price-mobile">$0</span>
-                  </div>
-                  <div class="drink-details">
-                    <p class="ingredients">berry smoothie, yogurt,<br>banana, leaderboard drama</p>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <strong class="price">$0</strong>
-                </div>
-              </article>
-
-              <article class="menu-card">
-                <div class="drink-spacer" aria-hidden="true"></div>
-                <div class="card-heading">
-                  <div class="drink-title-row">
-                    <div class="drink-name-group">
-                      <h3 class="tertiary-text">Attention Iced Tea</h3>
-                      <span class="sponsor-line">By Sponsor wanted</span>
-                    </div>
-                    <span class="price price-mobile">$0</span>
-                  </div>
-                  <div class="drink-details">
-                    <p class="ingredients">black tea, lemon, peach,<br>multi-head refreshment</p>
+                    <p class="ingredients">lager, lime,<br>cold bottle</p>
                   </div>
                 </div>
                 <div class="card-footer">
