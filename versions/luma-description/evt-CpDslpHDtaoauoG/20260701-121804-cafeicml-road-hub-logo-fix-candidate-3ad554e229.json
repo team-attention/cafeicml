@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-07-01T12:18:04.513414+09:00",
+  "event_id": "evt-CpDslpHDtaoauoG",
+  "label": "cafeicml-road-hub-logo-fix",
+  "stage": "candidate",
+  "source": "/Users/bong/team-attention/cafeicml/generated/cafeicml-luma-description-logo-fix.md",
+  "sha256": "3ad554e2297f73c5c5fb6a7fdce05d2e433e8cd829a4b1de460b14c3ae7639b9",
+  "bytes": 9174,
+  "chars": 9062,
+  "markdown_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-121804-cafeicml-road-hub-logo-fix-candidate-3ad554e229.md",
+  "metadata_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-121804-cafeicml-road-hub-logo-fix-candidate-3ad554e229.json"
+}

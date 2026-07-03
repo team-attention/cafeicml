@@ -17,11 +17,14 @@ assert.match(html, /Cafe @ ICML/, 'hero title should remain visible');
 assert.match(html, /Free coffee for ICML ticket holders in Seoul/i, 'hero must emphasize free coffee for ICML ticket holders');
 assert.match(html, /Show your ICML ticket\. Coffee is free\./i, 'ticket/free coffee source copy must remain');
 assert.match(html, /Google Maps link for the exact location\./, 'location section should keep the map link copy');
+assert.match(html, /https:\/\/maps\.app\.goo\.gl\/RaefhMoRSksakyhv6/, 'location should use the provided Google Maps link');
+assert.doesNotMatch(html, /I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul/, 'location section should not expose the address text');
 
 assert.equal(countMatches(html, /<article class=["']menu-card\b/g), 5, 'menu should render five drink cards');
 assert.match(html, /Exclusive Drinks/, 'menu should use the exclusive drinks heading');
 assert.match(html, /menu-panel/, 'menu should use the production rounded glass panel');
 assert.match(html, /rgba\(4, 5, 18, 0\.54\)/, 'menu panel should use the current dark glass background');
+assert.match(html, /backdrop-filter:\s*blur\(22px\)/i, 'menu panel should blur the page background behind it');
 assert.match(html, /aria-label=["']Free drink menu["']/, 'menu should describe the updated drink list');
 assert.match(html, /ICML Cold Brew Americano/, 'ICML cold brew Americano should be the first menu item');
 assert.match(html, /assets\/menu\/cafeicml-americano-cutout\.png/, 'ICML Americano card should include the CAFE@ICML drink image');
@@ -53,6 +56,8 @@ assert.equal(countMatches(html, /By Sponsor wanted/g), 0, 'sponsor-wanted rows s
 assert.equal(countMatches(html, /class=["']drink-placeholder["']/g), 0, 'sponsor-wanted rows should not use CSS-drawn cup placeholders');
 assert.equal(countMatches(html, /<strong class=["']price["']>\$0<\/strong>/g), 5, 'all drink cards should show desktop $0 pricing');
 assert.equal(countMatches(html, /<span class=["']price price-mobile["']>\$0<\/span>/g), 5, 'all drink cards should show mobile $0 pricing');
+assert.match(html, /drink-name-group/, 'menu should use grouped drink title and sponsor layout');
+assert.match(html, /price-mobile/, 'menu should split mobile and desktop prices like the source section');
 
 assert.doesNotMatch(html, /Arize Espresso Trace/, 'incorrect Espresso Trace rename should not return');
 assert.doesNotMatch(html, /IronClaw Latte<\/h3>/, 'incorrect standalone IronClaw Latte rename should not return');

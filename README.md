@@ -7,7 +7,8 @@ Static landing page for `cafeicml.com`: a Corgi Cafe-inspired page for an ICML-p
 - Hero: short value proposition — ICML ticket holders get free coffee.
 - Menu: all items priced at `$0`.
 - Exclusive Drinks: Arize main drink + general cafe drinks marked `Sponsor wanted`.
-- Location: I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul with Naver map link.
+- Location: exact pin via Google Maps link, without exposing the address text on the page.
+- Sponsor logos: Arize and IronClaw assets live under `assets/logos/`.
 - Guestbook: localStorage prototype guestbook.
 - Events: Running with Researchers, codex `/goal` workshop, Claude Code cafe hours.
 

@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-07-01T12:16:10.143657+09:00",
+  "event_id": "evt-CpDslpHDtaoauoG",
+  "label": "cafeicml-road-hub",
+  "stage": "candidate",
+  "source": "/Users/bong/team-attention/cafeicml/generated/cafeicml-luma-description.md",
+  "sha256": "cc5fc9324d9e96816ba33214fc94a746c00a7393ab7af51311eb80ea97a07cef",
+  "bytes": 9059,
+  "chars": 8947,
+  "markdown_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-121610-cafeicml-road-hub-candidate-cc5fc9324d.md",
+  "metadata_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-CpDslpHDtaoauoG/20260701-121610-cafeicml-road-hub-candidate-cc5fc9324d.json"
+}
