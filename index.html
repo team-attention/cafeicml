@@ -455,17 +455,41 @@
         color: var(--text-secondary);
       }
 
+      #menu {
+        position: relative;
+        z-index: 20;
+        display: flex;
+        width: 100%;
+        max-width: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 var(--space-4) var(--space-6);
+      }
+
+      #menu::before {
+        display: none;
+      }
+
       .menu-panel {
         position: relative;
         overflow: hidden;
-        max-width: 78rem;
+        width: 100%;
+        max-width: 72rem;
         margin-inline: auto;
-        border: 1px solid rgba(24, 24, 26, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.16);
         border-radius: 2.25rem;
-        background: #d8dec8;
-        box-shadow: 0 1.25rem 3.5rem rgba(4, 6, 18, 0.18);
-        color: #18181a;
-        padding: var(--space-8);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.025)),
+          rgba(4, 5, 18, 0.54);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.12),
+          inset 5px -5px 10px rgba(0, 0, 0, 0.18),
+          0 1.25rem 4rem rgba(0, 0, 0, 0.28);
+        color: #f5f3ff;
+        backdrop-filter: blur(22px) saturate(132%);
+        -webkit-backdrop-filter: blur(22px) saturate(132%);
+        padding: var(--space-6);
       }
 
       .menu-panel::before {
@@ -476,105 +500,109 @@
         position: relative;
         display: grid;
         z-index: 1;
-        gap: var(--space-12);
+        gap: var(--space-8);
       }
 
       .menu-panel h2 {
-        color: #18181a;
-        font-size: clamp(3rem, 6vw, 4.75rem);
+        color: #e1dfff;
+        font-size: 1.875rem;
         font-weight: 500;
         line-height: 1;
+        letter-spacing: -0.96px;
       }
 
       .menu-panel h3 {
-        color: #18181a;
-        font-size: clamp(1.45rem, 2.4vw, 1.85rem);
-        font-weight: 700;
+        color: #f5f3ff;
+        font-size: 1.125rem;
+        font-weight: 600;
         line-height: 1;
+        letter-spacing: -0.576px;
       }
 
       .menu-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: var(--space-10);
+        column-gap: var(--space-12);
+        row-gap: var(--space-8);
         padding: 0;
       }
 
       .menu-card {
-        display: grid;
-        grid-template-columns: 4.75rem minmax(0, 1fr) auto;
-        align-items: center;
-        gap: var(--space-5);
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        gap: var(--space-4);
         min-width: 0;
       }
 
       .drink-image {
         position: relative;
         display: grid;
-        width: 4.75rem;
-        height: 6.1rem;
+        width: 3.1875rem;
+        height: 4.75rem;
         place-items: center;
+        flex-shrink: 0;
         overflow: visible;
       }
 
       .drink-image img {
         width: auto;
-        max-width: 4.9rem;
-        max-height: 6.1rem;
+        max-width: 3.1875rem;
+        max-height: 4.75rem;
         height: auto;
-        filter: drop-shadow(0 0.55rem 0.8rem rgba(0, 0, 0, 0.14));
+        filter: drop-shadow(0 0.45rem 0.75rem rgba(0, 0, 0, 0.12));
       }
 
-      .featured-drink .drink-image img {
-        transform: scale(1.34);
-      }
-
-      .drink-placeholder::before {
-        display: block;
-        width: 3.15rem;
-        height: 4.75rem;
-        border: 1px solid rgba(24, 24, 26, 0.18);
-        border-radius: 0.45rem 0.45rem 0.85rem 0.85rem;
-        content: "";
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent 22%),
-          linear-gradient(180deg, #f3f0ed, #ddd8d2);
-        box-shadow: 0 0.45rem 0.8rem rgba(0, 0, 0, 0.1);
+      .placeholder-drink img {
+        opacity: 1;
       }
 
       .card-heading {
-        display: grid;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
         min-width: 0;
-        gap: var(--space-3);
+        gap: var(--space-2);
       }
 
       .drink-title-row {
         display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        min-width: 0;
+        gap: var(--space-2);
+      }
+
+      .drink-name-group {
+        display: flex;
         align-items: center;
         flex-wrap: wrap;
         min-width: 0;
-        gap: var(--space-3);
+        gap: 0.375rem;
       }
 
       .sponsor-line {
         display: inline-flex;
         align-items: center;
-        border: 1px solid rgba(24, 24, 26, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.34);
-        color: #18181a;
+        background: rgba(255, 255, 255, 0.08);
+        color: #f5f3ff;
         font-family: "Sora", system-ui, sans-serif;
-        font-size: 0.9rem;
-        font-weight: 700;
+        font-size: 0.75rem;
+        font-weight: 600;
         line-height: 1;
-        padding: 0.42rem 0.72rem;
+        letter-spacing: -0.384px;
+        padding: 4px 7px;
       }
 
       .ingredients {
-        max-width: 24rem;
-        color: #18181a;
-        font-size: 1rem;
-        line-height: 1.18;
+        width: 100%;
+        max-width: 229px;
+        color: rgba(245, 243, 255, 0.78);
+        font-size: 0.8125rem;
+        line-height: 1.08;
+        letter-spacing: -0.416px;
       }
 
       .badge {
@@ -590,28 +618,33 @@
       }
 
       .primary-text {
-        color: #18181a;
+        color: #f5f3ff;
       }
 
       .secondary-text {
-        color: #18181a;
+        color: #f5f3ff;
       }
 
       .tertiary-text {
-        color: #18181a;
+        color: #f5f3ff;
       }
 
       .card-footer {
-        display: block;
-        align-self: end;
+        display: none;
+        flex-shrink: 0;
       }
 
       .price {
         font-family: "Sora", system-ui, sans-serif;
-        color: #18181a;
-        font-size: 1.6rem;
-        font-weight: 800;
+        color: #f5f3ff;
+        font-size: 1.125rem;
+        font-weight: 500;
         line-height: 1;
+        letter-spacing: -0.576px;
+      }
+
+      .price-mobile {
+        display: block;
       }
 
       .timeline {
@@ -786,6 +819,34 @@
         font-size: 1.1rem;
       }
 
+      .map-link-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        padding: var(--space-5);
+        background: rgba(255, 255, 255, 0.045);
+        color: var(--text-secondary);
+        transition: transform 160ms ease, border-color 180ms ease, background 180ms ease;
+      }
+
+      .map-link-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--border-primary);
+        background: rgba(255, 255, 255, 0.075);
+      }
+
+      .map-link-card strong {
+        display: block;
+        color: var(--text-primary);
+      }
+
+      .map-link-card .material-symbols-outlined {
+        color: var(--accent-secondary);
+      }
+
       .bottom-nav {
         position: fixed;
         right: 0;
@@ -884,46 +945,118 @@
         }
 
         .menu-panel {
-          padding: var(--space-12);
+          padding: var(--space-6);
         }
 
-        .menu-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: var(--space-10) var(--space-20);
+        .menu-panel-inner {
+          gap: var(--space-8);
         }
 
-        .menu-card {
-          grid-template-columns: 5.5rem minmax(0, 1fr) auto;
-          gap: var(--space-6);
-        }
-
-        .drink-image {
-          width: 5.5rem;
-          height: 7rem;
-        }
-
-        .drink-image img {
-          max-width: 5.4rem;
-          max-height: 7rem;
-        }
-
-        .drink-placeholder::before {
-          width: 3.5rem;
-          height: 5.7rem;
-        }
-
-        .price {
-          font-size: 1.9rem;
+        .menu-panel h2 {
+          font-size: 3rem;
+          letter-spacing: -1.536px;
         }
 
         .menu-panel h3 {
-          white-space: nowrap;
+          font-size: 1.35rem;
+          letter-spacing: -0.64px;
+          text-wrap: balance;
+        }
+
+        .menu-grid {
+          column-gap: var(--space-8);
+          row-gap: var(--space-6);
+        }
+
+        .menu-card {
+          align-items: center;
+          gap: var(--space-5);
+        }
+
+        .drink-image {
+          width: 4.1875rem;
+          height: 6.25rem;
+        }
+
+        .drink-image img {
+          max-width: 4.1875rem;
+          max-height: 6.25rem;
+        }
+
+        .card-heading {
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: var(--space-2);
+        }
+
+        .drink-title-row {
+          width: 100%;
+          justify-content: flex-start;
+        }
+
+        .drink-name-group {
+          gap: var(--space-2);
+        }
+
+        .sponsor-line {
+          font-size: 1rem;
+          letter-spacing: -0.512px;
+          padding: 4.942px 9.884px;
+        }
+
+        .ingredients {
+          font-size: 0.875rem;
+          line-height: 1;
+          letter-spacing: -0.448px;
+        }
+
+        .price {
+          font-size: 1.5rem;
+          letter-spacing: -0.768px;
+        }
+
+        .price-mobile {
+          display: none;
+        }
+
+        .card-footer {
+          display: block;
         }
       }
 
       @media (min-width: 960px) {
         .section {
           padding-block: var(--space-20);
+        }
+
+        .menu-panel {
+          max-width: 72rem;
+          padding: 2.25rem;
+        }
+
+        .menu-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          column-gap: var(--space-12);
+          row-gap: var(--space-8);
+        }
+
+        .menu-card {
+          gap: var(--space-5);
+        }
+
+        .card-heading {
+          flex: 0 1 21rem;
+        }
+
+        .menu-panel h3 {
+          font-size: 1.5rem;
+          letter-spacing: -0.64px;
+        }
+
+        .sponsor-line {
+          font-size: 1rem;
+          padding: 4.942px 9.884px;
         }
       }
 
@@ -951,7 +1084,6 @@
     <header class="site-header">
       <div class="header-inner">
         <a class="brand-link" href="#home" aria-label="CAFE @ICML home">
-          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
           <span>CAFE @ICML</span>
         </a>
         <nav class="header-nav" aria-label="Main sections">
@@ -960,9 +1092,6 @@
           <a class="nav-link" href="#notes">Guestbook</a>
           <a class="nav-link" href="#map">Location</a>
         </nav>
-        <button class="account-button" type="button" aria-label="Open account menu">
-          <span class="material-symbols-outlined" aria-hidden="true">account_circle</span>
-        </button>
       </div>
     </header>
 
@@ -1026,7 +1155,61 @@
         <div class="menu-panel">
           <div class="menu-panel-inner">
             <h2 id="menu-title">Exclusive Drinks</h2>
-            <div class="menu-grid" aria-label="Free coffee menu">
+            <div class="menu-grid" aria-label="Free drink menu">
+              <article class="menu-card featured-drink">
+                <div class="drink-image">
+                  <img
+                    src="./assets/menu/cafeicml-americano-cutout.png"
+                    alt="ICML Cold Brew Americano with a pastel city-pop CAFE@ICML cup sleeve"
+                    width="1024"
+                    height="1536"
+                    loading="lazy"
+                  >
+                </div>
+                <div class="card-heading">
+                  <div class="drink-title-row">
+                    <div class="drink-name-group">
+                      <h3 class="primary-text">ICML Cold Brew Americano</h3>
+                      <span class="sponsor-line">By CAFE@ICML</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
+                  </div>
+                  <div class="drink-details">
+                    <p class="ingredients">cold brew, water,<br>ice, clean finish</p>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <strong class="price">$0</strong>
+                </div>
+              </article>
+
+              <article class="menu-card featured-drink">
+                <div class="drink-image">
+                  <img
+                    src="./assets/menu/ironclaw-latte-descent-cutout.png"
+                    alt="Ironclaw Iced Latte with a blue IronClaw cup sleeve"
+                    width="1024"
+                    height="1536"
+                    loading="lazy"
+                  >
+                </div>
+                <div class="card-heading">
+                  <div class="drink-title-row">
+                    <div class="drink-name-group">
+                      <h3 class="secondary-text">Ironclaw Iced Latte</h3>
+                      <span class="sponsor-line">By IronClaw</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
+                  </div>
+                  <div class="drink-details">
+                    <p class="ingredients">milk, espresso,<br>ice, smooth finish</p>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <strong class="price">$0</strong>
+                </div>
+              </article>
+
               <article class="menu-card featured-drink">
                 <div class="drink-image">
                   <img
@@ -1039,80 +1222,68 @@
                 </div>
                 <div class="card-heading">
                   <div class="drink-title-row">
-                    <h3 class="primary-text">Arize Grapefruit Ade</h3>
-                    <span class="sponsor-line">By Arize</span>
+                    <div class="drink-name-group">
+                      <h3 class="tertiary-text">Arize Grapefruit Ade</h3>
+                      <span class="sponsor-line">By Arize</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
                   </div>
-                  <p class="ingredients">grapefruit, sparkling water,<br>citrus, ice</p>
+                  <div class="drink-details">
+                    <p class="ingredients">grapefruit, sparkling water,<br>citrus, ice</p>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <strong class="price">$0</strong>
                 </div>
               </article>
 
-              <article class="menu-card">
-                <div class="drink-image drink-placeholder" style="--drink-top: #b7f7de; --drink-bottom: #66d79e;" aria-hidden="true"></div>
+              <article class="menu-card featured-drink">
+                <div class="drink-image">
+                  <img
+                    src="./assets/menu/minds-yuja-poster-session-cutout.png"
+                    alt="Minds Orange Juice with a deep blue Minds cup sleeve"
+                    width="1024"
+                    height="1536"
+                    loading="lazy"
+                  >
+                </div>
                 <div class="card-heading">
                   <div class="drink-title-row">
-                    <h3 class="secondary-text">Gradient Matcha</h3>
-                    <span class="sponsor-line">By Sponsor wanted</span>
+                    <div class="drink-name-group">
+                      <h3 class="primary-text">Minds Orange Juice</h3>
+                      <span class="sponsor-line">By Minds</span>
+                    </div>
+                    <span class="price price-mobile">$0</span>
                   </div>
-                  <p class="ingredients">matcha, milk, vanilla,<br>Seoul green energy</p>
+                  <div class="drink-details">
+                    <p class="ingredients">orange juice,<br>citrus, ice</p>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <strong class="price">$0</strong>
                 </div>
               </article>
 
-              <article class="menu-card">
-                <div class="drink-image drink-placeholder" style="--drink-top: #ffd8a8; --drink-bottom: #ff8fd2;" aria-hidden="true"></div>
+              <article class="menu-card featured-drink">
+                <div class="drink-image">
+                  <img
+                    src="./assets/menu/corona-extra-cutout.png"
+                    alt="Corona Extra beer bottle with lime"
+                    width="1024"
+                    height="1536"
+                    loading="lazy"
+                  >
+                </div>
                 <div class="card-heading">
                   <div class="drink-title-row">
-                    <h3 class="tertiary-text">Yuja Poster Session</h3>
-                    <span class="sponsor-line">By Sponsor wanted</span>
+                    <div class="drink-name-group">
+                      <h3 class="tertiary-text">Corona Extra</h3>
+                    </div>
+                    <span class="price price-mobile">$0</span>
                   </div>
-                  <p class="ingredients">yuja ade, sparkling water,<br>mint, late-afternoon optimism</p>
-                </div>
-                <div class="card-footer">
-                  <strong class="price">$0</strong>
-                </div>
-              </article>
-
-              <article class="menu-card">
-                <div class="drink-image drink-placeholder" style="--drink-top: #f6d8ba; --drink-bottom: #9a6a4f;" aria-hidden="true"></div>
-                <div class="card-heading">
-                  <div class="drink-title-row">
-                    <h3 class="primary-text">Latte Descent</h3>
-                    <span class="sponsor-line">By Sponsor wanted</span>
+                  <div class="drink-details">
+                    <p class="ingredients">lager, lime,<br>cold bottle</p>
                   </div>
-                  <p class="ingredients">milk, espresso, cinnamon,<br>smooth convergence curve</p>
-                </div>
-                <div class="card-footer">
-                  <strong class="price">$0</strong>
-                </div>
-              </article>
-
-              <article class="menu-card">
-                <div class="drink-image drink-placeholder" style="--drink-top: #f0b7ff; --drink-bottom: #846cff;" aria-hidden="true"></div>
-                <div class="card-heading">
-                  <div class="drink-title-row">
-                    <h3 class="secondary-text">Berry Benchmark</h3>
-                    <span class="sponsor-line">By Sponsor wanted</span>
-                  </div>
-                  <p class="ingredients">berry smoothie, yogurt,<br>banana, leaderboard drama</p>
-                </div>
-                <div class="card-footer">
-                  <strong class="price">$0</strong>
-                </div>
-              </article>
-
-              <article class="menu-card">
-                <div class="drink-image drink-placeholder" style="--drink-top: #fee0a6; --drink-bottom: #e89a5b;" aria-hidden="true"></div>
-                <div class="card-heading">
-                  <div class="drink-title-row">
-                    <h3 class="tertiary-text">Attention Iced Tea</h3>
-                    <span class="sponsor-line">By Sponsor wanted</span>
-                  </div>
-                  <p class="ingredients">black tea, lemon, peach,<br>multi-head refreshment</p>
                 </div>
                 <div class="card-footer">
                   <strong class="price">$0</strong>
@@ -1217,15 +1388,18 @@
             <figcaption class="map-marker">
               <span>
                 <span class="material-symbols-outlined icon-filled" aria-hidden="true">location_on</span>
-                <strong class="secondary-text">I-Park Tower 2</strong>
+                <strong class="secondary-text">Google Maps</strong>
               </span>
             </figcaption>
           </figure>
 
-          <address>
-            <strong>I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul</strong>
-            A Gangnam stop for hallway-track energy, quiet chats, and free coffee after the next session.
-          </address>
+          <a class="map-link-card" href="https://maps.app.goo.gl/RaefhMoRSksakyhv6" target="_blank" rel="noopener noreferrer">
+            <span>
+              <strong>Open the cafe pin</strong>
+              Google Maps link for the exact location.
+            </span>
+            <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+          </a>
         </div>
       </section>
     </main>
