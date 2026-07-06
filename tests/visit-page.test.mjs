@@ -85,8 +85,9 @@ assert.match(html, /class=["']hero-actions["'][\s\S]*Sign guestbook[\s\S]*Browse
 assert.match(css, /\.hero-actions\b[\s\S]*flex-wrap:\s*nowrap/, 'visit hero CTAs should stay in one horizontal row');
 assert.match(css, /\.hero-button\b[\s\S]*flex:\s*1 1 0/, 'visit hero CTAs should share a single row on mobile');
 assert.doesNotMatch(css, /@media\s+\(max-width:\s*640px\)[\s\S]*\.hero-actions\s*\{[^}]*display:\s*grid/, 'mobile hero CTAs should not stack into a vertical grid');
-assert.match(css, /\.hero-pass\b[\s\S]*display:\s*flex[\s\S]*overflow-x:\s*auto/, 'hero pass should become a horizontal flow to reduce height');
-assert.match(css, /\.hero-pass ol\b[\s\S]*display:\s*flex/, 'hero pass steps should flow horizontally');
+assert.match(css, /\.hero-pass\b[\s\S]*display:\s*grid[\s\S]*overflow:\s*visible/, 'hero pass should be a visible flow component instead of a hidden horizontal scroller');
+assert.doesNotMatch(css, /\.hero-pass\b[\s\S]*overflow-x:\s*auto/, 'hero pass should not rely on horizontal scrolling');
+assert.match(css, /\.hero-pass ol\b[\s\S]*display:\s*flex[\s\S]*flex-wrap:\s*wrap/, 'hero pass steps should wrap like a fluid flow row');
 assert.match(css, /\.hero-pass li:not\(:last-child\)::after[\s\S]*linear-gradient/, 'hero pass flow should visually connect steps across the row');
 assert.match(html, /class=["'][^"']*guestbook-card[^"']*glass-panel[^"']*["'][^>]+id=["']formScreen["']/, 'visit form should reuse the shared glass-panel primitive');
 assert.match(html, /class=["'][^"']*guestbook-card[^"']*glass-panel[^"']*["'][^>]+id=["']successScreen["']/, 'visit success state should reuse the shared glass-panel primitive');
@@ -134,6 +135,10 @@ assert.match(html, /id=["']successScreen["']/, 'visit page should include a post
 assert.match(html, /id=["']submittedSummary["']/, 'success screen should show what the visitor submitted');
 assert.match(html, /id=["']entryList["']/, 'visit page should show existing guestbook entries below the form');
 assert.match(html, /id=["']entrySearch["'][^>]+placeholder=["']Find people by interests["']/, 'guestbook wall should include an interest search field');
+assert.match(css, /\.entry-search\b[\s\S]*inline-size:\s*100%/, 'guestbook search parent should span the full card width');
+assert.match(css, /\.entry-search\b[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)/, 'guestbook search should override label grid sizing so the input can stretch');
+assert.match(css, /\.entry-search\b[\s\S]*justify-content:\s*stretch/, 'guestbook search should override the global label space-between layout');
+assert.match(css, /\.entry-search input\b[\s\S]*inline-size:\s*100%/, 'guestbook search input should span its parent width');
 assert.match(html, /id=["']entryLazyControls["'][^>]+aria-live=["']polite["']/, 'guestbook wall should expose lazy-loading controls outside the note list');
 assert.doesNotMatch(html, /id=["']deletionIssueLink["']|GitHub issue/i, 'deletion copy should not send visitors to GitHub issues');
 assert.doesNotMatch(html, /<form[\s\S]*privacy-notice[\s\S]*<\/form>/i, 'privacy notice should not make the mobile note form taller');

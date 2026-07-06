@@ -372,38 +372,35 @@ h2 {
 }
 
 .hero-pass {
-  display: flex;
+  display: grid;
   align-items: center;
-  gap: 0.75rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.62rem 0.82rem;
   width: min(100%, 52rem);
-  min-width: 0;
-  overflow-x: auto;
+  min-inline-size: 0;
+  overflow: visible;
   padding: 0.78rem 0.85rem;
   border: 1px solid rgba(152, 225, 255, 0.2);
   border-radius: var(--radius-lg);
   background: rgba(9, 10, 30, 0.36);
   box-shadow: inset 0 0 24px rgba(152, 225, 255, 0.05);
-  scrollbar-width: none;
-}
-
-.hero-pass::-webkit-scrollbar {
-  display: none;
 }
 
 .pass-label {
-  flex: 0 0 auto;
   color: var(--accent-secondary);
   font-family: "Space Grotesk", system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 800;
+  line-height: 1;
   white-space: nowrap;
 }
 
 .hero-pass ol {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
-  min-width: max-content;
+  gap: 0.45rem 0.5rem;
+  min-width: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -412,13 +409,17 @@ h2 {
 .hero-pass li {
   position: relative;
   display: inline-flex;
-  gap: 0.45rem;
+  flex: 1 1 10.5rem;
+  min-width: min(100%, 9.5rem);
   align-items: center;
+  gap: 0.42rem;
   color: var(--text-secondary);
 }
 
 .hero-pass li:not(:last-child)::after {
-  width: 1.35rem;
+  flex: 1 1 1rem;
+  min-width: 0.9rem;
+  max-width: 1.75rem;
   height: 1px;
   margin-left: 0.15rem;
   content: "";
@@ -442,7 +443,8 @@ h2 {
 .hero-pass li strong {
   color: var(--text-primary);
   font-size: 0.82rem;
-  white-space: nowrap;
+  line-height: 1.22;
+  text-wrap: balance;
 }
 
 .guestbook-grid {
@@ -725,11 +727,18 @@ textarea:focus {
 
 .entry-search {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.38rem;
-  min-width: 0;
+  inline-size: 100%;
+  min-inline-size: 0;
+  justify-self: stretch;
+  justify-content: stretch;
+  justify-items: stretch;
 }
 
 .entry-search input {
+  inline-size: 100%;
+  min-inline-size: 0;
   min-height: 2.75rem;
   border-color: rgba(152, 225, 255, 0.18);
   background:
@@ -1262,8 +1271,21 @@ textarea:focus {
   }
 
   .hero-pass {
+    grid-template-columns: 1fr;
     width: 100%;
     padding: 0.56rem 0.65rem;
+  }
+
+  .hero-pass ol {
+    gap: 0.38rem;
+  }
+
+  .hero-pass li {
+    flex-basis: min(100%, 8.8rem);
+  }
+
+  .hero-pass li strong {
+    font-size: 0.76rem;
   }
 
   .guestbook-card,

@@ -161,7 +161,7 @@ Known divergence is limited to content density: the visit page can use a shorter
 
 ### Visit Landing Hero
 - **Structure**: compact brand link, left-aligned value proposition, direct in-page CTAs, and a small proof/pass panel.
-- **Layout**: page-grid composition with a dominant form and supporting notes rail on desktop; one-column source order on mobile. The hero keeps its two CTAs in one horizontal row and compresses the Cafe pass into a horizontal flow so the guestbook card is visible before scrolling on mobile.
+- **Layout**: page-grid composition with a dominant form and supporting notes rail on desktop; one-column source order on mobile. The hero keeps its two CTAs in one horizontal row and renders the Cafe pass as a connected wrapping flow, not a hidden horizontal scroller, so the guestbook card is visible before scrolling on mobile.
 - **States**: CTAs use the primary/secondary button states and visible focus rings.
 - **Accessibility**: hero actions link to real page sections, and the source order stays brand, promise, action, form, notes.
 
@@ -176,7 +176,7 @@ Known divergence is limited to content density: the visit page can use a shorter
 ### Guestbook Notes Wall
 - **Structure**: repeated `article` notes with top-right render-time `Supported by <sponsor>` attribution, a single identity row for name and intent, message, optional profile link, and timestamp when available.
 - **Layout**: responsive feed/grid wall for varied note lengths; no forced equal heights and no CSS masonry that can disturb focus order.
-- **Search and filters**: interest search sits above the intent filter buttons; search and intent filters apply to already-fetched notes without changing DOM source order inside each rendered list. Intent filter buttons use `aria-pressed`.
+- **Search and filters**: interest search sits above the intent filter buttons, spans the full wall width, and keeps its placeholder visible. Search and intent filters apply to already-fetched notes without changing DOM source order inside each rendered list. Intent filter buttons use `aria-pressed`.
 - **Lazy loading**: fetched notes are newest-first and rendered in visible chunks with a load-more control and scroll sentinel so large guestbooks do not mount every card at once.
 - **Sponsor attribution**: sponsor attributions are assigned only at render time from the current sponsor list using balanced random distribution; visible sponsor counts should differ by no more than one within a rendered batch.
 - **Accessibility**: note cards remain in logical DOM order and the entries container announces loading, empty, and error states.
