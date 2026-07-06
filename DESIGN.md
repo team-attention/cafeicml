@@ -89,6 +89,33 @@ All spacing derives from a 4px base.
 - Bottom navigation is fixed and content gets enough bottom padding to avoid overlap.
 - No horizontal page overflow on mobile.
 
+### StyleGallery layout-gallery Import
+
+Source: https://github.com/changeroa/StyleGallery
+
+StyleGallery layout-gallery is the imported layout-system source for `visit.html`. It is not a visual design system: CAFE@ICML keeps its own brand, typography, color, shadow, and motion, while StyleGallery supplies structure, flow, sizing, alignment, spacing, scrolling, and containment contracts.
+
+| StyleGallery contract | Local surface | Responsibility |
+|-----------------------|---------------|----------------|
+| `page_grid` / `page_grid_content` | `visit-shell`, hero, guestbook section | Align page content to fluid gutters and a central max-width track. |
+| `main_with_rail` / `main_with_rail_main` / `main_with_rail_side` | guestbook form plus notes rail | Keep the form dominant while notes remain a supporting rail, then reflow to one column. |
+| `stack` | hero, cards, form | Maintain stable vertical rhythm between direct children. |
+| `wrap_row` | intent radio badges | Keep related controls together while allowing wrapping. |
+| `feed` | guestbook notes | Stack repeated public notes with stable rhythm and logical source order. |
+| `reel` | sponsor carousel viewport | Own horizontal reel behavior for brand assets while product CSS controls animation. |
+
+| Layout token | Value | Usage |
+|--------------|-------|-------|
+| --layout-content-max | 75rem | Central page track from `page_grid`. |
+| --layout-gutter | clamp(0.75rem, 2vw, 1.25rem) | Fluid page margins and section gutters. |
+| --layout-section-gap | clamp(0.7rem, 2vw, 1.25rem) | Gaps between page-level sections and rail columns. |
+| --layout-stack-gap | 0.9rem | Default vertical rhythm for form and cards. |
+| --layout-inline-gap | 0.65rem | Inline grouped controls and reel spacing. |
+| --layout-rail-min | 22rem | Guestbook rail reflow threshold. |
+| --layout-reel-card-min | clamp(15rem, 24vw, 22rem) | Desktop sponsor brand card width. |
+
+Verification follows the StyleGallery matrix: check `320px`, `375px`, `768px`, `1024px`, and `1440px` when layout changes; include empty, short, long paragraph, and unbroken-string content; preserve visible focus order; avoid unusable two-dimensional scrolling.
+
 ## 5. Components
 
 ### Top Navigation
@@ -117,6 +144,23 @@ All spacing derives from a 4px base.
 - **Structure**: `form`, labels, input, textarea, submit button, sample notes.
 - **States**: focus, invalid, submit feedback placeholder.
 - **Accessibility**: labels tied to controls; helper text remains visible.
+
+### Visit Landing Hero
+- **Structure**: compact brand link, left-aligned value proposition, direct in-page CTAs, and a small proof/pass panel.
+- **Layout**: page-grid composition with a dominant form and supporting notes rail on desktop; one-column source order on mobile.
+- **States**: CTAs use the primary/secondary button states and visible focus rings.
+- **Accessibility**: hero actions link to real page sections, and the source order stays brand, promise, action, form, notes.
+
+### Sponsor Brand Reel
+- **Structure**: bottom `aside`, label, overflow-hidden viewport, and repeated brand asset cards.
+- **Desktop layout**: large horizontal brand cards with a slow continuous reel so sponsor assets read as real placements.
+- **Mobile layout**: each brand asset owns one full viewport width and advances every 2 seconds.
+- **Motion**: transform-only animation, pauses on hover/focus, and stops under `prefers-reduced-motion`.
+
+### Guestbook Notes Wall
+- **Structure**: repeated `article` notes with avatar/initials, name, intent badge, message, optional profile link, and timestamp when available.
+- **Layout**: masonry/feed hybrid for varied note lengths; no forced equal heights.
+- **Accessibility**: note cards remain in logical DOM order and the entries container announces loading, empty, and error states.
 
 ## 6. Motion & Interaction
 

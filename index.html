@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko" class="theme-dark">
+<html lang="en" class="theme-dark">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -355,8 +355,7 @@
         font-size: clamp(1rem, 3.5vw, 1.2rem);
       }
 
-      .hero-actions,
-      .form-actions {
+      .hero-actions {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -396,6 +395,12 @@
         color: var(--text-inverse);
         box-shadow: var(--brand-glow);
       }
+      .button-primary-cyan {
+        background: var(--accent-secondary);
+        color: #003544;
+        box-shadow: var(--secondary-glow);
+      }
+
 
       .button-secondary {
         border-color: rgba(152, 225, 255, 0.7);
@@ -714,15 +719,6 @@
         gap: var(--space-3);
       }
 
-      .guestbook-form {
-        display: grid;
-        gap: var(--space-6);
-      }
-
-      .field {
-        display: grid;
-        gap: var(--space-2);
-      }
 
       label {
         color: var(--accent-secondary);
@@ -766,8 +762,40 @@
       }
 
       .note {
+        display: grid;
+        gap: var(--space-2);
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         padding: var(--space-4);
+      }
+
+      .note:last-child {
+        border-bottom: 0;
+      }
+
+      .note-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--space-2);
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      .note-profile,
+      .guestbook-state a {
+        color: var(--accent-secondary);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.18em;
+      }
+
+      .guestbook-state {
+        margin: 0;
+      }
+
+      .guestbook-cta {
+        justify-self: start;
       }
 
       .map-panel {
@@ -931,8 +959,7 @@
           display: flex;
         }
 
-        .hero-actions,
-        .form-actions {
+        .hero-actions {
           width: auto;
         }
 
@@ -1078,7 +1105,7 @@
     </style>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">본문으로 이동</a>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <canvas class="aurora-canvas" id="aurora-canvas" aria-hidden="true"></canvas>
 
     <header class="site-header">
@@ -1107,7 +1134,7 @@
           </p>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button button-primary" href="#menu">Get free coffee</a>
-            <a class="button button-secondary" href="#notes">Leave a guestbook note</a>
+            <a class="button button-primary button-primary-cyan" href="./visit.html">Leave a guestbook note</a>
           </div>
         </div>
       </section>
@@ -1370,36 +1397,21 @@
             Guestbook
           </h2>
           <p class="muted">
-            Coming to ICML? Leave your name, affiliation, and what you want to talk about.
-            The form opens a public GitHub guestbook issue and previews your note here.
+            Read the latest notes from ICML visitors, then add your own on the guestbook page.
           </p>
 
-          <form class="guestbook-form" action="#" method="post">
-            <div class="field">
-              <label for="guest-name">Name and affiliation</label>
-              <input id="guest-name" name="name" type="text" autocomplete="name" placeholder="Your name, lab, or company">
-            </div>
-            <div class="field">
-              <label for="guest-message">What do you want to talk about?</label>
-              <textarea id="guest-message" name="message" rows="4" placeholder="Research, demos, Seoul tips, recruiting, runs..."></textarea>
-            </div>
-            <div class="form-actions">
-              <button class="button button-primary" type="submit">Sign guestbook</button>
-            </div>
-          </form>
-
-          <ul class="note-list" aria-label="최근 방명록">
-            <li class="note">
-              <blockquote>
-                <p class="muted">"The retro-future cafe for AI researchers."</p>
-              </blockquote>
-            </li>
-            <li class="note">
-              <blockquote>
-                <p class="muted">"Your ICML ticket turns coffee into the easiest hello."</p>
-              </blockquote>
+          <ul class="note-list" id="landingGuestbookEntries" aria-label="Recent guestbook notes">
+            <li class="note guestbook-state">
+              Loading recent guestbook notes.
             </li>
           </ul>
+
+          <p class="guestbook-state" hidden>
+            No notes yet — <a href="./visit.html">sign the guestbook</a>.
+            Guestbook unavailable right now. <a href="./visit.html">Sign the guestbook</a>.
+          </p>
+
+          <a class="button button-primary button-primary-cyan guestbook-cta" href="./visit.html">Sign the guestbook</a>
         </div>
       </section>
 
@@ -1467,6 +1479,7 @@
     </nav>
 
     <script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js" defer></script>
+    <script type="module" src="./script.js"></script>
     <script>
       (() => {
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
