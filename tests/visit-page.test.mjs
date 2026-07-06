@@ -163,13 +163,21 @@ assert.notDeepEqual(
 assert.match(js, /assignSponsorsToEntries\(entries\.length,\s*SPONSORS\)/, 'renderEntries should assign sponsors once per visible batch');
 assert.doesNotMatch(js, /class=["']entry-avatar["']/, 'guestbook cards should not render the old standalone avatar element');
 assert.doesNotMatch(css, /\.entry-avatar\b|--entry-avatar-size/, 'visit CSS should remove the old standalone avatar layout');
+assert.doesNotMatch(js, /class=["']entry-initials["']|getEntryInitials/, 'guestbook cards should not render initials');
+assert.doesNotMatch(css, /\.entry-initials\b|--entry-initials-size/, 'visit CSS should remove the initials badge layout');
+assert.doesNotMatch(designSystem, /name, initials, and intent/i, 'design system should not describe initials in guestbook note cards');
 assert.doesNotMatch(js, /class=["']entry-sponsor-badge["']|By\s+\$\{escapeHtml\(sponsor\.name\)\}/, 'entry sponsor attribution should not read as a By badge');
 assert.match(js, /class=["']entry-supported-by["'][\s\S]*Supported by\s+\$\{escapeHtml\(sponsor\.name\)\}/, 'entry cards should render top-right Supported by attribution');
 assert.match(js, /data-intent=["']\$\{escapeHtml\(getEntryIntent\(entry\)\)\}["']/, 'entry cards should expose their intent for filtering and QA');
+assert.match(js, /class=["']entry-profile["'][\s\S]*LinkedIn profile/, 'entry profile links should be labeled as LinkedIn profiles');
+assert.doesNotMatch(js, />Open profile<\/a>/, 'entry profile links should not use the generic Open profile label');
 assert.doesNotMatch(js, /seededRng|mulberry32|Math\.random\s*=/, 'production sponsor assignment should not hard-code a test RNG');
 assert.match(css, /\.entry-supported-by\b/, 'visit CSS should style the per-entry sponsor attribution');
 assert.match(css, /\.entry-support\b[\s\S]*justify-self:\s*end/, 'sponsor attribution should sit at the top-right of each note card');
-assert.match(css, /\.entry-person-row\b[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s*auto\s*auto/, 'name, initials, and intent should share one row below sponsor attribution');
+assert.match(css, /\.entry-person-row\b[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s*auto/, 'name and intent should share one row below sponsor attribution');
+assert.match(css, /\.entry-profile\b[\s\S]*display:\s*inline-flex[\s\S]*border-bottom:/, 'entry profile links should look visibly clickable');
+assert.match(css, /\.entry-profile::after[\s\S]*content:\s*["']↗["']/, 'entry profile links should show an external-link cue');
+assert.match(css, /\.entry-profile:hover[\s\S]*transform:\s*translateY\(-1px\)/, 'entry profile links should have an interactive hover affordance');
 
 assert.match(css, /min-height:\s*100svh/, 'visit page should be mobile-first and fill the viewport');
 assert.match(css, /\.intent-option:has\(input:focus-visible\)/, 'intent radios should have a visible focus ring');
@@ -235,8 +243,5 @@ assert.equal(visitModule.getEntryProfileUrl({ profileUrl: 'example.org/profile' 
 assert.equal(visitModule.getEntryProfileUrl({ profile_url: 'javascript:alert(1)', profileUrl: 'example.org/fallback' }), '', 'unsafe primary profile_url should not fall back to another field');
 assert.equal(visitModule.normalizeProfileUrl('example.com:3000/researcher'), 'https://example.com:3000/researcher', 'profile URLs with ports should be accepted as URL-like values');
 assert.equal(visitModule.normalizeProfileUrl('javascript:alert(1)'), null, 'unsafe explicit schemes should be rejected for submitted profiles');
-assert.equal(typeof visitModule.getEntryInitials, 'function', 'guestbook note initials should use an exported Unicode-safe helper');
-assert.equal(visitModule.getEntryInitials('김 Researcher'), '김R', 'initials should keep CJK code points intact');
-assert.equal(visitModule.getEntryInitials('🧪 Scientist'), '🧪S', 'initials should keep emoji code points intact');
 
 console.log('visit-page tests passed');

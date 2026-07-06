@@ -46,7 +46,6 @@
   --entry-card-min-height: 11.5rem;
   --entry-card-padding: var(--space-4);
   --entry-accent-width: 0.18rem;
-  --entry-initials-size: 2rem;
   --entry-badge-min-height: 1.55rem;
   --entry-badge-padding: 0.16rem 0.48rem;
   --entry-message-rail-width: 2px;
@@ -817,24 +816,9 @@ textarea:focus {
 
 .entry-person-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.5rem;
   align-items: center;
-}
-
-.entry-initials {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--entry-initials-size);
-  height: var(--entry-initials-size);
-  border: 1px solid rgba(152, 225, 255, 0.25);
-  border-radius: var(--radius-sm);
-  background: rgba(152, 225, 255, 0.09);
-  color: var(--accent-secondary);
-  font-family: "Space Grotesk", system-ui, sans-serif;
-  font-size: 0.72rem;
-  font-weight: 800;
 }
 
 .entry-name {
@@ -885,9 +869,33 @@ textarea:focus {
 }
 
 .entry-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.22rem;
+  border-bottom: 1px solid rgba(255, 174, 220, 0.58);
   color: var(--accent-primary);
   font-size: 0.84rem;
   font-weight: 700;
+  line-height: 1.25;
+  transition: border-color 180ms ease, color 180ms ease, transform 140ms ease;
+}
+
+.entry-profile::after {
+  content: "↗";
+  color: var(--accent-secondary);
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.entry-profile:hover {
+  border-color: var(--accent-secondary);
+  color: var(--accent-secondary);
+  transform: translateY(-1px);
+}
+
+.entry-profile:focus-visible {
+  outline: 3px solid rgba(152, 225, 255, 0.68);
+  outline-offset: 3px;
 }
 
 .visit-disclosure {
