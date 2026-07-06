@@ -407,6 +407,11 @@ h2 {
   white-space: nowrap;
 }
 
+.pass-marquee {
+  min-inline-size: 0;
+  overflow: hidden;
+}
+
 .hero-pass ol {
   display: flex;
   flex-wrap: nowrap;
