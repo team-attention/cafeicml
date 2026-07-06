@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta
+      name="description"
+      content="Leave a Cafe @ICML guestbook note, unlock a free drink, and share the same sponsor drink page with a friend."
+    >
+    <meta property="og:title" content="Visit cafe @icml">
+    <meta
+      property="og:description"
+      content="A sponsor-backed Cafe @ICML guestbook for free drinks and researcher introductions."
+    >
+    <meta property="og:type" content="website">
+    <title>Visit cafe @icml</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310102b'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-size='28' font-family='Arial,sans-serif' font-weight='700' fill='%23ffaedc'%3EC%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Sora:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="./visit.css">
+    <script type="module" src="./visit.js"></script>
+  </head>
+  <body>
+    <main class="visit-shell">
+      <section class="visit-hero" aria-label="Cafe @ICML sponsor guestbook">
+        <a class="home-link" href="./index.html">CAFE @ICML</a>
+
+        <div class="hero-copy">
+          <p class="eyebrow">Free drink guestbook</p>
+          <h1>Sign the guestbook. Get a free drink.</h1>
+          <p id="drinkSponsorLine">A Cafe @ICML sponsor will buy this drink.</p>
+        </div>
+
+        <nav class="sponsor-rail" aria-label="Cafe @ICML sponsor carousel">
+          <div class="sponsor-rail-head">
+            <span class="rail-label">Supported by</span>
+            <a class="sponsor-cta" id="sponsorCta" href="https://github.com/team-attention/cafeicml/issues/new?title=Sponsor%20Cafe%20%40ICML" target="_blank" rel="noopener noreferrer">Sponsor this menu</a>
+          </div>
+          <div class="sponsor-carousel" id="sponsorCarousel"></div>
+        </nav>
+      </section>
+
+      <section class="guestbook-grid" aria-label="Cafe @ICML QR guestbook">
+        <section class="guestbook-card" id="formScreen" aria-labelledby="guestbook-title">
+          <div class="card-heading">
+            <p class="eyebrow">Guestbook sign in</p>
+            <h2 id="guestbook-title">Sign in</h2>
+            <p>
+              Name, link, and why you are here. That is enough to unlock a free drink.
+            </p>
+          </div>
+
+          <form class="visit-form" id="guestbookForm" action="#" method="post">
+            <div class="field">
+              <label for="visitorName">Name</label>
+              <input id="visitorName" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+            </div>
+
+            <div class="field">
+              <label for="visitorProfile">LinkedIn, X, or website <span>optional</span></label>
+              <input id="visitorProfile" name="profile" type="text" inputmode="url" autocomplete="url" placeholder="linkedin.com/in/you">
+            </div>
+
+            <fieldset class="intent-group">
+              <legend>Why are you here?</legend>
+              <label class="intent-option">
+                <input type="radio" name="intent" value="collab" checked>
+                <span>Collab</span>
+              </label>
+              <label class="intent-option">
+                <input type="radio" name="intent" value="hiring">
+                <span>Hiring</span>
+              </label>
+              <label class="intent-option">
+                <input type="radio" name="intent" value="open-to-work">
+                <span>Open to work</span>
+              </label>
+              <label class="intent-option">
+                <input type="radio" name="intent" value="business">
+                <span>Business</span>
+              </label>
+              <label class="intent-option">
+                <input type="radio" name="intent" value="special-request">
+                <span>Special request</span>
+              </label>
+            </fieldset>
+
+            <details class="optional-message">
+              <summary>What should people ask you about?</summary>
+              <div class="field">
+                <label for="visitorMessage">Optional note</label>
+                <textarea
+                  id="visitorMessage"
+                  name="message"
+                  rows="4"
+                  placeholder="I am working on agent evaluations and would love to meet collaborators."
+                ></textarea>
+              </div>
+            </details>
+
+            <button class="primary-button" type="submit">Submit and get free drink</button>
+          </form>
+        </section>
+
+        <section class="guestbook-card success-card" id="successScreen" aria-live="polite" hidden>
+          <p class="eyebrow">Free Drink unlocked</p>
+          <h2>Show this screen at Cafe @ICML.</h2>
+          <div class="submitted-summary" id="submittedSummary"></div>
+          <p>
+            Your note is on the guestbook. Share this page with a friend so they can unlock a free drink too.
+          </p>
+          <div class="success-actions">
+            <button class="primary-button" id="shareButton" type="button">Share link</button>
+            <button class="secondary-button" id="copyButton" type="button">Copy link</button>
+            <button class="secondary-button" id="backButton" type="button">Back to guestbook</button>
+          </div>
+        </section>
+
+        <section class="entries-card" aria-labelledby="entries-title">
+          <div class="card-heading">
+            <p class="eyebrow">Who is here</p>
+            <h2 id="entries-title">Guestbook notes</h2>
+          </div>
+          <div class="entry-list" id="entryList"></div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
