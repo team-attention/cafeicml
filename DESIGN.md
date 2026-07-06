@@ -169,7 +169,7 @@ Known divergence is limited to content density: the visit page can use a shorter
 - **Structure**: fixed bottom `aside`, centered divider-style label, reel viewport, and repeated brand asset cards.
 - **Desktop layout**: large horizontal brand cards inside the central page track with a slow continuous reel so sponsor assets read as real placements.
 - **Mobile layout**: each brand asset owns one full viewport width and advances every 2 seconds.
-- **Logo treatment**: real sponsor image assets fill compact glass cards; light-background logo files may receive a small image radius while the rail height stays fixed.
+- **Logo treatment**: real sponsor image assets fill compact glass cards; light-background logo files sit on a matching bright porcelain card and shelf while the rail height stays fixed.
 - **Overlap safety**: page and anchor scrolling reserve `--sponsor-rail-height` plus safe-area inset so the fixed footer never hides the guestbook CTA or note content.
 - **Motion**: transform-only animation, pauses on hover/focus, and stops under `prefers-reduced-motion`.
 
