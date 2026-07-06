@@ -1,8 +1,10 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { strict as assert } from 'node:assert';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const script = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
+const guestbookQrUrl = new URL('../assets/qr-guestbook.svg', import.meta.url);
+const guestbookQr = existsSync(guestbookQrUrl) ? readFileSync(guestbookQrUrl, 'utf8') : '';
 
 
 function countMatches(text, pattern) {
@@ -86,6 +88,12 @@ assert.equal(countMatches(html, /class=["']cup\b/g), 0, 'exclusive drink cards s
 assert.equal(countMatches(html, /class=["']logo-dot\b/g), 0, 'exclusive drink cards should not use decorative symbol prefixes');
 assert.doesNotMatch(html, />\s*add\s*</, 'menu cards should not include plus/add icon buttons');
 assert.doesNotMatch(html, /<cite\b/i, 'removed cite labels should not return');
+assert.ok(existsSync(guestbookQrUrl), 'guestbook QR asset should exist');
+assert.match(guestbookQr, /https:\/\/cafeicml\.com\/visit\.html/, 'guestbook QR asset should encode the public guestbook URL in metadata');
+assert.match(html, /class=["']menu-heading-row["'][\s\S]*class=["']menu-guestbook-qr["']/, 'menu heading should include a guestbook QR block');
+assert.match(html, /class=["']menu-guestbook-qr["'][^>]+href=["']\.\/visit\.html["']|href=["']\.\/visit\.html["'][^>]+class=["']menu-guestbook-qr["']/, 'menu QR should link to the guestbook page');
+assert.match(html, /src=["']\.\/assets\/qr-guestbook\.svg["'][\s\S]*alt=["']QR code for Cafe @ICML guestbook["']/, 'menu QR should render the local QR asset with useful alt text');
+assert.match(html, /Scan to sign the guestbook/, 'menu QR should have a concise visible instruction');
 
 const pinkCityPopTokens = [
   /--accent-primary:\s*#ffaedc/i,
