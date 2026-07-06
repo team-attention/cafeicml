@@ -41,7 +41,7 @@
         <div class="hero-layout">
           <div class="hero-copy">
             <p class="eyebrow">ICML Seoul guestbook</p>
-            <h1>Meet who is in the cafe before the next session.</h1>
+            <h1>Meet the cafe crowd.</h1>
             <p>
               Leave a public note, unlock your free drink, and make it easy for researchers nearby
               to find the right conversation.
@@ -150,6 +150,10 @@
             </div>
             <p class="entry-board-meta">Public notes from visitors looking for hallway conversations.</p>
           </div>
+          <label class="entry-search" for="entrySearch">
+            <span>Search notes</span>
+            <input id="entrySearch" type="search" autocomplete="off" placeholder="Find people by interests">
+          </label>
           <div class="intent-filter-bar" id="entryFilters" aria-label="Filter guestbook notes by intent">
             <button class="intent-filter is-active" type="button" data-intent-filter="all" aria-pressed="true">All</button>
             <button class="intent-filter" type="button" data-intent-filter="collab" aria-pressed="false">Collab</button>
@@ -159,6 +163,7 @@
             <button class="intent-filter" type="button" data-intent-filter="special-request" aria-pressed="false">Special request</button>
           </div>
           <div class="entry-list guestbook-wall feed" id="entryList" role="list" aria-live="polite"></div>
+          <div class="entry-lazy-controls" id="entryLazyControls" aria-live="polite"></div>
         </section>
       </section>
 

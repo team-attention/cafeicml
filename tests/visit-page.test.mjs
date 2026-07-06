@@ -79,6 +79,15 @@ assert.match(designSystem, /Visit Landing Visual Parity/i, 'DESIGN.md should doc
 assert.match(html, /class=["']site-header visit-header["']/, 'visit page should include the same fixed glass header primitive as the landing page');
 assert.match(html, /class=["']brand-link["']/, 'visit page brand link should reuse the landing brand primitive');
 assert.match(html, /class=["']visit-hero page_grid_content stack glass-panel["']/, 'visit hero should be a glass-panel landing surface');
+assert.match(html, /<h1>Meet the cafe crowd\.<\/h1>/, 'visit hero headline should use a short high-impact phrase');
+assert.doesNotMatch(html, /Meet who is in the cafe before the next session\./, 'visit hero should not keep the taller original headline');
+assert.match(html, /class=["']hero-actions["'][\s\S]*Sign guestbook[\s\S]*Browse notes/, 'visit hero should keep sign and browse CTAs together');
+assert.match(css, /\.hero-actions\b[\s\S]*flex-wrap:\s*nowrap/, 'visit hero CTAs should stay in one horizontal row');
+assert.match(css, /\.hero-button\b[\s\S]*flex:\s*1 1 0/, 'visit hero CTAs should share a single row on mobile');
+assert.doesNotMatch(css, /@media\s+\(max-width:\s*640px\)[\s\S]*\.hero-actions\s*\{[^}]*display:\s*grid/, 'mobile hero CTAs should not stack into a vertical grid');
+assert.match(css, /\.hero-pass\b[\s\S]*display:\s*flex[\s\S]*overflow-x:\s*auto/, 'hero pass should become a horizontal flow to reduce height');
+assert.match(css, /\.hero-pass ol\b[\s\S]*display:\s*flex/, 'hero pass steps should flow horizontally');
+assert.match(css, /\.hero-pass li:not\(:last-child\)::after[\s\S]*linear-gradient/, 'hero pass flow should visually connect steps across the row');
 assert.match(html, /class=["'][^"']*guestbook-card[^"']*glass-panel[^"']*["'][^>]+id=["']formScreen["']/, 'visit form should reuse the shared glass-panel primitive');
 assert.match(html, /class=["'][^"']*guestbook-card[^"']*glass-panel[^"']*["'][^>]+id=["']successScreen["']/, 'visit success state should reuse the shared glass-panel primitive');
 assert.match(html, /class=["'][^"']*entries-card[^"']*glass-panel[^"']*["']/, 'visit guestbook wall should reuse the shared glass-panel primitive');
@@ -124,6 +133,8 @@ assert.match(html, /Sign guestbook and unlock free drink/, 'form CTA should clea
 assert.match(html, /id=["']successScreen["']/, 'visit page should include a post-submit success screen');
 assert.match(html, /id=["']submittedSummary["']/, 'success screen should show what the visitor submitted');
 assert.match(html, /id=["']entryList["']/, 'visit page should show existing guestbook entries below the form');
+assert.match(html, /id=["']entrySearch["'][^>]+placeholder=["']Find people by interests["']/, 'guestbook wall should include an interest search field');
+assert.match(html, /id=["']entryLazyControls["'][^>]+aria-live=["']polite["']/, 'guestbook wall should expose lazy-loading controls outside the note list');
 assert.doesNotMatch(html, /id=["']deletionIssueLink["']|GitHub issue/i, 'deletion copy should not send visitors to GitHub issues');
 assert.doesNotMatch(html, /<form[\s\S]*privacy-notice[\s\S]*<\/form>/i, 'privacy notice should not make the mobile note form taller');
 assert.match(html, /class=["']visit-disclosure[^"']*["'][\s\S]*Guestbook notes are public/i, 'bottom disclosure should explain public guestbook notes');
@@ -131,6 +142,8 @@ assert.match(html, /class=["']visit-disclosure[^"']*["'][\s\S]*contact the Cafe 
 assert.equal(typeof visitModule.assignSponsorsToEntries, 'function', 'entry sponsor assignment helper should be exported');
 assert.ok(Array.isArray(visitModule.SPONSORS), 'visit sponsors should be exported for balanced entry badges');
 assert.ok(visitModule.SPONSORS.length >= 2, 'balanced entry badges should have at least two sponsor choices');
+assert.equal(visitModule.ENTRY_PAGE_SIZE, 8, 'guestbook notes should render in lazy chunks of eight');
+assert.ok(visitModule.VISIT_ENTRY_LIMIT >= 96, 'visit page should fetch enough latest notes for a busy guestbook');
 assert.deepEqual(
   visitModule.assignSponsorsToEntries(0, visitModule.SPONSORS, seededRng(1)),
   [],
@@ -161,6 +174,13 @@ assert.notDeepEqual(
   'different random seeds should produce different sponsor orderings'
 );
 assert.match(js, /assignSponsorsToEntries\(entries\.length,\s*SPONSORS\)/, 'renderEntries should assign sponsors once per visible batch');
+assert.match(js, /activeEntrySearch/, 'visit JS should keep an active guestbook search state');
+assert.match(js, /function getEntrySearchText/, 'visit JS should search guestbook cards by rendered people and interest text');
+assert.match(js, /function sortEntriesByNewest/, 'visit JS should keep latest registrations as the default order');
+assert.match(js, /sortEntriesByNewest\(entries\)\.slice\(0,\s*VISIT_ENTRY_LIMIT\)/, 'refreshEntries should sort fetched notes newest-first before rendering');
+assert.match(js, /visibleEntryCount/, 'visit JS should render guestbook cards lazily by visible count');
+assert.match(js, /data-load-more-entries/, 'lazy-loading controls should include a load-more action');
+assert.match(js, /IntersectionObserver/, 'lazy-loading controls should auto-load as visitors approach the sentinel');
 assert.doesNotMatch(js, /class=["']entry-avatar["']/, 'guestbook cards should not render the old standalone avatar element');
 assert.doesNotMatch(css, /\.entry-avatar\b|--entry-avatar-size/, 'visit CSS should remove the old standalone avatar layout');
 assert.doesNotMatch(js, /class=["']entry-initials["']|getEntryInitials/, 'guestbook cards should not render initials');
@@ -173,6 +193,8 @@ assert.match(js, /class=["']entry-profile["'][\s\S]*LinkedIn profile/, 'entry pr
 assert.doesNotMatch(js, />Open profile<\/a>/, 'entry profile links should not use the generic Open profile label');
 assert.doesNotMatch(js, /seededRng|mulberry32|Math\.random\s*=/, 'production sponsor assignment should not hard-code a test RNG');
 assert.match(css, /\.entry-supported-by\b/, 'visit CSS should style the per-entry sponsor attribution');
+assert.match(css, /\.entry-supported-by\b[\s\S]*text-shadow:/, 'entry sponsor attribution should receive stronger visual emphasis without changing placement');
+assert.match(css, /\.entry-supported-by::before[\s\S]*var\(--accent-primary\)[\s\S]*var\(--accent-secondary\)/, 'entry sponsor attribution divider should use the pink/cyan visual system');
 assert.match(css, /\.entry-support\b[\s\S]*justify-self:\s*end/, 'sponsor attribution should sit at the top-right of each note card');
 assert.match(css, /\.entry-person-row\b[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s*auto/, 'name and intent should share one row below sponsor attribution');
 assert.match(css, /\.entry-profile\b[\s\S]*display:\s*inline-flex[\s\S]*border-bottom:/, 'entry profile links should look visibly clickable');
@@ -201,6 +223,14 @@ assert.match(sponsorRailBody, /z-index:\s*30/, 'sponsor rail should sit below mo
 assert.match(sponsorRailBody, /background:\s*linear-gradient/, 'sponsor rail should use the landing glass material instead of a flat footer fill');
 assert.match(css, /\.sponsor-track[\s\S]*animation:\s*sponsor-scroll/, 'sponsor carousel should use a CSS-only infinite track animation');
 assert.match(js, /<div class=["']sponsor-track["'] aria-live=["']off["']>/, 'dynamic sponsor carousel should preserve aria-live off after render');
+assert.ok(visitModule.SPONSORS.every(sponsor => sponsor.logo), 'footer sponsors should render from real logo image assets');
+for (const sponsor of visitModule.SPONSORS) {
+  assert.ok(existsSync(new URL(`../${sponsor.logo}`, import.meta.url)), `${sponsor.name} footer logo should exist`);
+}
+assert.match(js, /id:\s*['"]dalpha['"][\s\S]*logo:\s*['"]assets\/logos\/dalpha-logo\.png['"]/, 'Dalpha should use the supplied footer logo image');
+assert.match(js, /id:\s*['"]minds['"][\s\S]*logo:\s*['"]assets\/logos\/minds-logo\.png['"]/, 'Minds should use the supplied footer logo image');
+assert.match(css, /\.sponsor-card\[data-sponsor=["']arize["']\] img[\s\S]*border-radius:/, 'Arize logo image should receive a rounded image edge');
+assert.match(css, /\.sponsor-card\.has-logo\b/, 'sponsor logo cards should expose a logo-specific style hook');
 assert.match(css, /sponsor-mobile-cycle[\s\S]*8s[\s\S]*100vw/, 'mobile sponsor carousel should rotate one full-viewport brand asset every two seconds');
 assert.match(css, /\.sponsor-carousel:hover \.sponsor-track|\.sponsor-carousel:focus-within \.sponsor-track/, 'sponsor carousel should pause on hover or focus');
 assert.doesNotMatch(css, /\.sponsor-carousel\s*\{[^}]*\b(?:display|overflow(?:-x)?)\s*:/, 'sponsor carousel should not override the StyleGallery reel scroll-owner contract');
@@ -215,10 +245,13 @@ assert.match(css, /@media\s+\(max-width:\s*640px\)/, 'visit CSS should include a
 assert.match(css, /\.guestbook-grid/, 'visit CSS should keep the form and entries in a clear one-page flow');
 assert.match(css, /\.entry-top[\s\S]*grid-template-columns/, 'guestbook notes should use a structured note-card layout');
 assert.match(css, /\.guestbook-wall\b[\s\S]*grid-template-columns:\s*repeat\(auto-fit/, 'guestbook notes should render as a responsive wall, not a narrow rail list');
+assert.match(css, /\.entry-search\b/, 'guestbook search should have a dedicated style hook');
+assert.match(css, /\.entry-lazy-controls\b[\s\S]*justify-items:\s*center/, 'lazy-loading controls should sit below the note grid');
 assert.match(css, /\.sponsor-rail-head[\s\S]*justify-content:\s*center/, 'sponsor rail label should be horizontally centered');
 assert.doesNotMatch(css, /\.rail-label\s*\{[^}]*border-radius/, 'sponsor rail label should not look like a badge');
 assert.match(css, /\.rail-label::before[\s\S]*linear-gradient/, 'sponsor rail label should use a divider-style pattern instead of a dot badge');
 assert.match(css, /@media\s+\(max-width:\s*640px\)[\s\S]*\.guestbook-card\s*\{[\s\S]*padding:\s*0\.72rem/, 'mobile guestbook form should be compact enough to keep the note flow in one viewport');
+assert.match(css, /@media\s+\(max-width:\s*640px\)[\s\S]*\.hero-copy > p:not\(\.eyebrow\)\s*\{[\s\S]*display:\s*none/, 'mobile hero should hide long supporting copy so the guestbook card appears before scrolling');
 assert.match(css, /@media\s+\(max-width:\s*640px\)[\s\S]*textarea\s*\{[\s\S]*min-height:\s*5\.25rem/, 'mobile note textarea should not force the CTA below the first viewport');
 assert.match(css, /\.form-cta-row \.primary-button[\s\S]*white-space:\s*nowrap/, 'submit CTA text should stay on one line');
 assert.doesNotMatch(css, /\bmasonry\b/, 'guestbook wall should avoid masonry behavior that can disrupt keyboard order');

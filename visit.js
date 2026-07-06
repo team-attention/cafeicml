@@ -54,9 +54,14 @@ const SUBMIT_TEXT = 'Sign guestbook and unlock free drink';
 const SUBMITTING_TEXT = 'Submitting...';
 const ALL_INTENTS_FILTER = 'all';
 const FILTER_EMPTY_MESSAGE = 'No notes for this reason yet.';
+const SEARCH_EMPTY_MESSAGE = 'No notes match this search yet.';
+export const ENTRY_PAGE_SIZE = 8;
 
 let currentEntries = [];
 let activeIntentFilter = ALL_INTENTS_FILTER;
+let activeEntrySearch = '';
+let visibleEntryCount = ENTRY_PAGE_SIZE;
+let entryLazyObserver = null;
 
 export const SPONSORS = [
   {
@@ -71,11 +76,13 @@ export const SPONSORS = [
   },
   {
     id: 'minds',
-    name: 'Minds'
+    name: 'Minds',
+    logo: 'assets/logos/minds-logo.png'
   },
   {
-    id: 'dalpa',
-    name: 'Dalpa'
+    id: 'dalpha',
+    name: 'Dalpha',
+    logo: 'assets/logos/dalpha-logo.png'
   }
 ];
 
@@ -125,13 +132,42 @@ function getEntryIntent(entry) {
   return entry.intent || DEFAULT_INTENT;
 }
 
+function normalizeSearchQuery(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function getEntrySearchText(entry) {
+  const intentConfig = getIntentConfig(getEntryIntent(entry));
+  return [
+    entry.name,
+    intentConfig.label,
+    getEntryMessage(entry),
+    entry.profile_url,
+    entry.profileUrl
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+}
+
+function sortEntriesByNewest(entries) {
+  return [...entries].sort((firstEntry, secondEntry) => {
+    const firstTime = new Date(firstEntry.created_at || firstEntry.createdAt || 0).getTime() || 0;
+    const secondTime = new Date(secondEntry.created_at || secondEntry.createdAt || 0).getTime() || 0;
+    return secondTime - firstTime;
+  });
+}
+
 function isIntentFilter(value) {
   return value === ALL_INTENTS_FILTER || Object.prototype.hasOwnProperty.call(INTENTS, value);
 }
 
 function getVisibleEntries() {
-  if (activeIntentFilter === ALL_INTENTS_FILTER) return currentEntries;
-  return currentEntries.filter(entry => getEntryIntent(entry) === activeIntentFilter);
+  return currentEntries.filter(entry => {
+    const matchesIntent = activeIntentFilter === ALL_INTENTS_FILTER || getEntryIntent(entry) === activeIntentFilter;
+    const matchesSearch = !activeEntrySearch || getEntrySearchText(entry).includes(activeEntrySearch);
+    return matchesIntent && matchesSearch;
+  });
 }
 
 function getEntryMessage(entry) {
@@ -181,9 +217,10 @@ function renderSponsorCard(sponsor) {
   const content = sponsor.logo
     ? `<img src="${escapeHtml(sponsor.logo)}" alt="${escapeHtml(sponsor.name)} logo">`
     : `<span>${escapeHtml(sponsor.name)}</span>`;
+  const logoClass = sponsor.logo ? ' has-logo' : ' text-card';
 
   return `
-    <div class="sponsor-card${sponsor.logo ? '' : ' text-card'}" aria-label="${escapeHtml(sponsor.name)} sponsor">
+    <div class="sponsor-card${logoClass}" data-sponsor="${escapeHtml(sponsor.id)}" aria-label="${escapeHtml(sponsor.name)} sponsor">
       ${content}
     </div>
   `;
@@ -203,18 +240,71 @@ function renderSponsorCarousel() {
   `;
 }
 
-function renderEntries(entries, state = 'ready') {
+function disconnectEntryLazyObserver() {
+  entryLazyObserver?.disconnect();
+  entryLazyObserver = null;
+}
+
+function loadMoreEntries() {
+  visibleEntryCount += ENTRY_PAGE_SIZE;
+  renderCurrentEntries();
+}
+
+function observeEntryLazySentinel() {
+  disconnectEntryLazyObserver();
+  const sentinel = document.querySelector('#entryLazySentinel');
+  if (!sentinel || typeof IntersectionObserver !== 'function') return;
+
+  entryLazyObserver = new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting)) {
+      loadMoreEntries();
+    }
+  }, { rootMargin: '240px 0px' });
+  entryLazyObserver.observe(sentinel);
+}
+
+function renderEntryLazyControls(renderedCount, totalCount) {
+  const controls = document.querySelector('#entryLazyControls');
+  if (!controls) return;
+
+  disconnectEntryLazyObserver();
+
+  if (!totalCount) {
+    controls.innerHTML = '';
+    return;
+  }
+
+  if (renderedCount >= totalCount) {
+    controls.innerHTML = `<p class="entry-load-status">Showing all ${totalCount} latest notes.</p>`;
+    return;
+  }
+
+  controls.innerHTML = `
+    <button class="entry-load-more" type="button" data-load-more-entries>
+      Load more latest notes
+    </button>
+    <p class="entry-load-status">Showing ${renderedCount} of ${totalCount} latest notes.</p>
+    <span class="entry-lazy-sentinel" id="entryLazySentinel" aria-hidden="true"></span>
+  `;
+  observeEntryLazySentinel();
+}
+
+function renderEntries(entries, state = 'ready', totalEntryCount = entries.length) {
   const container = document.querySelector('#entryList');
   if (!container) return;
 
   if (state === 'error') {
     container.innerHTML = `<p class="entry-state" role="status">${escapeHtml(ERROR_MESSAGE)}</p>`;
+    renderEntryLazyControls(0, 0);
     return;
   }
 
   if (!entries.length) {
-    const message = state === 'filtered-empty' ? FILTER_EMPTY_MESSAGE : EMPTY_MESSAGE;
+    const message = state === 'search-empty'
+      ? SEARCH_EMPTY_MESSAGE
+      : state === 'filtered-empty' ? FILTER_EMPTY_MESSAGE : EMPTY_MESSAGE;
     container.innerHTML = `<p class="entry-state" role="status">${escapeHtml(message)}</p>`;
+    renderEntryLazyControls(0, 0);
     return;
   }
 
@@ -251,20 +341,24 @@ function renderEntries(entries, state = 'ready') {
       </article>
     `;
   }).join('');
+  renderEntryLazyControls(entries.length, totalEntryCount);
 }
 
 function renderCurrentEntries() {
   const visibleEntries = getVisibleEntries();
-  const state = currentEntries.length > 0 && activeIntentFilter !== ALL_INTENTS_FILTER && visibleEntries.length === 0
-    ? 'filtered-empty'
+  const hasActiveFilter = activeIntentFilter !== ALL_INTENTS_FILTER;
+  const hasActiveSearch = Boolean(activeEntrySearch);
+  const state = currentEntries.length > 0 && visibleEntries.length === 0
+    ? hasActiveSearch ? 'search-empty' : hasActiveFilter ? 'filtered-empty' : 'ready'
     : 'ready';
-  renderEntries(visibleEntries, state);
+  renderEntries(visibleEntries.slice(0, visibleEntryCount), state, visibleEntries.length);
 }
 
 async function refreshEntries() {
   try {
     const entries = await fetchGuestbookEntries(VISIT_ENTRY_LIMIT);
-    currentEntries = entries.slice(0, VISIT_ENTRY_LIMIT);
+    currentEntries = sortEntriesByNewest(entries).slice(0, VISIT_ENTRY_LIMIT);
+    visibleEntryCount = ENTRY_PAGE_SIZE;
     renderCurrentEntries();
   } catch (_) {
     currentEntries = [];
@@ -334,8 +428,32 @@ function bindEntryFilters() {
     if (!isIntentFilter(nextFilter) || nextFilter === activeIntentFilter) return;
 
     activeIntentFilter = nextFilter;
+    visibleEntryCount = ENTRY_PAGE_SIZE;
     setActiveFilterButtonState(filterBar);
     renderCurrentEntries();
+  });
+}
+
+function bindEntrySearch() {
+  const searchInput = document.querySelector('#entrySearch');
+  if (!searchInput) return;
+
+  searchInput.addEventListener('input', event => {
+    activeEntrySearch = normalizeSearchQuery(event.currentTarget?.value);
+    visibleEntryCount = ENTRY_PAGE_SIZE;
+    renderCurrentEntries();
+  });
+}
+
+function bindEntryLazyControls() {
+  const controls = document.querySelector('#entryLazyControls');
+  if (!controls) return;
+
+  controls.addEventListener('click', event => {
+    if (!(event.target instanceof Element)) return;
+    const button = event.target.closest('[data-load-more-entries]');
+    if (!button) return;
+    loadMoreEntries();
   });
 }
 
@@ -423,7 +541,9 @@ function bindSuccessActions() {
 
 export async function initVisitPage() {
   renderSponsorCarousel();
+  bindEntrySearch();
   bindEntryFilters();
+  bindEntryLazyControls();
   bindForm();
   bindSuccessActions();
   await refreshEntries();
