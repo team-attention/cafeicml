@@ -1,44 +1,63 @@
+import {
+  EMPTY_MESSAGE,
+  ERROR_MESSAGE,
+  LANDING_ENTRY_LIMIT,
+  escapeHtml,
+  fetchGuestbookEntries,
+  getIntentConfig
+} from './guestbook-client.js';
+
 const ADDRESS = 'I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul';
-const STORAGE_KEY = 'cafe-icml-guestbook';
-const ISSUE_URL = 'https://github.com/team-attention/cafeicml/issues/new';
+const VISIT_URL = './visit.html';
+const EMPTY_STATE = `${escapeHtml(EMPTY_MESSAGE).replace(
+  'sign the guestbook',
+  `<a href="${VISIT_URL}">sign the guestbook</a>`
+)}`;
+const ERROR_STATE = `${escapeHtml(ERROR_MESSAGE)} <a href="${VISIT_URL}">Sign the guestbook</a>.`;
 
-const seedEntries = [
-  { name: 'Team Attention', affiliation: 'host', note: 'Welcome to cafe @icml. Show your ICML ticket and coffee is free.' },
-  { name: 'A visiting researcher', affiliation: 'ICML attendee', note: 'Looking for people to run with, talk evals, and find the best Korean food nearby.' }
-];
+function renderState(container, message) {
+  container.innerHTML = `<li class="note guestbook-state">${message}</li>`;
+}
 
-function getEntries() {
+function renderEntries(container, entries) {
+  if (!entries.length) {
+    renderState(container, EMPTY_STATE);
+    return;
+  }
+
+  container.innerHTML = entries.map((entry) => {
+    const intent = getIntentConfig(entry.intent);
+    const profileUrl = entry.profile_url ? String(entry.profile_url) : '';
+    const profileLink = profileUrl
+      ? `<a class="note-profile" href="${escapeHtml(profileUrl)}" target="_blank" rel="noopener noreferrer nofollow ugc">Profile</a>`
+      : '';
+
+    return `
+      <li class="note">
+        <div class="note-meta">
+          <strong>${escapeHtml(entry.name)}</strong>
+          <span>${escapeHtml(intent.label)}</span>
+          ${profileLink}
+        </div>
+        <p class="muted">${escapeHtml(entry.message)}</p>
+      </li>
+    `;
+  }).join('');
+}
+
+async function renderLandingGuestbook() {
+  const container = document.querySelector('#landingGuestbookEntries');
+  if (!container) return;
+
   try {
-    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    return parsed.length ? parsed : seedEntries;
+    const entries = await fetchGuestbookEntries(LANDING_ENTRY_LIMIT);
+    renderEntries(container, entries);
   } catch (_) {
-    return seedEntries;
+    renderState(container, ERROR_STATE);
   }
 }
 
-function setEntries(entries) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries.slice(0, 12)));
-}
-
-function renderEntries() {
-  const container = document.querySelector('#guestbookEntries');
-  if (!container) return;
-  container.innerHTML = getEntries().map(entry => `
-    <div class="entry">
-      <strong>${escapeHtml(entry.name)}</strong>
-      ${entry.affiliation ? `<span> · ${escapeHtml(entry.affiliation)}</span>` : ''}
-      <div>${escapeHtml(entry.note)}</div>
-    </div>
-  `).join('');
-}
-
-function escapeHtml(value) {
-  return String(value).replace(/[&<>'"]/g, char => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-  }[char]));
-}
-
-document.querySelector('#copyAddress')?.addEventListener('click', async event => {
+document.querySelector('#copyAddress')?.addEventListener('click', async (event) => {
   try {
     await navigator.clipboard.writeText(ADDRESS);
     event.currentTarget.textContent = 'Copied!';
@@ -48,23 +67,4 @@ document.querySelector('#copyAddress')?.addEventListener('click', async event =>
   }
 });
 
-document.querySelector('#guestbookForm')?.addEventListener('submit', event => {
-  event.preventDefault();
-  const form = new FormData(event.currentTarget);
-  const entry = {
-    name: form.get('name')?.toString().trim(),
-    affiliation: form.get('affiliation')?.toString().trim(),
-    note: form.get('note')?.toString().trim()
-  };
-  if (!entry.name || !entry.note) return;
-  setEntries([entry, ...getEntries()]);
-  event.currentTarget.reset();
-  renderEntries();
-  const params = new URLSearchParams({
-    title: `Guestbook: ${entry.name}`,
-    body: [`Name: ${entry.name}`, `Affiliation: ${entry.affiliation || '-'}`, '', entry.note].join('\n')
-  });
-  window.open(`${ISSUE_URL}?${params.toString()}`, '_blank', 'noopener,noreferrer');
-});
-
-renderEntries();
+renderLandingGuestbook();

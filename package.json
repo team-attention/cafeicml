@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/static-page.test.mjs",
-    "build": "node tests/static-page.test.mjs"
+    "test": "node tests/static-page.test.mjs && node tests/visit-page.test.mjs",
+    "build": "node tests/static-page.test.mjs && node tests/visit-page.test.mjs"
   }
 }

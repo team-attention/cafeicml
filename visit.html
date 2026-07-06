@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta
+      name="description"
+      content="Leave a Cafe @ICML guestbook note, unlock a free drink, and meet researchers visiting Seoul."
+    >
+    <meta property="og:title" content="Visit cafe @icml">
+    <meta
+      property="og:description"
+      content="A Cafe @ICML guestbook for researcher introductions and free drinks."
+    >
+    <meta property="og:type" content="website">
+    <title>Visit cafe @icml</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310102b'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-size='28' font-family='Arial,sans-serif' font-weight='700' fill='%23ffaedc'%3EC%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Sora:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="./visit.css">
+    <script type="module" src="./visit.js"></script>
+  </head>
+  <body>
+    <main class="visit-shell page_grid">
+      <section class="visit-hero page_grid_content stack" aria-label="Cafe @ICML guestbook landing">
+        <a class="home-link" href="./index.html">CAFE @ICML</a>
+
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">ICML Seoul guestbook</p>
+            <h1>Meet who is in the cafe before the next session.</h1>
+            <p>
+              Leave a public note, unlock your free drink, and make it easy for researchers nearby
+              to find the right conversation.
+            </p>
+            <div class="hero-actions" aria-label="Guestbook actions">
+              <a class="primary-button hero-button" href="#guestbook-title">Sign guestbook</a>
+              <a class="secondary-button hero-button" href="#entries-title">Browse notes</a>
+            </div>
+          </div>
+
+          <aside class="hero-pass" aria-label="How the guestbook works">
+            <p class="pass-label">Cafe pass</p>
+            <ol>
+              <li><span>1</span><strong>Write a note</strong></li>
+              <li><span>2</span><strong>Show the unlocked screen</strong></li>
+              <li><span>3</span><strong>Start a hallway conversation</strong></li>
+            </ol>
+          </aside>
+        </div>
+      </section>
+
+      <section class="guestbook-grid page_grid_content main_with_rail" aria-label="Cafe @ICML guestbook">
+        <section class="guestbook-card main_with_rail_main stack" id="formScreen" aria-labelledby="guestbook-title">
+          <div class="card-heading">
+            <p class="eyebrow">Guestbook sign in</p>
+            <h2 id="guestbook-title">Leave your note</h2>
+            <p>
+              Name, link, reason, and a short ask-me-about note. That is enough to unlock a free drink.
+            </p>
+          </div>
+
+          <form class="visit-form stack" id="guestbookForm" action="#" method="post">
+            <div class="field">
+              <label for="visitorName">Name</label>
+              <input id="visitorName" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+            </div>
+
+            <div class="field">
+              <label for="visitorProfile">LinkedIn, X, or website <span>optional</span></label>
+              <input id="visitorProfile" name="profile" type="text" inputmode="url" autocomplete="url" placeholder="linkedin.com/in/you">
+            </div>
+
+            <fieldset class="intent-group wrap_row">
+              <legend>Why are you here?</legend>
+              <label class="intent-option">
+                <input type="radio" name="intent" value="collab" checked>
+                <span>Collab</span>
+              </label>
+              <label class="intent-option">
+                <input type="radio" name="intent" value="hiring">
+                <span>Hiring</span>
+              </label>
+              <label class="intent-option">
+                <input type="radio" name="intent" value="open-to-work">
+                <span>Open to work</span>
+              </label>
+              <label class="intent-option">
+                <input type="radio" name="intent" value="business">
+                <span>Business</span>
+              </label>
+              <label class="intent-option">
+                <input type="radio" name="intent" value="special-request">
+                <span>Special request</span>
+              </label>
+            </fieldset>
+
+            <div class="field message-field">
+              <label for="visitorMessage">What should people ask you about? <span>optional</span></label>
+              <textarea
+                id="visitorMessage"
+                name="message"
+                rows="4"
+                placeholder="I am working on agent evaluations and would love to meet collaborators."
+              ></textarea>
+            </div>
+
+            <div class="form-status" id="submitStatus" aria-live="polite" role="status"></div>
+
+            <p class="privacy-notice">
+              Submitting makes your name, link, reason, and message public on this page.
+              To request deletion, open the configured
+              <a id="deletionIssueLink" href="https://github.com/team-attention/cafeicml/issues/new?title=Guestbook%20deletion%20request" target="_blank" rel="noopener noreferrer">GitHub issue</a>.
+            </p>
+
+            <div class="form-cta-row">
+              <button class="primary-button" id="submitButton" type="submit">Sign guestbook and unlock free drink</button>
+              <p>Show the next screen to the Cafe @ICML team.</p>
+            </div>
+          </form>
+        </section>
+
+        <section class="guestbook-card success-card main_with_rail_main stack" id="successScreen" aria-live="polite" hidden>
+          <p class="eyebrow">Free Drink unlocked</p>
+          <h2>Show this screen at Cafe @ICML.</h2>
+          <div class="submitted-summary" id="submittedSummary"></div>
+          <p>
+            Your note is on the guestbook. Share this page with a friend so they can unlock a free drink too.
+          </p>
+          <div class="success-actions">
+            <button class="primary-button" id="shareButton" type="button">Share link</button>
+            <button class="secondary-button" id="copyButton" type="button">Copy link</button>
+            <button class="secondary-button" id="backButton" type="button">Back to guestbook</button>
+          </div>
+        </section>
+
+        <section class="entries-card main_with_rail_side stack" aria-labelledby="entries-title">
+          <div class="entry-board-heading">
+            <div class="card-heading">
+              <p class="eyebrow">Who is here</p>
+              <h2 id="entries-title">Guestbook notes</h2>
+            </div>
+            <p class="entry-board-meta">Latest public notes from Cafe @ICML visitors.</p>
+          </div>
+          <div class="entry-list feed" id="entryList" role="list" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
+
+    <aside class="sponsor-rail sponsor-rail--bottom" aria-label="Cafe @ICML sponsors">
+      <div class="sponsor-rail-head">
+        <span class="rail-label">Supported by</span>
+      </div>
+      <div class="sponsor-carousel reel" id="sponsorCarousel">
+        <div class="sponsor-track" aria-live="off"></div>
+      </div>
+    </aside>
+  </body>
+</html>

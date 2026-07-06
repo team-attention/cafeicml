@@ -2,6 +2,8 @@ import { readFileSync } from 'node:fs';
 import { strict as assert } from 'node:assert';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+const script = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
+
 
 function countMatches(text, pattern) {
   return (text.match(pattern) || []).length;
@@ -12,6 +14,8 @@ for (const id of requiredSections) {
   assert.match(html, new RegExp(`id=["']${id}["']`), `missing #${id} section`);
 }
 
+assert.match(html, /<html lang=["']en["']/, 'landing page language should be English');
+assert.match(html, /<a class=["']skip-link["'] href=["']#main-content["']>Skip to main content<\/a>/, 'skip link text should be English');
 assert.match(html, /CAFE @ICML/, 'header brand should show CAFE @ICML');
 assert.match(html, /Cafe @ ICML/, 'hero title should remain visible');
 assert.match(html, /Free coffee for ICML ticket holders in Seoul/i, 'hero must emphasize free coffee for ICML ticket holders');
@@ -105,9 +109,20 @@ for (const token of pinkCityPopTokens) {
 }
 
 assert.match(html, /@media \(prefers-reduced-motion: reduce\)/, 'must respect reduced motion');
-assert.match(html, /<form class=["']guestbook-form["'] action=["']#["'] method=["']post["']>/, 'guestbook form should remain');
-assert.match(html, /<label for=["']guest-name["']>Name and affiliation<\/label>/, 'guestbook name label should remain');
-assert.match(html, /<label for=["']guest-message["']>What do you want to talk about\?<\/label>/, 'guestbook message label should remain');
+assert.match(html, /<a class=["']button button-primary["'] href=["']#menu["']>Get free coffee<\/a>/, 'coffee CTA should remain pink primary');
+assert.match(html, /<a class=["']button button-primary button-primary-cyan["'] href=["']\.\/visit\.html["']>Leave a guestbook note<\/a>/, 'guestbook CTA should link to visit page with cyan primary styling');
+assert.doesNotMatch(html, /<form class=["']guestbook-form["']/i, 'landing guestbook should not include a write form');
+assert.match(html, /id=["']landingGuestbookEntries["']/, 'landing guestbook needs a stable dynamic entries container');
+assert.match(html, /aria-label=["']Recent guestbook notes["']/, 'landing guestbook entries should have an accessible label');
+assert.match(html, /<script type=["']module["'] src=["']\.\/script\.js["']><\/script>/, 'landing page should load script.js as a module');
+assert.match(html, /No notes yet —\s*<a href=["']\.\/visit\.html["']>sign the guestbook<\/a>\./, 'empty guestbook copy should be present');
+assert.match(html, /Guestbook unavailable right now\.\s*<a href=["']\.\/visit\.html["']>Sign the guestbook<\/a>\./, 'error guestbook copy should be present');
+assert.doesNotMatch(script, /localStorage|STORAGE_KEY|issues\/new|window\.open|guestbookForm|setEntries|seedEntries/, 'landing script should not keep old localStorage or GitHub issue submit behavior');
+assert.match(script, /fetchGuestbookEntries\(LANDING_ENTRY_LIMIT\)/, 'landing script should fetch the configured latest entries limit');
+assert.match(script, /LANDING_ENTRY_LIMIT/, 'landing script should use the latest-three landing limit');
+assert.match(script, /EMPTY_MESSAGE/, 'landing script should import/use shared empty copy');
+assert.match(script, /ERROR_MESSAGE/, 'landing script should import/use shared error copy');
+assert.doesNotMatch(script, /sponsor/i, 'landing guestbook entries should not render sponsor badges');
 assert.match(html, /aria-current/, 'navigation should expose the active section state');
 
 console.log('static-page tests passed');
