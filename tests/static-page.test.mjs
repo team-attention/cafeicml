@@ -5,6 +5,8 @@ const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const script = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
 const guestbookQrUrl = new URL('../assets/qr-guestbook.svg', import.meta.url);
 const guestbookQr = existsSync(guestbookQrUrl) ? readFileSync(guestbookQrUrl, 'utf8') : '';
+const ogImageUrl = new URL('../assets/og-cafeicml-preview.png', import.meta.url);
+const ogImage = existsSync(ogImageUrl) ? readFileSync(ogImageUrl) : Buffer.alloc(0);
 const guestbookClient = readFileSync(new URL('../guestbook-client.js', import.meta.url), 'utf8');
 
 
@@ -22,6 +24,21 @@ assert.match(html, /<a class=["']skip-link["'] href=["']#main-content["']>Skip t
 assert.match(html, /CAFE @ICML/, 'header brand should show CAFE @ICML');
 assert.match(html, /Cafe @ ICML/, 'hero title should remain visible');
 assert.match(html, /Free coffee for ICML ticket holders in Seoul/i, 'hero must emphasize free coffee for ICML ticket holders');
+assert.match(html, /<link rel=["']canonical["'] href=["']https:\/\/cafeicml\.com\/["']>/, 'landing page should expose the canonical URL');
+assert.match(html, /content=["']Free drinks for ICML ticket holders in Seoul\. Drop by Cafe @ICML for city-pop coffee, sponsor specials, and easy hallway conversations\.["']/, 'meta description should use the hooked cafe invite');
+assert.match(html, /<meta property=["']og:title["'] content=["']CAFE@ICML \| Free drinks in Seoul["']>/, 'OG title should make CAFE@ICML visible in previews');
+assert.match(html, /<meta\s+property=["']og:description["'][\s\S]*?content=["']Free drinks for ICML ticket holders in Seoul\. Drop by Cafe @ICML for city-pop coffee, sponsor specials, and easy hallway conversations\.["'][\s\S]*?>/, 'OG description should use the hooked cafe invite');
+assert.match(html, /<meta property=["']og:image["'] content=["']https:\/\/cafeicml\.com\/assets\/og-cafeicml-preview\.png["']>/, 'OG image should use the CAFE@ICML preview artwork');
+assert.match(html, /<meta property=["']og:image:width["'] content=["']1200["']>/, 'OG image width should match the generated preview asset');
+assert.match(html, /<meta property=["']og:image:height["'] content=["']630["']>/, 'OG image height should match the generated preview asset');
+assert.match(html, /<meta property=["']og:image:alt["'] content=["']Pastel city-pop CAFE@ICML poster with get free coffee text over a Seoul skyline["']>/, 'OG image should describe the visible preview artwork');
+assert.match(html, /<meta name=["']twitter:card["'] content=["']summary_large_image["']>/, 'Twitter should render a large image card');
+assert.match(html, /<meta\s+name=["']twitter:description["'][\s\S]*?content=["']Free drinks for ICML ticket holders in Seoul\. Drop by Cafe @ICML for city-pop coffee, sponsor specials, and easy hallway conversations\.["'][\s\S]*?>/, 'Twitter description should use the hooked cafe invite');
+assert.match(html, /<meta name=["']twitter:image["'] content=["']https:\/\/cafeicml\.com\/assets\/og-cafeicml-preview\.png["']>/, 'Twitter image should match the OG preview artwork');
+assert.ok(existsSync(ogImageUrl), 'OG preview image asset should exist');
+assert.deepEqual([...ogImage.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], 'OG preview asset should be a PNG');
+assert.equal(ogImage.readUInt32BE(16), 1200, 'OG preview PNG should be 1200px wide');
+assert.equal(ogImage.readUInt32BE(20), 630, 'OG preview PNG should be 630px tall');
 assert.match(html, /Show your ICML ticket\. Coffee is free\./i, 'ticket/free coffee source copy must remain');
 assert.match(html, /Google Maps link for the exact location\./, 'location section should keep the map link copy');
 assert.match(html, /https:\/\/maps\.app\.goo\.gl\/RaefhMoRSksakyhv6/, 'location should use the provided Google Maps link');
