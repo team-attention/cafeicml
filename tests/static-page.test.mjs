@@ -1,8 +1,10 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { strict as assert } from 'node:assert';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const script = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
+const guestbookQrUrl = new URL('../assets/qr-guestbook.svg', import.meta.url);
+const guestbookQr = existsSync(guestbookQrUrl) ? readFileSync(guestbookQrUrl, 'utf8') : '';
 
 
 function countMatches(text, pattern) {
@@ -86,6 +88,12 @@ assert.equal(countMatches(html, /class=["']cup\b/g), 0, 'exclusive drink cards s
 assert.equal(countMatches(html, /class=["']logo-dot\b/g), 0, 'exclusive drink cards should not use decorative symbol prefixes');
 assert.doesNotMatch(html, />\s*add\s*</, 'menu cards should not include plus/add icon buttons');
 assert.doesNotMatch(html, /<cite\b/i, 'removed cite labels should not return');
+assert.ok(existsSync(guestbookQrUrl), 'guestbook QR asset should exist');
+assert.match(guestbookQr, /https:\/\/cafeicml\.com\/visit\.html/, 'guestbook QR asset should encode the public guestbook URL in metadata');
+assert.match(html, /class=["']menu-heading-row["'][\s\S]*class=["']menu-guestbook-qr["']/, 'menu heading should include a guestbook QR block');
+assert.match(html, /class=["']menu-guestbook-qr["'][^>]+href=["']\.\/visit\.html["']|href=["']\.\/visit\.html["'][^>]+class=["']menu-guestbook-qr["']/, 'menu QR should link to the guestbook page');
+assert.match(html, /src=["']\.\/assets\/qr-guestbook\.svg["'][\s\S]*alt=["']QR code for Cafe @ICML guestbook["']/, 'menu QR should render the local QR asset with useful alt text');
+assert.match(html, /Scan to sign the guestbook/, 'menu QR should have a concise visible instruction');
 
 const pinkCityPopTokens = [
   /--accent-primary:\s*#ffaedc/i,
@@ -122,6 +130,9 @@ assert.match(script, /fetchGuestbookEntries\(LANDING_ENTRY_LIMIT\)/, 'landing sc
 assert.match(script, /LANDING_ENTRY_LIMIT/, 'landing script should use the latest-three landing limit');
 assert.match(script, /EMPTY_MESSAGE/, 'landing script should import/use shared empty copy');
 assert.match(script, /ERROR_MESSAGE/, 'landing script should import/use shared error copy');
+assert.match(script, /normalizeProfileUrl/, 'landing script should normalize fetched profile URLs before rendering links');
+assert.match(script, /const profileUrl = normalizeProfileUrl\(entry\.profile_url\)/, 'landing guestbook links should use the shared profile URL sanitizer');
+assert.doesNotMatch(script, /String\(entry\.profile_url\)|entry\.profile_url \? String\(entry\.profile_url\)/, 'landing guestbook should not render raw fetched profile URLs');
 assert.doesNotMatch(script, /sponsor/i, 'landing guestbook entries should not render sponsor badges');
 assert.match(html, /aria-current/, 'navigation should expose the active section state');
 

@@ -508,6 +508,23 @@
         gap: var(--space-8);
       }
 
+      .menu-heading-row {
+        display: grid;
+        gap: var(--space-4);
+      }
+
+      .menu-heading-copy {
+        display: grid;
+        gap: var(--space-2);
+      }
+
+      .menu-heading-copy p {
+        max-width: 34rem;
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
+
       .menu-panel h2 {
         color: #e1dfff;
         font-size: 1.875rem;
@@ -522,6 +539,79 @@
         font-weight: 600;
         line-height: 1;
         letter-spacing: -0.576px;
+      }
+
+      .menu-guestbook-qr {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: var(--space-4);
+        width: 100%;
+        min-width: 0;
+        padding: var(--space-3);
+        border: 1px solid rgba(152, 225, 255, 0.32);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.07);
+        color: var(--text-primary);
+        box-shadow: inset 0 0 24px rgba(152, 225, 255, 0.05);
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      }
+
+      .menu-guestbook-qr:hover {
+        border-color: rgba(152, 225, 255, 0.62);
+        background: rgba(152, 225, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .menu-guestbook-qr:focus-visible {
+        outline: 3px solid var(--accent-secondary);
+        outline-offset: 3px;
+      }
+
+      .qr-frame {
+        display: grid;
+        width: clamp(5.25rem, 22vw, 7rem);
+        aspect-ratio: 1;
+        place-items: center;
+        flex-shrink: 0;
+        border-radius: 0.95rem;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.18);
+      }
+
+      .qr-frame img {
+        width: 82%;
+        height: 82%;
+        display: block;
+      }
+
+      .qr-copy {
+        display: grid;
+        min-width: 0;
+        gap: var(--space-1);
+      }
+
+      .qr-label {
+        color: var(--accent-secondary);
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .qr-title {
+        color: var(--text-primary);
+        font-family: "Sora", system-ui, sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .qr-helper {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        line-height: 1.35;
       }
 
       .menu-grid {
@@ -979,6 +1069,15 @@
           gap: var(--space-8);
         }
 
+        .menu-heading-row {
+          grid-template-columns: minmax(0, 1fr) minmax(16rem, 19rem);
+          align-items: center;
+        }
+
+        .menu-guestbook-qr {
+          justify-self: end;
+        }
+
         .menu-panel h2 {
           font-size: 3rem;
           letter-spacing: -1.536px;
@@ -1060,6 +1159,10 @@
         .menu-panel {
           max-width: 72rem;
           padding: 2.25rem;
+        }
+
+        .menu-heading-row {
+          grid-template-columns: minmax(0, 1fr) minmax(17rem, 20rem);
         }
 
         .menu-grid {
@@ -1181,7 +1284,29 @@
       <section class="section reveal" id="menu" aria-labelledby="menu-title">
         <div class="menu-panel">
           <div class="menu-panel-inner">
-            <h2 id="menu-title">Exclusive Drinks</h2>
+            <div class="menu-heading-row">
+              <div class="menu-heading-copy">
+                <h2 id="menu-title">Exclusive Drinks</h2>
+                <p>Scan the guestbook before you order so nearby ICML visitors can find you.</p>
+              </div>
+              <a class="menu-guestbook-qr" href="./visit.html" aria-label="Open the Cafe @ICML guestbook page">
+                <span class="qr-frame" aria-hidden="true">
+                  <img
+                    src="./assets/qr-guestbook.svg"
+                    alt="QR code for Cafe @ICML guestbook"
+                    width="132"
+                    height="132"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </span>
+                <span class="qr-copy">
+                  <span class="qr-label">Guestbook</span>
+                  <span class="qr-title">Scan to sign the guestbook</span>
+                  <span class="qr-helper">Unlock the visit page, leave a note, and show it to the cafe team.</span>
+                </span>
+              </a>
+            </div>
             <div class="menu-grid" aria-label="Free drink menu">
               <article class="menu-card featured-drink">
                 <div class="drink-image">

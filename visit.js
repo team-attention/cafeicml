@@ -1,4 +1,3 @@
-import { GUESTBOOK_CONFIG } from './guestbook-config.js';
 import {
   DEFAULT_INTENT,
   INTENTS,
@@ -53,11 +52,11 @@ const SUCCESS_TITLE = 'Free Drink unlocked';
 const DEFAULT_MESSAGE_PLACEHOLDER = 'I am working on agent evaluations and would love to meet collaborators.';
 const SUBMIT_TEXT = 'Sign guestbook and unlock free drink';
 const SUBMITTING_TEXT = 'Submitting...';
-const DELETION_ISSUE_URL = GUESTBOOK_CONFIG.deletionIssueUrl
-  || GUESTBOOK_CONFIG.deletion_issue_url
-  || GUESTBOOK_CONFIG.githubIssueUrl
-  || GUESTBOOK_CONFIG.deleteRequestUrl
-  || 'https://github.com/team-attention/cafeicml/issues/new?title=Guestbook%20deletion%20request';
+const ALL_INTENTS_FILTER = 'all';
+const FILTER_EMPTY_MESSAGE = 'No notes for this reason yet.';
+
+let currentEntries = [];
+let activeIntentFilter = ALL_INTENTS_FILTER;
 
 export const SPONSORS = [
   {
@@ -80,17 +79,59 @@ export const SPONSORS = [
   }
 ];
 
+function shuffleInPlace(items, rng) {
+  for (let i = items.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(rng() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+  return items;
+}
+
+export function assignSponsorsToEntries(entryCount, sponsors = SPONSORS, rng = Math.random) {
+  const count = Math.max(0, Math.trunc(Number(entryCount) || 0));
+  if (count === 0) return [];
+
+  const eligibleSponsors = Array.isArray(sponsors)
+    ? sponsors.filter(sponsor => sponsor && sponsor.name)
+    : [];
+  if (!eligibleSponsors.length) return Array.from({ length: count }, () => null);
+  if (eligibleSponsors.length === 1) return Array.from({ length: count }, () => eligibleSponsors[0]);
+
+  const sponsorOrder = shuffleInPlace([...eligibleSponsors], rng);
+  const assignments = [];
+
+  while (assignments.length < count) {
+    for (const sponsor of sponsorOrder) {
+      if (assignments.length === count) break;
+      assignments.push(sponsor);
+    }
+  }
+
+  return shuffleInPlace(assignments, rng);
+}
+
 function getIntentPlaceholder(intent) {
   const config = getIntentConfig(intent);
   return config.placeholder || config.messagePlaceholder || DEFAULT_MESSAGE_PLACEHOLDER;
 }
 
-function getEntryProfileUrl(entry) {
-  return entry.profile_url || entry.profileUrl || '';
+export function getEntryProfileUrl(entry) {
+  const hasPrimaryProfile = Object.prototype.hasOwnProperty.call(entry ?? {}, 'profile_url');
+  const profileUrl = hasPrimaryProfile ? entry.profile_url : entry?.profileUrl;
+  return normalizeSharedProfileUrl(profileUrl);
 }
 
 function getEntryIntent(entry) {
   return entry.intent || DEFAULT_INTENT;
+}
+
+function isIntentFilter(value) {
+  return value === ALL_INTENTS_FILTER || Object.prototype.hasOwnProperty.call(INTENTS, value);
+}
+
+function getVisibleEntries() {
+  if (activeIntentFilter === ALL_INTENTS_FILTER) return currentEntries;
+  return currentEntries.filter(entry => getEntryIntent(entry) === activeIntentFilter);
 }
 
 function getEntryMessage(entry) {
@@ -98,13 +139,13 @@ function getEntryMessage(entry) {
   return message || getIntentConfig(getEntryIntent(entry)).label;
 }
 
-function getEntryInitials(name) {
+export function getEntryInitials(name) {
   const normalizedName = String(name || 'Cafe visitor').trim();
   const parts = normalizedName.split(/\s+/).filter(Boolean);
   if (!parts.length) return 'CV';
   return parts
     .slice(0, 2)
-    .map(part => part[0])
+    .map(part => Array.from(part)[0])
     .join('')
     .toUpperCase();
 }
@@ -166,7 +207,7 @@ function renderSponsorCarousel() {
   const cards = SPONSORS.map(sponsor => renderSponsorCard(sponsor)).join('');
   const duplicateCards = SPONSORS.map(sponsor => renderSponsorCard(sponsor)).join('');
   container.innerHTML = `
-    <div class="sponsor-track">
+    <div class="sponsor-track" aria-live="off">
       <div class="sponsor-set">${cards}</div>
       <div class="sponsor-set" aria-hidden="true">${duplicateCards}</div>
     </div>
@@ -183,42 +224,62 @@ function renderEntries(entries, state = 'ready') {
   }
 
   if (!entries.length) {
-    container.innerHTML = `<p class="entry-state" role="status">${escapeHtml(EMPTY_MESSAGE)}</p>`;
+    const message = state === 'filtered-empty' ? FILTER_EMPTY_MESSAGE : EMPTY_MESSAGE;
+    container.innerHTML = `<p class="entry-state" role="status">${escapeHtml(message)}</p>`;
     return;
   }
 
-  container.innerHTML = entries.map(entry => {
-    const intentConfig = getIntentConfig(getEntryIntent(entry));
+  const sponsorAssignments = assignSponsorsToEntries(entries.length, SPONSORS);
+
+  container.innerHTML = entries.map((entry, index) => {
+    const entryIntent = getEntryIntent(entry);
+    const intentConfig = getIntentConfig(entryIntent);
     const profileUrl = getEntryProfileUrl(entry);
     const visitorName = entry.name || 'Cafe visitor';
     const timeLabel = getEntryTimeLabel(entry);
+    const sponsor = sponsorAssignments[index];
 
     return `
-      <article class="entry" role="listitem" aria-label="${escapeHtml(visitorName)} guestbook note">
+      <article class="entry" role="listitem" data-intent="${escapeHtml(getEntryIntent(entry))}" aria-label="${escapeHtml(visitorName)} guestbook note">
         <div class="entry-top">
-          <span class="entry-avatar" aria-hidden="true">${escapeHtml(getEntryInitials(visitorName))}</span>
-          <div class="entry-identity">
-            <div class="entry-head">
-              <span class="entry-name">${escapeHtml(visitorName)}</span>
-              <span class="entry-intent">${escapeHtml(intentConfig.label)}</span>
+          ${sponsor ? `
+            <div class="entry-support">
+              <span class="entry-supported-by" aria-label="Supported by ${escapeHtml(sponsor.name)}">Supported by ${escapeHtml(sponsor.name)}</span>
             </div>
-            <div class="entry-meta">
-              ${profileUrl ? `<a class="entry-profile" href="${escapeHtml(profileUrl)}" target="_blank" rel="noopener noreferrer nofollow ugc">Open profile</a>` : ''}
-              ${timeLabel ? `<span class="entry-time">${escapeHtml(timeLabel)}</span>` : ''}
-            </div>
+          ` : ''}
+          <div class="entry-person-row">
+            <span class="entry-name">${escapeHtml(visitorName)}</span>
+            <span class="entry-initials" aria-hidden="true">${escapeHtml(getEntryInitials(visitorName))}</span>
+            <span class="entry-intent">${escapeHtml(intentConfig.label)}</span>
           </div>
         </div>
         <p class="entry-message">${escapeHtml(getEntryMessage(entry))}</p>
+        ${profileUrl || timeLabel ? `
+          <div class="entry-meta">
+            ${profileUrl ? `<a class="entry-profile" href="${escapeHtml(profileUrl)}" target="_blank" rel="noopener noreferrer nofollow ugc">Open profile</a>` : ''}
+            ${timeLabel ? `<span class="entry-time">${escapeHtml(timeLabel)}</span>` : ''}
+          </div>
+        ` : ''}
       </article>
     `;
   }).join('');
 }
 
+function renderCurrentEntries() {
+  const visibleEntries = getVisibleEntries();
+  const state = currentEntries.length > 0 && activeIntentFilter !== ALL_INTENTS_FILTER && visibleEntries.length === 0
+    ? 'filtered-empty'
+    : 'ready';
+  renderEntries(visibleEntries, state);
+}
+
 async function refreshEntries() {
   try {
     const entries = await fetchGuestbookEntries(VISIT_ENTRY_LIMIT);
-    renderEntries(entries.slice(0, VISIT_ENTRY_LIMIT));
+    currentEntries = entries.slice(0, VISIT_ENTRY_LIMIT);
+    renderCurrentEntries();
   } catch (_) {
+    currentEntries = [];
     renderEntries([], 'error');
   }
 }
@@ -236,11 +297,16 @@ function renderSubmittedSummary(entry) {
   `;
 }
 
+function getReducedMotionAwareScrollBehavior() {
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+}
+
 function showSuccess(entry) {
   renderSubmittedSummary(entry);
   document.querySelector('#formScreen')?.setAttribute('hidden', '');
   document.querySelector('#successScreen')?.removeAttribute('hidden');
-  document.querySelector('#successScreen')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const scrollBehavior = getReducedMotionAwareScrollBehavior();
+  document.querySelector('#successScreen')?.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
 }
 
 function showForm() {
@@ -249,18 +315,39 @@ function showForm() {
   document.querySelector('#visitorName')?.focus();
 }
 
-function configureDeletionLink() {
-  const link = document.querySelector('#deletionIssueLink');
-  if (!link) return;
-  link.href = DELETION_ISSUE_URL;
-}
-
 function bindIntentPlaceholders(form) {
   updateMessagePlaceholder(form?.querySelector('input[name="intent"]:checked')?.value || DEFAULT_INTENT);
   form?.querySelectorAll('input[name="intent"]').forEach(input => {
     input.addEventListener('change', () => {
       if (input.checked) updateMessagePlaceholder(input.value);
     });
+  });
+}
+
+function setActiveFilterButtonState(filterBar) {
+  filterBar.querySelectorAll('[data-intent-filter]').forEach(button => {
+    const isActive = button.dataset.intentFilter === activeIntentFilter;
+    button.classList.toggle('is-active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
+}
+
+function bindEntryFilters() {
+  const filterBar = document.querySelector('#entryFilters');
+  if (!filterBar) return;
+
+  setActiveFilterButtonState(filterBar);
+  filterBar.addEventListener('click', event => {
+    if (!(event.target instanceof Element)) return;
+    const button = event.target.closest('[data-intent-filter]');
+    if (!button) return;
+
+    const nextFilter = button.dataset.intentFilter || ALL_INTENTS_FILTER;
+    if (!isIntentFilter(nextFilter) || nextFilter === activeIntentFilter) return;
+
+    activeIntentFilter = nextFilter;
+    setActiveFilterButtonState(filterBar);
+    renderCurrentEntries();
   });
 }
 
@@ -321,7 +408,8 @@ function bindSuccessActions() {
       }
       await navigator.clipboard.writeText(shareUrl);
       shareButton.textContent = 'Link copied';
-    } catch (_) {
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
       shareButton.textContent = 'Share unavailable';
     }
   });
@@ -346,8 +434,8 @@ function bindSuccessActions() {
 }
 
 export async function initVisitPage() {
-  configureDeletionLink();
   renderSponsorCarousel();
+  bindEntryFilters();
   bindForm();
   bindSuccessActions();
   await refreshEntries();

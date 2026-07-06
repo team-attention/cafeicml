@@ -53,10 +53,13 @@ export function normalizeProfileUrl(value) {
   if (!trimmed) {
     return '';
   }
+  if (/[\u0000-\u001F\u007F\s"'<>`]/.test(trimmed)) {
+    return '';
+  }
   if (/^https?:\/\//i.test(trimmed)) {
     return trimmed;
   }
-  if (/^[a-z][a-z\d+.-]*:/i.test(trimmed)) {
+  if (/^[a-z][a-z\d+.-]*:(?!\d+)/i.test(trimmed)) {
     return '';
   }
   return `https://${trimmed}`;
