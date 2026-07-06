@@ -39,7 +39,7 @@ export const INTENT_ORDER = [
 ];
 
 export const LANDING_ENTRY_LIMIT = 5;
-export const VISIT_ENTRY_LIMIT = 24;
+export const VISIT_ENTRY_LIMIT = 96;
 export const EMPTY_MESSAGE = 'No notes yet — sign the guestbook.';
 export const ERROR_MESSAGE = 'Guestbook unavailable right now.';
 export const REQUEST_TIMEOUT_MS = 8000;
