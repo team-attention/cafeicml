@@ -32,15 +32,16 @@ function renderEntries(container, entries) {
     const profileLink = profileUrl
       ? `<a class="note-profile" href="${escapeHtml(profileUrl)}" target="_blank" rel="noopener noreferrer nofollow ugc">Profile</a>`
       : '';
+    const visitorName = entry.name || 'Cafe visitor';
 
     return `
       <li class="note">
         <div class="note-meta">
-          <strong>${escapeHtml(entry.name)}</strong>
-          <span>${escapeHtml(intent.label)}</span>
-          ${profileLink}
+          <strong>${escapeHtml(visitorName)}</strong>
+          <span class="note-intent">${escapeHtml(intent.label)}</span>
         </div>
         <p class="muted">${escapeHtml(entry.message)}</p>
+        ${profileLink}
       </li>
     `;
   }).join('');

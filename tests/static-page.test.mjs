@@ -5,6 +5,7 @@ const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const script = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
 const guestbookQrUrl = new URL('../assets/qr-guestbook.svg', import.meta.url);
 const guestbookQr = existsSync(guestbookQrUrl) ? readFileSync(guestbookQrUrl, 'utf8') : '';
+const guestbookClient = readFileSync(new URL('../guestbook-client.js', import.meta.url), 'utf8');
 
 
 function countMatches(text, pattern) {
@@ -117,17 +118,28 @@ for (const token of pinkCityPopTokens) {
 }
 
 assert.match(html, /@media \(prefers-reduced-motion: reduce\)/, 'must respect reduced motion');
+assert.match(html, /\.bottom-link span:not\(\.material-symbols-outlined\)[\s\S]*text-overflow:\s*ellipsis/, 'bottom nav labels should not overflow into adjacent items on narrow mobile');
+assert.match(html, /@media\s+\(max-width:\s*360px\)[\s\S]*\.bottom-link\s*\{[\s\S]*font-size:\s*0\.68rem/, 'bottom nav should tighten label sizing on very narrow screens');
 assert.match(html, /<a class=["']button button-primary["'] href=["']#menu["']>Get free coffee<\/a>/, 'coffee CTA should remain pink primary');
 assert.match(html, /<a class=["']button button-primary button-primary-cyan["'] href=["']\.\/visit\.html["']>Leave a guestbook note<\/a>/, 'guestbook CTA should link to visit page with cyan primary styling');
 assert.doesNotMatch(html, /<form class=["']guestbook-form["']/i, 'landing guestbook should not include a write form');
 assert.match(html, /id=["']landingGuestbookEntries["']/, 'landing guestbook needs a stable dynamic entries container');
 assert.match(html, /aria-label=["']Recent guestbook notes["']/, 'landing guestbook entries should have an accessible label');
+assert.match(html, /class=["']guestbook-heading-row["'][\s\S]*class=["']guestbook-page-indicator["'][^>]+href=["']\.\/visit\.html["']/i, 'landing guestbook preview should show an explicit guestbook-page indicator');
+assert.match(html, /Open guestbook page/, 'guestbook preview indicator should make the navigation destination clear');
+assert.match(html, /Recently signed/, 'guestbook preview should label the latest visitors as recently signed');
+assert.match(html, /Latest 5 visitors/, 'guestbook preview should explain that it shows the latest five visitors');
 assert.match(html, /<script type=["']module["'] src=["']\.\/script\.js["']><\/script>/, 'landing page should load script.js as a module');
 assert.match(html, /No notes yet —\s*<a href=["']\.\/visit\.html["']>sign the guestbook<\/a>\./, 'empty guestbook copy should be present');
 assert.match(html, /Guestbook unavailable right now\.\s*<a href=["']\.\/visit\.html["']>Sign the guestbook<\/a>\./, 'error guestbook copy should be present');
 assert.doesNotMatch(script, /localStorage|STORAGE_KEY|issues\/new|window\.open|guestbookForm|setEntries|seedEntries/, 'landing script should not keep old localStorage or GitHub issue submit behavior');
 assert.match(script, /fetchGuestbookEntries\(LANDING_ENTRY_LIMIT\)/, 'landing script should fetch the configured latest entries limit');
-assert.match(script, /LANDING_ENTRY_LIMIT/, 'landing script should use the latest-three landing limit');
+assert.match(script, /LANDING_ENTRY_LIMIT/, 'landing script should use the latest-five landing limit');
+assert.match(guestbookClient, /export const LANDING_ENTRY_LIMIT = 5;/, 'landing guestbook preview should fetch the latest five entries');
+assert.match(html, /\.note-list[\s\S]*background:\s*rgba/, 'guestbook preview list should have its own subtle surface');
+assert.match(html, /\.note\s*\{[\s\S]*border:\s*1px solid/, 'guestbook preview entries should read as separated cards');
+assert.match(html, /\.note\s*\{[\s\S]*background:\s*linear-gradient/, 'guestbook preview entries should not blend into the parent glass panel');
+assert.match(html, /\.note-meta[\s\S]*justify-content:\s*space-between/, 'guestbook preview card meta should use a structured row');
 assert.match(script, /EMPTY_MESSAGE/, 'landing script should import/use shared empty copy');
 assert.match(script, /ERROR_MESSAGE/, 'landing script should import/use shared error copy');
 assert.match(script, /normalizeProfileUrl/, 'landing script should normalize fetched profile URLs before rendering links');

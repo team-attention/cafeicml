@@ -139,17 +139,6 @@ function getEntryMessage(entry) {
   return message || getIntentConfig(getEntryIntent(entry)).label;
 }
 
-export function getEntryInitials(name) {
-  const normalizedName = String(name || 'Cafe visitor').trim();
-  const parts = normalizedName.split(/\s+/).filter(Boolean);
-  if (!parts.length) return 'CV';
-  return parts
-    .slice(0, 2)
-    .map(part => Array.from(part)[0])
-    .join('')
-    .toUpperCase();
-}
-
 function getEntryTimeLabel(entry) {
   const rawDate = entry.created_at || entry.createdAt;
   if (!rawDate) return '';
@@ -249,14 +238,13 @@ function renderEntries(entries, state = 'ready') {
           ` : ''}
           <div class="entry-person-row">
             <span class="entry-name">${escapeHtml(visitorName)}</span>
-            <span class="entry-initials" aria-hidden="true">${escapeHtml(getEntryInitials(visitorName))}</span>
             <span class="entry-intent">${escapeHtml(intentConfig.label)}</span>
           </div>
         </div>
         <p class="entry-message">${escapeHtml(getEntryMessage(entry))}</p>
         ${profileUrl || timeLabel ? `
           <div class="entry-meta">
-            ${profileUrl ? `<a class="entry-profile" href="${escapeHtml(profileUrl)}" target="_blank" rel="noopener noreferrer nofollow ugc">Open profile</a>` : ''}
+            ${profileUrl ? `<a class="entry-profile" href="${escapeHtml(profileUrl)}" target="_blank" rel="noopener noreferrer nofollow ugc">LinkedIn profile</a>` : ''}
             ${timeLabel ? `<span class="entry-time">${escapeHtml(timeLabel)}</span>` : ''}
           </div>
         ` : ''}

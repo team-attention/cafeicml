@@ -173,7 +173,7 @@ Known divergence is limited to content density: the visit page can use a shorter
 - **Motion**: transform-only animation, pauses on hover/focus, and stops under `prefers-reduced-motion`.
 
 ### Guestbook Notes Wall
-- **Structure**: repeated `article` notes with top-right render-time `Supported by <sponsor>` attribution, a single identity row for name, initials, and intent, message, optional profile link, and timestamp when available.
+- **Structure**: repeated `article` notes with top-right render-time `Supported by <sponsor>` attribution, a single identity row for name and intent, message, optional profile link, and timestamp when available.
 - **Layout**: responsive feed/grid wall for varied note lengths; no forced equal heights and no CSS masonry that can disturb focus order.
 - **Filters**: intent filter buttons sit above the feed, use `aria-pressed`, and filter already-fetched notes without changing DOM source order inside each rendered list.
 - **Sponsor attribution**: sponsor attributions are assigned only at render time from the current sponsor list using balanced random distribution; visible sponsor counts should differ by no more than one within a rendered batch.
