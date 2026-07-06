@@ -25,10 +25,19 @@
     <script type="module" src="./visit.js"></script>
   </head>
   <body>
-    <main class="visit-shell page_grid">
-      <section class="visit-hero page_grid_content stack" aria-label="Cafe @ICML guestbook landing">
-        <a class="home-link" href="./index.html">CAFE @ICML</a>
+    <header class="site-header visit-header">
+      <div class="header-inner">
+        <a class="brand-link" href="./index.html">CAFE @ICML</a>
+        <nav class="header-nav" aria-label="Visit navigation">
+          <a class="nav-link" href="./index.html#menu">Menu</a>
+          <a class="nav-link" href="#guestbook-title" aria-current="page">Guestbook</a>
+          <a class="nav-link" href="#entries-title">Notes</a>
+        </nav>
+      </div>
+    </header>
 
+    <main class="visit-shell page_grid">
+      <section class="visit-hero page_grid_content stack glass-panel" aria-label="Cafe @ICML guestbook landing">
         <div class="hero-layout">
           <div class="hero-copy">
             <p class="eyebrow">ICML Seoul guestbook</p>
@@ -38,8 +47,8 @@
               to find the right conversation.
             </p>
             <div class="hero-actions" aria-label="Guestbook actions">
-              <a class="primary-button hero-button" href="#guestbook-title">Sign guestbook</a>
-              <a class="secondary-button hero-button" href="#entries-title">Browse notes</a>
+              <a class="button button-primary primary-button hero-button" href="#guestbook-title">Sign guestbook</a>
+              <a class="button button-secondary secondary-button hero-button" href="#entries-title">Browse notes</a>
             </div>
           </div>
 
@@ -67,12 +76,12 @@
           <form class="visit-form stack" id="guestbookForm" action="#" method="post">
             <div class="field">
               <label for="visitorName">Name</label>
-              <input id="visitorName" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+              <input id="visitorName" name="name" type="text" autocomplete="name" placeholder="Your name" maxlength="80" required>
             </div>
 
             <div class="field">
               <label for="visitorProfile">LinkedIn, X, or website <span>optional</span></label>
-              <input id="visitorProfile" name="profile" type="text" inputmode="url" autocomplete="url" placeholder="linkedin.com/in/you">
+              <input id="visitorProfile" name="profile" type="text" inputmode="url" autocomplete="url" placeholder="linkedin.com/in/you" maxlength="240">
             </div>
 
             <fieldset class="intent-group wrap_row">
@@ -105,6 +114,7 @@
                 id="visitorMessage"
                 name="message"
                 rows="4"
+                maxlength="500"
                 placeholder="I am working on agent evaluations and would love to meet collaborators."
               ></textarea>
             </div>
@@ -118,7 +128,7 @@
             </p>
 
             <div class="form-cta-row">
-              <button class="primary-button" id="submitButton" type="submit">Sign guestbook and unlock free drink</button>
+              <button class="button button-primary primary-button" id="submitButton" type="submit">Sign guestbook and unlock free drink</button>
               <p>Show the next screen to the Cafe @ICML team.</p>
             </div>
           </form>
@@ -132,9 +142,9 @@
             Your note is on the guestbook. Share this page with a friend so they can unlock a free drink too.
           </p>
           <div class="success-actions">
-            <button class="primary-button" id="shareButton" type="button">Share link</button>
-            <button class="secondary-button" id="copyButton" type="button">Copy link</button>
-            <button class="secondary-button" id="backButton" type="button">Back to guestbook</button>
+            <button class="button button-primary primary-button" id="shareButton" type="button">Share link</button>
+            <button class="button button-secondary secondary-button" id="copyButton" type="button">Copy link</button>
+            <button class="button button-secondary secondary-button" id="backButton" type="button">Back to guestbook</button>
           </div>
         </section>
 

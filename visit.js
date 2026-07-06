@@ -85,8 +85,10 @@ function getIntentPlaceholder(intent) {
   return config.placeholder || config.messagePlaceholder || DEFAULT_MESSAGE_PLACEHOLDER;
 }
 
-function getEntryProfileUrl(entry) {
-  return entry.profile_url || entry.profileUrl || '';
+export function getEntryProfileUrl(entry) {
+  const hasPrimaryProfile = Object.prototype.hasOwnProperty.call(entry ?? {}, 'profile_url');
+  const profileUrl = hasPrimaryProfile ? entry.profile_url : entry?.profileUrl;
+  return normalizeSharedProfileUrl(profileUrl);
 }
 
 function getEntryIntent(entry) {
@@ -98,13 +100,13 @@ function getEntryMessage(entry) {
   return message || getIntentConfig(getEntryIntent(entry)).label;
 }
 
-function getEntryInitials(name) {
+export function getEntryInitials(name) {
   const normalizedName = String(name || 'Cafe visitor').trim();
   const parts = normalizedName.split(/\s+/).filter(Boolean);
   if (!parts.length) return 'CV';
   return parts
     .slice(0, 2)
-    .map(part => part[0])
+    .map(part => Array.from(part)[0])
     .join('')
     .toUpperCase();
 }
@@ -166,7 +168,7 @@ function renderSponsorCarousel() {
   const cards = SPONSORS.map(sponsor => renderSponsorCard(sponsor)).join('');
   const duplicateCards = SPONSORS.map(sponsor => renderSponsorCard(sponsor)).join('');
   container.innerHTML = `
-    <div class="sponsor-track">
+    <div class="sponsor-track" aria-live="off">
       <div class="sponsor-set">${cards}</div>
       <div class="sponsor-set" aria-hidden="true">${duplicateCards}</div>
     </div>
@@ -236,11 +238,16 @@ function renderSubmittedSummary(entry) {
   `;
 }
 
+function getReducedMotionAwareScrollBehavior() {
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+}
+
 function showSuccess(entry) {
   renderSubmittedSummary(entry);
   document.querySelector('#formScreen')?.setAttribute('hidden', '');
   document.querySelector('#successScreen')?.removeAttribute('hidden');
-  document.querySelector('#successScreen')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const scrollBehavior = getReducedMotionAwareScrollBehavior();
+  document.querySelector('#successScreen')?.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
 }
 
 function showForm() {
@@ -321,7 +328,8 @@ function bindSuccessActions() {
       }
       await navigator.clipboard.writeText(shareUrl);
       shareButton.textContent = 'Link copied';
-    } catch (_) {
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
       shareButton.textContent = 'Share unavailable';
     }
   });

@@ -4,7 +4,8 @@ import {
   LANDING_ENTRY_LIMIT,
   escapeHtml,
   fetchGuestbookEntries,
-  getIntentConfig
+  getIntentConfig,
+  normalizeProfileUrl
 } from './guestbook-client.js';
 
 const ADDRESS = 'I-Park Tower 2, 5 Yeongdong-daero 106-gil, Gangnam-gu, Seoul';
@@ -27,7 +28,7 @@ function renderEntries(container, entries) {
 
   container.innerHTML = entries.map((entry) => {
     const intent = getIntentConfig(entry.intent);
-    const profileUrl = entry.profile_url ? String(entry.profile_url) : '';
+    const profileUrl = normalizeProfileUrl(entry.profile_url);
     const profileLink = profileUrl
       ? `<a class="note-profile" href="${escapeHtml(profileUrl)}" target="_blank" rel="noopener noreferrer nofollow ugc">Profile</a>`
       : '';

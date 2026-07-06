@@ -122,6 +122,9 @@ assert.match(script, /fetchGuestbookEntries\(LANDING_ENTRY_LIMIT\)/, 'landing sc
 assert.match(script, /LANDING_ENTRY_LIMIT/, 'landing script should use the latest-three landing limit');
 assert.match(script, /EMPTY_MESSAGE/, 'landing script should import/use shared empty copy');
 assert.match(script, /ERROR_MESSAGE/, 'landing script should import/use shared error copy');
+assert.match(script, /normalizeProfileUrl/, 'landing script should normalize fetched profile URLs before rendering links');
+assert.match(script, /const profileUrl = normalizeProfileUrl\(entry\.profile_url\)/, 'landing guestbook links should use the shared profile URL sanitizer');
+assert.doesNotMatch(script, /String\(entry\.profile_url\)|entry\.profile_url \? String\(entry\.profile_url\)/, 'landing guestbook should not render raw fetched profile URLs');
 assert.doesNotMatch(script, /sponsor/i, 'landing guestbook entries should not render sponsor badges');
 assert.match(html, /aria-current/, 'navigation should expose the active section state');
 

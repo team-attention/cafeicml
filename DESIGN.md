@@ -116,6 +116,20 @@ StyleGallery layout-gallery is the imported layout-system source for `visit.html
 
 Verification follows the StyleGallery matrix: check `320px`, `375px`, `768px`, `1024px`, and `1440px` when layout changes; include empty, short, long paragraph, and unbroken-string content; preserve visible focus order; avoid unusable two-dimensional scrolling.
 
+### Visit Landing Visual Parity
+
+`visit.html` must read as the same landing experience as `index.html`, not as a separate microsite. StyleGallery may own structural layout classes, but the visible primitives are inherited from the home landing page.
+
+| Home landing primitive | Visit usage | Required visual contract |
+|------------------------|-------------|--------------------------|
+| `body::before` aurora atmosphere | visit page canvas | Same pink/cyan radial fields and deep city-pop night gradient. |
+| `.site-header` / `.header-inner` / `.brand-link` | visit fixed top header | Same glass blur, border, brand glow, and compact nav treatment. |
+| `.glass-panel` | visit hero, form, success, notes | Same raised translucent material, `--radius-xl`, and `--glass-shadow`. |
+| `.button` / `.button-primary` / `.button-secondary` | hero actions, submit, share, copy | Same square-radius button anatomy, pink primary CTA, cyan secondary CTA, hover/active/focus states. |
+| Display `h1` treatment | visit hero headline | Uppercase Sora display, centered rhythm, and neon text glow from the home hero. |
+
+Known divergence is limited to content density: the visit page can use a shorter hero and a form/notes rail, but it must preserve the same color ramp, type system, surface material, and button primitives as the landing page.
+
 ## 5. Components
 
 ### Top Navigation
