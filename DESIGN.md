@@ -112,7 +112,7 @@ StyleGallery layout-gallery is the imported layout-system source for `visit.html
 | --layout-stack-gap | 0.9rem | Default vertical rhythm for form and cards. |
 | --layout-inline-gap | 0.65rem | Inline grouped controls and reel spacing. |
 | --layout-rail-min | 22rem | Guestbook rail reflow threshold. |
-| --layout-reel-card-min | clamp(15rem, 24vw, 22rem) | Desktop sponsor brand card width. |
+| --layout-reel-card-min | clamp(17rem, 28vw, 26rem) | Desktop sponsor brand card width for the sticky footer reel. |
 
 Verification follows the StyleGallery matrix: check `320px`, `375px`, `768px`, `1024px`, and `1440px` when layout changes; include empty, short, long paragraph, and unbroken-string content; preserve visible focus order; avoid unusable two-dimensional scrolling.
 
@@ -166,15 +166,23 @@ Known divergence is limited to content density: the visit page can use a shorter
 - **Accessibility**: hero actions link to real page sections, and the source order stays brand, promise, action, form, notes.
 
 ### Sponsor Brand Reel
-- **Structure**: bottom `aside`, label, overflow-hidden viewport, and repeated brand asset cards.
-- **Desktop layout**: large horizontal brand cards with a slow continuous reel so sponsor assets read as real placements.
+- **Structure**: fixed bottom `aside`, centered divider-style label, reel viewport, and repeated brand asset cards.
+- **Desktop layout**: large horizontal brand cards inside the central page track with a slow continuous reel so sponsor assets read as real placements.
 - **Mobile layout**: each brand asset owns one full viewport width and advances every 2 seconds.
+- **Overlap safety**: page and anchor scrolling reserve `--sponsor-rail-height` plus safe-area inset so the fixed footer never hides the guestbook CTA or note content.
 - **Motion**: transform-only animation, pauses on hover/focus, and stops under `prefers-reduced-motion`.
 
 ### Guestbook Notes Wall
-- **Structure**: repeated `article` notes with avatar/initials, name, intent badge, message, optional profile link, and timestamp when available.
-- **Layout**: masonry/feed hybrid for varied note lengths; no forced equal heights.
+- **Structure**: repeated `article` notes with top-right render-time `Supported by <sponsor>` attribution, a single identity row for name, initials, and intent, message, optional profile link, and timestamp when available.
+- **Layout**: responsive feed/grid wall for varied note lengths; no forced equal heights and no CSS masonry that can disturb focus order.
+- **Filters**: intent filter buttons sit above the feed, use `aria-pressed`, and filter already-fetched notes without changing DOM source order inside each rendered list.
+- **Sponsor attribution**: sponsor attributions are assigned only at render time from the current sponsor list using balanced random distribution; visible sponsor counts should differ by no more than one within a rendered batch.
 - **Accessibility**: note cards remain in logical DOM order and the entries container announces loading, empty, and error states.
+
+### Guestbook Privacy Disclosure
+- **Structure**: compact unframed disclosure below the form/notes grid, not inside the form card.
+- **Content**: tell visitors that guestbook notes are public and route edits/deletion to the Cafe @ICML admin rather than GitHub issues.
+- **Mobile layout**: keep the submit CTA visible within the first form viewport by avoiding long legal copy inside `Leave your note`.
 
 ## 6. Motion & Interaction
 

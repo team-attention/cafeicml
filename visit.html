@@ -64,7 +64,7 @@
       </section>
 
       <section class="guestbook-grid page_grid_content main_with_rail" aria-label="Cafe @ICML guestbook">
-        <section class="guestbook-card main_with_rail_main stack" id="formScreen" aria-labelledby="guestbook-title">
+        <section class="guestbook-card main_with_rail_main stack glass-panel" id="formScreen" aria-labelledby="guestbook-title">
           <div class="card-heading">
             <p class="eyebrow">Guestbook sign in</p>
             <h2 id="guestbook-title">Leave your note</h2>
@@ -80,7 +80,7 @@
             </div>
 
             <div class="field">
-              <label for="visitorProfile">LinkedIn, X, or website <span>optional</span></label>
+              <label for="visitorProfile">LinkedIn profile <span>optional</span></label>
               <input id="visitorProfile" name="profile" type="text" inputmode="url" autocomplete="url" placeholder="linkedin.com/in/you" maxlength="240">
             </div>
 
@@ -121,12 +121,6 @@
 
             <div class="form-status" id="submitStatus" aria-live="polite" role="status"></div>
 
-            <p class="privacy-notice">
-              Submitting makes your name, link, reason, and message public on this page.
-              To request deletion, open the configured
-              <a id="deletionIssueLink" href="https://github.com/team-attention/cafeicml/issues/new?title=Guestbook%20deletion%20request" target="_blank" rel="noopener noreferrer">GitHub issue</a>.
-            </p>
-
             <div class="form-cta-row">
               <button class="button button-primary primary-button" id="submitButton" type="submit">Sign guestbook and unlock free drink</button>
               <p>Show the next screen to the Cafe @ICML team.</p>
@@ -134,7 +128,7 @@
           </form>
         </section>
 
-        <section class="guestbook-card success-card main_with_rail_main stack" id="successScreen" aria-live="polite" hidden>
+        <section class="guestbook-card success-card main_with_rail_main stack glass-panel" id="successScreen" aria-live="polite" hidden>
           <p class="eyebrow">Free Drink unlocked</p>
           <h2>Show this screen at Cafe @ICML.</h2>
           <div class="submitted-summary" id="submittedSummary"></div>
@@ -148,16 +142,31 @@
           </div>
         </section>
 
-        <section class="entries-card main_with_rail_side stack" aria-labelledby="entries-title">
+        <section class="entries-card guestbook-wall-card main_with_rail_side stack glass-panel" aria-labelledby="entries-title">
           <div class="entry-board-heading">
             <div class="card-heading">
-              <p class="eyebrow">Who is here</p>
-              <h2 id="entries-title">Guestbook notes</h2>
+              <p class="eyebrow">Cafe wall</p>
+              <h2 id="entries-title">Guestbook wall</h2>
             </div>
-            <p class="entry-board-meta">Latest public notes from Cafe @ICML visitors.</p>
+            <p class="entry-board-meta">Public notes from visitors looking for hallway conversations.</p>
           </div>
-          <div class="entry-list feed" id="entryList" role="list" aria-live="polite"></div>
+          <div class="intent-filter-bar" id="entryFilters" aria-label="Filter guestbook notes by intent">
+            <button class="intent-filter is-active" type="button" data-intent-filter="all" aria-pressed="true">All</button>
+            <button class="intent-filter" type="button" data-intent-filter="collab" aria-pressed="false">Collab</button>
+            <button class="intent-filter" type="button" data-intent-filter="hiring" aria-pressed="false">Hiring</button>
+            <button class="intent-filter" type="button" data-intent-filter="open-to-work" aria-pressed="false">Open to work</button>
+            <button class="intent-filter" type="button" data-intent-filter="business" aria-pressed="false">Business</button>
+            <button class="intent-filter" type="button" data-intent-filter="special-request" aria-pressed="false">Special request</button>
+          </div>
+          <div class="entry-list guestbook-wall feed" id="entryList" role="list" aria-live="polite"></div>
         </section>
+      </section>
+
+      <section class="visit-disclosure page_grid_content" aria-label="Guestbook privacy disclosure">
+        <p>
+          Guestbook notes are public on this page, including your name, LinkedIn profile, reason, and message.
+          For edits or deletion, contact the Cafe @ICML admin.
+        </p>
       </section>
     </main>
 
