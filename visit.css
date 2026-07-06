@@ -372,53 +372,71 @@ h2 {
 }
 
 .hero-pass {
-  display: flex;
+  position: relative;
+  display: grid;
   align-items: center;
-  gap: 0.75rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.82rem;
   width: min(100%, 52rem);
-  min-width: 0;
-  overflow-x: auto;
+  min-inline-size: 0;
+  overflow: hidden;
   padding: 0.78rem 0.85rem;
   border: 1px solid rgba(152, 225, 255, 0.2);
   border-radius: var(--radius-lg);
   background: rgba(9, 10, 30, 0.36);
   box-shadow: inset 0 0 24px rgba(152, 225, 255, 0.05);
-  scrollbar-width: none;
 }
 
-.hero-pass::-webkit-scrollbar {
-  display: none;
+.hero-pass::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 3rem;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(9, 10, 30, 0.88));
 }
 
 .pass-label {
-  flex: 0 0 auto;
   color: var(--accent-secondary);
   font-family: "Space Grotesk", system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 800;
+  line-height: 1;
   white-space: nowrap;
 }
 
 .hero-pass ol {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 0.5rem;
+  width: max-content;
   min-width: max-content;
   margin: 0;
   padding: 0;
+  animation: pass-marquee 22s linear infinite;
   list-style: none;
+  will-change: transform;
+}
+
+.hero-pass:hover ol {
+  animation-play-state: paused;
 }
 
 .hero-pass li {
   position: relative;
   display: inline-flex;
-  gap: 0.45rem;
+  flex: 0 0 auto;
   align-items: center;
+  gap: 0.42rem;
   color: var(--text-secondary);
+  white-space: nowrap;
 }
 
 .hero-pass li:not(:last-child)::after {
-  width: 1.35rem;
+  width: 1.45rem;
   height: 1px;
   margin-left: 0.15rem;
   content: "";
@@ -442,6 +460,7 @@ h2 {
 .hero-pass li strong {
   color: var(--text-primary);
   font-size: 0.82rem;
+  line-height: 1.22;
   white-space: nowrap;
 }
 
@@ -1158,6 +1177,16 @@ textarea:focus {
   }
 }
 
+@keyframes pass-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes sponsor-mobile-cycle {
   0%,
   20% {
@@ -1195,8 +1224,13 @@ textarea:focus {
     scroll-behavior: auto;
   }
 
+  .hero-pass ol,
   .sponsor-track {
     animation: none;
+  }
+
+  .hero-pass ol {
+    transform: none;
   }
 }
 
@@ -1262,8 +1296,17 @@ textarea:focus {
   }
 
   .hero-pass {
+    grid-template-columns: auto minmax(0, 1fr);
     width: 100%;
     padding: 0.56rem 0.65rem;
+  }
+
+  .hero-pass ol {
+    animation-duration: 18s;
+  }
+
+  .hero-pass li strong {
+    font-size: 0.76rem;
   }
 
   .guestbook-card,

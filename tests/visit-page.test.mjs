@@ -85,9 +85,12 @@ assert.match(html, /class=["']hero-actions["'][\s\S]*Sign guestbook[\s\S]*Browse
 assert.match(css, /\.hero-actions\b[\s\S]*flex-wrap:\s*nowrap/, 'visit hero CTAs should stay in one horizontal row');
 assert.match(css, /\.hero-button\b[\s\S]*flex:\s*1 1 0/, 'visit hero CTAs should share a single row on mobile');
 assert.doesNotMatch(css, /@media\s+\(max-width:\s*640px\)[\s\S]*\.hero-actions\s*\{[^}]*display:\s*grid/, 'mobile hero CTAs should not stack into a vertical grid');
-assert.match(css, /\.hero-pass\b[\s\S]*display:\s*flex[\s\S]*overflow-x:\s*auto/, 'hero pass should become a horizontal flow to reduce height');
-assert.match(css, /\.hero-pass ol\b[\s\S]*display:\s*flex/, 'hero pass steps should flow horizontally');
+assert.match(html, /<li aria-hidden=["']true["']><span>1<\/span><strong>Write a note<\/strong><\/li>/, 'hero pass should duplicate its steps for a seamless visual marquee without repeating them to assistive tech');
+assert.match(css, /\.hero-pass\b[\s\S]*display:\s*grid[\s\S]*overflow:\s*hidden/, 'hero pass should keep the moving track clipped inside one row');
+assert.match(css, /\.hero-pass ol\s*\{[^}]*display:\s*flex[^}]*flex-wrap:\s*nowrap[^}]*animation:\s*pass-marquee/, 'hero pass steps should move as a single-line marquee');
+assert.match(css, /@keyframes\s+pass-marquee[\s\S]*translateX\(-50%\)/, 'hero pass marquee should loop over the duplicated track');
 assert.match(css, /\.hero-pass li:not\(:last-child\)::after[\s\S]*linear-gradient/, 'hero pass flow should visually connect steps across the row');
+assert.doesNotMatch(css, /\.hero-pass ol\s*\{[^}]*flex-wrap:\s*wrap/, 'hero pass track should not wrap into multiple rows');
 assert.match(html, /class=["'][^"']*guestbook-card[^"']*glass-panel[^"']*["'][^>]+id=["']formScreen["']/, 'visit form should reuse the shared glass-panel primitive');
 assert.match(html, /class=["'][^"']*guestbook-card[^"']*glass-panel[^"']*["'][^>]+id=["']successScreen["']/, 'visit success state should reuse the shared glass-panel primitive');
 assert.match(html, /class=["'][^"']*entries-card[^"']*glass-panel[^"']*["']/, 'visit guestbook wall should reuse the shared glass-panel primitive');

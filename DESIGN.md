@@ -161,7 +161,7 @@ Known divergence is limited to content density: the visit page can use a shorter
 
 ### Visit Landing Hero
 - **Structure**: compact brand link, left-aligned value proposition, direct in-page CTAs, and a small proof/pass panel.
-- **Layout**: page-grid composition with a dominant form and supporting notes rail on desktop; one-column source order on mobile. The hero keeps its two CTAs in one horizontal row and compresses the Cafe pass into a horizontal flow so the guestbook card is visible before scrolling on mobile.
+- **Layout**: page-grid composition with a dominant form and supporting notes rail on desktop; one-column source order on mobile. The hero keeps its two CTAs in one horizontal row and renders the Cafe pass as a single-line, transform-only marquee so the steps never wrap into a taller block on mobile or desktop.
 - **States**: CTAs use the primary/secondary button states and visible focus rings.
 - **Accessibility**: hero actions link to real page sections, and the source order stays brand, promise, action, form, notes.
 
