@@ -235,8 +235,8 @@ for (const sponsor of visitModule.SPONSORS) {
 assert.match(js, /id:\s*['"]dalpha['"][\s\S]*logo:\s*['"]assets\/logos\/dalpha-logo\.png['"]/, 'Dalpha should use the supplied footer logo image');
 assert.match(js, /id:\s*['"]minds['"][\s\S]*logo:\s*['"]assets\/logos\/minds-logo\.png['"]/, 'Minds should use the supplied footer logo image');
 assert.match(css, /\.sponsor-card\[data-sponsor=["']arize["']\] img[\s\S]*border-radius:/, 'Arize logo image should receive a rounded image edge');
-assert.match(css, /\.sponsor-carousel\b[\s\S]*rgba\(255, 255, 255, 0\.13\)/, 'sponsor footer shelf should pick up the bright logo backgrounds');
-assert.match(css, /\.sponsor-card\[data-sponsor=["']arize["']\],[\s\S]*\.sponsor-card\[data-sponsor=["']minds["']\]\s*\{[\s\S]*rgba\(255, 255, 255, 0\.92\)/, 'Arize and Minds should sit on matching bright sponsor cards');
+assert.match(css, /\.sponsor-carousel\b[\s\S]*rgba\(255, 255, 255, 0\)/, 'sponsor footer shelf should stay transparent around bright logo backgrounds');
+assert.match(css, /\.sponsor-card\[data-sponsor=["']arize["']\],[\s\S]*\.sponsor-card\[data-sponsor=["']minds["']\]\s*\{[\s\S]*background:\s*rgb\(255, 255, 255\)/, 'Arize and Minds should sit on logo-matched white sponsor cards');
 assert.match(css, /\.sponsor-card\.has-logo\b/, 'sponsor logo cards should expose a logo-specific style hook');
 assert.match(css, /sponsor-mobile-cycle[\s\S]*8s[\s\S]*100vw/, 'mobile sponsor carousel should rotate one full-viewport brand asset every two seconds');
 assert.match(css, /\.sponsor-carousel:hover \.sponsor-track|\.sponsor-carousel:focus-within \.sponsor-track/, 'sponsor carousel should pause on hover or focus');
