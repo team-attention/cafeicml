@@ -54,14 +54,14 @@ assert.match(html, /backdrop-filter:\s*blur\(22px\)/i, 'menu panel should blur t
 assert.match(html, /aria-label=["']Free drink menu["']/, 'menu should describe the updated drink list');
 assert.match(
   html,
-  /ICML Cold Brew Americano[\s\S]*Ironclaw Iced Latte[\s\S]*Arize Grapefruit Ade[\s\S]*Minds Orange Juice[\s\S]*Dalpa Peach Iced Tea[\s\S]*Corona Extra/,
+  /Weights & Brews[\s\S]*Ironclaw Iced Latte[\s\S]*Arize Grapefruit Ade[\s\S]*Minds Orange Juice[\s\S]*Dalpa Peach Iced Tea[\s\S]*Corona Extra/,
   'drink cards should render in the requested sponsor order'
 );
-assert.match(html, /ICML Cold Brew Americano/, 'ICML cold brew Americano should be the first menu item');
-assert.match(html, /assets\/menu\/cafeicml-americano-cutout\.png/, 'ICML Americano card should include the CAFE@ICML drink image');
-assert.match(html, /ICML Cold Brew Americano with a pastel city-pop CAFE@ICML cup sleeve/, 'ICML Americano image needs useful alt text');
-assert.match(html, /By CAFE@ICML/, 'ICML Americano card should use the CAFE@ICML line');
-assert.match(html, /cold brew, water,<br>ice, clean finish/, 'ICML Americano copy should match the new menu');
+assert.match(html, /Weights & Brews/, 'Weights & Brews should be the first menu item');
+assert.match(html, /assets\/menu\/Weights & Brews-cutout\.png/, 'Weights & Brews card should include the CAFE@ICML drink image');
+assert.match(html, /alt=["']Weights & Brews["']/, 'Weights & Brews image needs useful alt text');
+assert.match(html, /By CAFE@ICML/, 'Weights & Brews card should use the CAFE@ICML line');
+assert.match(html, /cold brew, water,<br>ice, clean finish/, 'Weights & Brews copy should match the new menu');
 assert.match(html, /Ironclaw Iced Latte/, 'Ironclaw iced latte should be the second menu item');
 assert.match(html, /assets\/menu\/ironclaw-latte-descent-cutout\.png/, 'Ironclaw card should include the iced latte image');
 assert.match(html, /Ironclaw Iced Latte with a blue IronClaw cup sleeve/, 'Ironclaw image needs useful alt text');
