@@ -5,6 +5,8 @@ const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const script = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
 const guestbookQrUrl = new URL('../assets/qr-guestbook.svg', import.meta.url);
 const guestbookQr = existsSync(guestbookQrUrl) ? readFileSync(guestbookQrUrl, 'utf8') : '';
+const guestbookQrPngUrl = new URL('../assets/qr-guestbook.png', import.meta.url);
+const guestbookQrPng = existsSync(guestbookQrPngUrl) ? readFileSync(guestbookQrPngUrl) : Buffer.alloc(0);
 const ogImageUrl = new URL('../assets/og-cafeicml-preview.png', import.meta.url);
 const ogImage = existsSync(ogImageUrl) ? readFileSync(ogImageUrl) : Buffer.alloc(0);
 const guestbookClient = readFileSync(new URL('../guestbook-client.js', import.meta.url), 'utf8');
@@ -108,9 +110,14 @@ assert.doesNotMatch(html, />\s*add\s*</, 'menu cards should not include plus/add
 assert.doesNotMatch(html, /<cite\b/i, 'removed cite labels should not return');
 assert.ok(existsSync(guestbookQrUrl), 'guestbook QR asset should exist');
 assert.match(guestbookQr, /https:\/\/cafeicml\.com\/visit\.html/, 'guestbook QR asset should encode the public guestbook URL in metadata');
+assert.ok(existsSync(guestbookQrPngUrl), 'guestbook QR PNG asset should exist for TV browser compatibility');
+assert.deepEqual([...guestbookQrPng.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], 'guestbook QR PNG should be a valid PNG image');
+assert.equal(guestbookQrPng.readUInt32BE(16), 1024, 'guestbook QR PNG should be large enough for TV scaling');
+assert.equal(guestbookQrPng.readUInt32BE(20), 1024, 'guestbook QR PNG should be square');
 assert.match(html, /class=["']menu-heading-row["'][\s\S]*class=["']menu-guestbook-qr["']/, 'menu heading should include a guestbook QR block');
 assert.match(html, /class=["']menu-guestbook-qr["'][^>]+href=["']\.\/visit\.html["']|href=["']\.\/visit\.html["'][^>]+class=["']menu-guestbook-qr["']/, 'menu QR should link to the guestbook page');
-assert.match(html, /src=["']\.\/assets\/qr-guestbook\.svg["'][\s\S]*alt=["']QR code for Cafe @ICML guestbook["']/, 'menu QR should render the local QR asset with useful alt text');
+assert.match(html, /src=["']\.\/assets\/qr-guestbook\.png["'][\s\S]*alt=["']QR code for Cafe @ICML guestbook["']/, 'menu QR should render the local PNG QR asset with useful alt text');
+assert.match(html, /src=["']\.\/assets\/qr-guestbook\.png["'][\s\S]*loading=["']eager["']/, 'menu QR PNG should load eagerly for TV browsers');
 assert.match(html, /Scan to sign the guestbook/, 'menu QR should have a concise visible instruction');
 
 const pinkCityPopTokens = [
