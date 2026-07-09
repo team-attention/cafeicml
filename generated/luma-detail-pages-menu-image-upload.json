@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-07-07T02:38:16.670200+09:00",
+  "image_source": "/var/folders/x2/4jx12y595v5_2rdk2fxtf8q00000gn/T/codex-clipboard-27111e0c-2606-4ec2-8f6e-ab050b1685bf.png",
+  "image_sha256": "524e31303da1bb996f3da822b7050e3ae8405733e64a730278442649eaf09e83",
+  "image_bytes": 2289499,
+  "content_type": "image/png",
+  "luma_file_url": "https://images.lumacdn.com/api-uploads/6f/85c2b0ab-53e5-431c-92e7-a5e51431ec72.png",
+  "put_status": 200,
+  "applied_to_event_ids": [
+    "evt-zeYDBIhHdV1BVRP",
+    "evt-FtCCZ9lG7xZzZzG",
+    "evt-sdkGWZrOFrebAgo",
+    "evt-EBjY7OOJBMHaM42",
+    "evt-ai87KwKhQ58eMtu"
+  ],
+  "main_url": "https://luma.com/7iiqamt2"
+}

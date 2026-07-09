@@ -1,0 +1,539 @@
+{
+  "created_at": "2026-07-06T17:45:27.637706+09:00",
+  "calendar_id": "cal-FUEjTX1v9DJ4GAn",
+  "parent_event_id": "evt-CpDslpHDtaoauoG",
+  "note": "Private Luma random coffee chat events for Cafe @ICML. Public API does not expose ticket-conditional registration questions; host questions are optional on the event form and host ticket requires approval.",
+  "events": [
+    {
+      "event_id": "evt-ZTwPjyFKscWIxF5",
+      "reused_existing": false,
+      "name": "Random Coffee Chat",
+      "url": "https://luma.com/team-scwz",
+      "manage_url": "https://luma.com/event/manage/evt-ZTwPjyFKscWIxF5",
+      "start_at": "2026-07-07T02:00:00.000Z",
+      "end_at": "2026-07-07T03:00:00.000Z",
+      "local_start": "2026-07-07T11:00:00+09:00",
+      "local_end": "2026-07-07T12:00:00+09:00",
+      "visibility": "public",
+      "registration_open": true,
+      "registration_questions_count": 4,
+      "tickets": [
+        {
+          "id": "ttype-wCivEXALCubsdob",
+          "name": "Standard",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        },
+        {
+          "id": "ttype-G4SERYeJQqQkI4V",
+          "name": "Host a Topic Table",
+          "type": "free",
+          "require_approval": true,
+          "is_hidden": false
+        }
+      ],
+      "ticket_ops": [
+        {
+          "op": "update-default-to-standard",
+          "id": "ttype-wCivEXALCubsdob"
+        },
+        {
+          "op": "create-host-request"
+        }
+      ],
+      "updated_to_english_at": "2026-07-06T17:56:43.755881+09:00",
+      "english_update_ops": [
+        {
+          "ticket": "ttype-wCivEXALCubsdob",
+          "to": "Standard"
+        },
+        {
+          "ticket": "ttype-G4SERYeJQqQkI4V",
+          "to": "Host a Topic Table"
+        }
+      ],
+      "cover_url": "https://images.lumacdn.com/api-uploads/l1/b9e2484a-6f65-4f40-aa7b-5e779146dfad.png",
+      "made_public_at": "2026-07-06T19:00:17.211333+09:00",
+      "cancelled_at": "2026-07-06T19:58:59.009304+09:00",
+      "note": "Cancelled per user request: tomorrow 11am slot removed.",
+      "cancel_result_keys": []
+    },
+    {
+      "event_id": "evt-zeYDBIhHdV1BVRP",
+      "reused_existing": false,
+      "name": "Cowork & Prepare Your Poster",
+      "url": "https://luma.com/team-lal5",
+      "manage_url": "https://luma.com/event/manage/evt-zeYDBIhHdV1BVRP",
+      "start_at": "2026-07-07T01:00:00.000Z",
+      "end_at": "2026-07-07T05:00:00.000Z",
+      "local_start": "2026-07-07T10:00:00+09:00",
+      "local_end": "2026-07-07T14:00:00+09:00",
+      "visibility": "public",
+      "registration_open": true,
+      "registration_questions_count": 0,
+      "tickets": [
+        {
+          "id": "ttype-GNNwCdsF9Aj7hia",
+          "name": "Coworking Seat",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        }
+      ],
+      "ticket_ops": [
+        {
+          "op": "update-default-to-standard",
+          "id": "ttype-GNNwCdsF9Aj7hia"
+        },
+        {
+          "op": "create-host-request"
+        }
+      ],
+      "updated_to_english_at": "2026-07-06T17:56:46.008776+09:00",
+      "english_update_ops": [
+        {
+          "ticket": "ttype-GNNwCdsF9Aj7hia",
+          "to": "Standard"
+        },
+        {
+          "ticket": "ttype-ih0G8NEB3nNLyzz",
+          "to": "Host a Topic Table"
+        }
+      ],
+      "cover_url": "https://images.lumacdn.com/api-uploads/l1/b9e2484a-6f65-4f40-aa7b-5e779146dfad.png",
+      "made_public_at": "2026-07-06T19:00:20.686384+09:00",
+      "updated_schedule_at": "2026-07-07T02:01:38.272294+09:00",
+      "schedule_label": "Tue cowork poster prep"
+    },
+    {
+      "event_id": "evt-FtCCZ9lG7xZzZzG",
+      "reused_existing": false,
+      "name": "Revenge Your Poster Session",
+      "url": "https://luma.com/team-ar6s",
+      "manage_url": "https://luma.com/event/manage/evt-FtCCZ9lG7xZzZzG",
+      "start_at": "2026-07-07T06:30:00.000Z",
+      "end_at": "2026-07-07T07:30:00.000Z",
+      "local_start": "2026-07-07T15:30:00+09:00",
+      "local_end": "2026-07-07T16:30:00+09:00",
+      "visibility": "public",
+      "registration_open": true,
+      "registration_questions_count": 0,
+      "tickets": [
+        {
+          "id": "ttype-zS0CyFxLXtwXKtN",
+          "name": "Just Listening",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        },
+        {
+          "id": "ttype-ngd2fmHJGj6dHj7",
+          "name": "Present My Poster",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        }
+      ],
+      "ticket_ops": [
+        {
+          "op": "update-default-to-standard",
+          "id": "ttype-zS0CyFxLXtwXKtN"
+        },
+        {
+          "op": "create-host-request"
+        }
+      ],
+      "updated_to_english_at": "2026-07-06T17:56:47.806733+09:00",
+      "english_update_ops": [
+        {
+          "ticket": "ttype-zS0CyFxLXtwXKtN",
+          "to": "Standard"
+        },
+        {
+          "ticket": "ttype-ngd2fmHJGj6dHj7",
+          "to": "Host a Topic Table"
+        }
+      ],
+      "cover_url": "https://images.lumacdn.com/api-uploads/l1/b9e2484a-6f65-4f40-aa7b-5e779146dfad.png",
+      "made_public_at": "2026-07-06T19:00:21.832414+09:00",
+      "updated_schedule_at": "2026-07-07T02:01:38.272294+09:00",
+      "schedule_label": "Tue revenge poster"
+    },
+    {
+      "event_id": "evt-sdkGWZrOFrebAgo",
+      "reused_existing": false,
+      "name": "Fable 5: The Final Five Hours",
+      "url": "https://luma.com/team-5fk5",
+      "manage_url": "https://luma.com/event/manage/evt-sdkGWZrOFrebAgo",
+      "start_at": "2026-07-08T02:00:00.000Z",
+      "end_at": "2026-07-08T07:00:00.000Z",
+      "local_start": "2026-07-08T11:00:00+09:00",
+      "local_end": "2026-07-08T16:00:00+09:00",
+      "visibility": "public",
+      "registration_open": true,
+      "registration_questions_count": 0,
+      "tickets": [
+        {
+          "id": "ttype-328vSVNFcA1sUll",
+          "name": "Join the Sprint",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        }
+      ],
+      "ticket_ops": [
+        {
+          "op": "update-default-to-standard",
+          "id": "ttype-328vSVNFcA1sUll"
+        },
+        {
+          "op": "create-host-request"
+        }
+      ],
+      "updated_to_english_at": "2026-07-06T17:56:49.549260+09:00",
+      "english_update_ops": [
+        {
+          "ticket": "ttype-328vSVNFcA1sUll",
+          "to": "Standard"
+        },
+        {
+          "ticket": "ttype-GAtsFCE7CbU1DN8",
+          "to": "Host a Topic Table"
+        }
+      ],
+      "cover_url": "https://images.lumacdn.com/api-uploads/l1/b9e2484a-6f65-4f40-aa7b-5e779146dfad.png",
+      "made_public_at": "2026-07-06T19:00:22.745274+09:00",
+      "updated_schedule_at": "2026-07-07T02:01:38.272294+09:00",
+      "schedule_label": "Wed Fable 5 final five hours"
+    },
+    {
+      "event_id": "evt-JJWIgaZJZbO4wme",
+      "reused_existing": false,
+      "name": "Random Coffee Chat",
+      "url": "https://luma.com/team-opq4",
+      "manage_url": "https://luma.com/event/manage/evt-JJWIgaZJZbO4wme",
+      "start_at": "2026-07-08T05:00:00.000Z",
+      "end_at": "2026-07-08T06:00:00.000Z",
+      "local_start": "2026-07-08T14:00:00+09:00",
+      "local_end": "2026-07-08T15:00:00+09:00",
+      "visibility": "public",
+      "registration_open": true,
+      "registration_questions_count": 4,
+      "tickets": [
+        {
+          "id": "ttype-cT8f7dh4OTRBdEA",
+          "name": "Standard",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        },
+        {
+          "id": "ttype-8UGR9yCHUmojD8W",
+          "name": "Host a Topic Table",
+          "type": "free",
+          "require_approval": true,
+          "is_hidden": false
+        }
+      ],
+      "ticket_ops": [
+        {
+          "op": "update-default-to-standard",
+          "id": "ttype-cT8f7dh4OTRBdEA"
+        },
+        {
+          "op": "create-host-request"
+        }
+      ],
+      "updated_to_english_at": "2026-07-06T17:56:51.646907+09:00",
+      "english_update_ops": [
+        {
+          "ticket": "ttype-cT8f7dh4OTRBdEA",
+          "to": "Standard"
+        },
+        {
+          "ticket": "ttype-8UGR9yCHUmojD8W",
+          "to": "Host a Topic Table"
+        }
+      ],
+      "cover_url": "https://images.lumacdn.com/api-uploads/l1/b9e2484a-6f65-4f40-aa7b-5e779146dfad.png",
+      "made_public_at": "2026-07-06T19:00:24.015285+09:00",
+      "cancelled_at": "2026-07-07T02:01:38.272294+09:00",
+      "note": "Delete unused Wed 14:00 slot"
+    },
+    {
+      "event_id": "evt-qtoLl55C2ZMLbAW",
+      "reused_existing": false,
+      "name": "Random Coffee Chat",
+      "url": "https://luma.com/team-hmzn",
+      "manage_url": "https://luma.com/event/manage/evt-qtoLl55C2ZMLbAW",
+      "start_at": "2026-07-08T07:00:00.000Z",
+      "end_at": "2026-07-08T08:00:00.000Z",
+      "local_start": "2026-07-08T16:00:00+09:00",
+      "local_end": "2026-07-08T17:00:00+09:00",
+      "visibility": "public",
+      "registration_open": true,
+      "registration_questions_count": 4,
+      "tickets": [
+        {
+          "id": "ttype-MkJ2J7IqJtPON3R",
+          "name": "Standard",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        },
+        {
+          "id": "ttype-5necjGpie1oI8rS",
+          "name": "Host a Topic Table",
+          "type": "free",
+          "require_approval": true,
+          "is_hidden": false
+        }
+      ],
+      "ticket_ops": [
+        {
+          "op": "update-default-to-standard",
+          "id": "ttype-MkJ2J7IqJtPON3R"
+        },
+        {
+          "op": "create-host-request"
+        }
+      ],
+      "updated_to_english_at": "2026-07-06T17:56:54.026923+09:00",
+      "english_update_ops": [
+        {
+          "ticket": "ttype-MkJ2J7IqJtPON3R",
+          "to": "Standard"
+        },
+        {
+          "ticket": "ttype-5necjGpie1oI8rS",
+          "to": "Host a Topic Table"
+        }
+      ],
+      "cover_url": "https://images.lumacdn.com/api-uploads/l1/b9e2484a-6f65-4f40-aa7b-5e779146dfad.png",
+      "made_public_at": "2026-07-06T19:00:24.715063+09:00",
+      "cancelled_at": "2026-07-07T02:01:38.272294+09:00",
+      "note": "Delete unused Wed 16:00 slot"
+    },
+    {
+      "event_id": "evt-EBjY7OOJBMHaM42",
+      "reused_existing": false,
+      "name": "Revenge Your Poster Session",
+      "url": "https://luma.com/team-1pig",
+      "manage_url": "https://luma.com/event/manage/evt-EBjY7OOJBMHaM42",
+      "start_at": "2026-07-09T02:00:00.000Z",
+      "end_at": "2026-07-09T03:00:00.000Z",
+      "local_start": "2026-07-09T11:00:00+09:00",
+      "local_end": "2026-07-09T12:00:00+09:00",
+      "visibility": "public",
+      "registration_open": true,
+      "registration_questions_count": 0,
+      "tickets": [
+        {
+          "id": "ttype-1GdeqFDBRz3DMmJ",
+          "name": "Just Listening",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        },
+        {
+          "id": "ttype-giHKlH5P5GupFEi",
+          "name": "Present My Poster",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        }
+      ],
+      "ticket_ops": [
+        {
+          "op": "update-default-to-standard",
+          "id": "ttype-1GdeqFDBRz3DMmJ"
+        },
+        {
+          "op": "create-host-request"
+        }
+      ],
+      "updated_to_english_at": "2026-07-06T17:56:57.439617+09:00",
+      "english_update_ops": [
+        {
+          "ticket": "ttype-1GdeqFDBRz3DMmJ",
+          "to": "Standard"
+        },
+        {
+          "ticket": "ttype-giHKlH5P5GupFEi",
+          "to": "Host a Topic Table"
+        }
+      ],
+      "cover_url": "https://images.lumacdn.com/api-uploads/l1/b9e2484a-6f65-4f40-aa7b-5e779146dfad.png",
+      "made_public_at": "2026-07-06T19:00:25.286615+09:00",
+      "updated_schedule_at": "2026-07-07T02:01:38.272294+09:00",
+      "schedule_label": "Thu 11 revenge poster"
+    },
+    {
+      "event_id": "evt-Tc6ckFskcvBSQNn",
+      "reused_existing": false,
+      "name": "Random Coffee Chat",
+      "url": "https://luma.com/team-8q1q",
+      "manage_url": "https://luma.com/event/manage/evt-Tc6ckFskcvBSQNn",
+      "start_at": "2026-07-09T05:00:00.000Z",
+      "end_at": "2026-07-09T06:00:00.000Z",
+      "local_start": "2026-07-09T14:00:00+09:00",
+      "local_end": "2026-07-09T15:00:00+09:00",
+      "visibility": "private",
+      "registration_open": true,
+      "registration_questions_count": 4,
+      "tickets": [
+        {
+          "id": "ttype-8Pz5NCGUCG0hruW",
+          "name": "Standard",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        },
+        {
+          "id": "ttype-3ErEZTY1oaeIaN1",
+          "name": "Host a Topic Table",
+          "type": "free",
+          "require_approval": true,
+          "is_hidden": false
+        }
+      ],
+      "ticket_ops": [
+        {
+          "op": "update-default-to-standard",
+          "id": "ttype-8Pz5NCGUCG0hruW"
+        },
+        {
+          "op": "create-host-request"
+        }
+      ],
+      "updated_to_english_at": "2026-07-06T17:56:59.276319+09:00",
+      "english_update_ops": [
+        {
+          "ticket": "ttype-8Pz5NCGUCG0hruW",
+          "to": "Standard"
+        },
+        {
+          "ticket": "ttype-3ErEZTY1oaeIaN1",
+          "to": "Host a Topic Table"
+        }
+      ],
+      "cancelled_at": "2026-07-06T19:00:27.331784+09:00",
+      "cancel_result_keys": [],
+      "note": "Cancelled per user request: Thursday 2pm slot removed."
+    },
+    {
+      "event_id": "evt-ai87KwKhQ58eMtu",
+      "reused_existing": false,
+      "name": "Revenge Your Poster Session",
+      "url": "https://luma.com/team-vow6",
+      "manage_url": "https://luma.com/event/manage/evt-ai87KwKhQ58eMtu",
+      "start_at": "2026-07-09T07:00:00.000Z",
+      "end_at": "2026-07-09T08:00:00.000Z",
+      "local_start": "2026-07-09T16:00:00+09:00",
+      "local_end": "2026-07-09T17:00:00+09:00",
+      "visibility": "public",
+      "registration_open": true,
+      "registration_questions_count": 0,
+      "tickets": [
+        {
+          "id": "ttype-ohxMVrA1L0CEf1X",
+          "name": "Just Listening",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        },
+        {
+          "id": "ttype-4gRTatzkABCbYNE",
+          "name": "Present My Poster",
+          "type": "free",
+          "require_approval": false,
+          "is_hidden": false
+        }
+      ],
+      "ticket_ops": [
+        {
+          "op": "update-default-to-standard",
+          "id": "ttype-ohxMVrA1L0CEf1X"
+        },
+        {
+          "op": "create-host-request"
+        }
+      ],
+      "updated_to_english_at": "2026-07-06T17:57:01.040194+09:00",
+      "english_update_ops": [
+        {
+          "ticket": "ttype-ohxMVrA1L0CEf1X",
+          "to": "Standard"
+        },
+        {
+          "ticket": "ttype-4gRTatzkABCbYNE",
+          "to": "Host a Topic Table"
+        }
+      ],
+      "cover_url": "https://images.lumacdn.com/api-uploads/l1/b9e2484a-6f65-4f40-aa7b-5e779146dfad.png",
+      "made_public_at": "2026-07-06T19:00:26.421937+09:00",
+      "updated_schedule_at": "2026-07-07T02:01:38.272294+09:00",
+      "schedule_label": "Thu 16 revenge poster"
+    }
+  ],
+  "english_update": {
+    "updated_at": "2026-07-06T17:57:01.040273+09:00",
+    "concept_source": "https://luma.com/7iiqamt2 / Road to ICML 2026 Seoul: Cafe @ICML",
+    "note": "Updated the random coffee chat events to English copy aligned with Cafe @ICML: free coffee, casual researcher/builder meetups, and optional host-led topic tables. Host ticket name kept <= 30 chars due to Luma API validation."
+  },
+  "public_cover_update": {
+    "updated_at": "2026-07-06T19:00:27.331825+09:00",
+    "image_source": "/Users/bong/Downloads/IMG_0310.png",
+    "image_sha256": "16f545ad234e406e1305972178dbb56226356dcd4a45f8c3b3667aa62e6eaa80",
+    "image_bytes": 10885814,
+    "content_type": "image/png",
+    "luma_file_url": "https://images.lumacdn.com/api-uploads/l1/b9e2484a-6f65-4f40-aa7b-5e779146dfad.png",
+    "cancelled_event_id": "evt-Tc6ckFskcvBSQNn",
+    "public_event_count": 8,
+    "note": "Thursday 2pm event was cancelled because Luma public API exposes cancel, not delete. Remaining events were made public and assigned the uploaded cover image."
+  },
+  "cancel_updates": [
+    {
+      "cancelled_at": "2026-07-06T19:58:59.009342+09:00",
+      "event_id": "evt-ZTwPjyFKscWIxF5",
+      "local_start": "2026-07-07T11:00:00+09:00",
+      "url": "https://luma.com/team-scwz",
+      "reason": "User requested deletion of tomorrow 11am event; Luma API supports cancel, not hard delete."
+    }
+  ],
+  "schedule_updates": [
+    {
+      "updated_at": "2026-07-07T02:01:38.272294+09:00",
+      "updated_event_ids": [
+        "evt-zeYDBIhHdV1BVRP",
+        "evt-FtCCZ9lG7xZzZzG",
+        "evt-sdkGWZrOFrebAgo",
+        "evt-EBjY7OOJBMHaM42",
+        "evt-ai87KwKhQ58eMtu"
+      ],
+      "cancelled_event_ids": [
+        "evt-JJWIgaZJZbO4wme",
+        "evt-qtoLl55C2ZMLbAW"
+      ],
+      "note": "Converted Random Coffee Chat slots to cowork/poster/Fable programming per user request."
+    }
+  ],
+  "detail_page_body_updates": [
+    {
+      "updated_at": "2026-07-07T02:38:16.670200+09:00",
+      "main_url": "https://luma.com/7iiqamt2",
+      "image_url": "https://images.lumacdn.com/api-uploads/6f/85c2b0ab-53e5-431c-92e7-a5e51431ec72.png",
+      "image_source": "/var/folders/x2/4jx12y595v5_2rdk2fxtf8q00000gn/T/codex-clipboard-27111e0c-2606-4ec2-8f6e-ab050b1685bf.png",
+      "image_sha256": "524e31303da1bb996f3da822b7050e3ae8405733e64a730278442649eaf09e83",
+      "event_ids": [
+        "evt-zeYDBIhHdV1BVRP",
+        "evt-FtCCZ9lG7xZzZzG",
+        "evt-sdkGWZrOFrebAgo",
+        "evt-EBjY7OOJBMHaM42",
+        "evt-ai87KwKhQ58eMtu"
+      ],
+      "note": "Added main Cafe @ICML hub link and exclusive drinks image to active detail pages."
+    }
+  ]
+}

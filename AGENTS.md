@@ -134,6 +134,18 @@ python3 /Users/bong/team-attention/deep-thought/.claude/skills/luma-description-
   --event evt-CpDslpHDtaoauoG --get
 ```
 
+Operational ownership:
+
+- Keep Cafe @ICML public-change artifacts in this repo: generated candidates,
+  upload reports, and `versions/luma-description/` snapshots.
+- Reuse the Deep Thought Luma API/versioning scripts as shared tooling; do not
+  fork one-off API helpers into this repo unless the workflow becomes
+  project-specific.
+- The Luma API key should live only in macOS Keychain service
+  `team-attention-luma-api-key` with account `luma`, or in a transient
+  `LUMA_API_KEY` environment variable for a single shell. Never commit it or
+  write it to generated files.
+
 Before any Luma mutation, snapshot:
 
 ```bash
@@ -175,6 +187,11 @@ python3 /Users/bong/team-attention/deep-thought/.claude/skills/luma-description-
 ```
 
 After apply, snapshot `after` and run `--get` to verify the exact live text.
+
+For small hotfixes, start from the current live `description_md`, not an older
+generated candidate, unless you explicitly diff the candidate against live
+first. Preserve sections outside the intended change, especially `## Sponsors`
+and its image/link block.
 
 For Luma Markdown images, use `https://images.lumacdn.com/...` URLs. Upload
 local PNGs through `/v1/images/create-upload-url`; keep upload metadata under

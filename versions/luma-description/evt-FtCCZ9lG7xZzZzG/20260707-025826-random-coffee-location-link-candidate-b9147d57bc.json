@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-07-07T02:58:26.643719+09:00",
+  "event_id": "evt-FtCCZ9lG7xZzZzG",
+  "label": "random-coffee-location-link",
+  "stage": "candidate",
+  "source": "/Users/bong/team-attention/cafeicml/generated/location-link-candidates/evt-FtCCZ9lG7xZzZzG-location-link.md",
+  "sha256": "b9147d57bcc377656708fd96b329a6032f228d1e9acba62ed6aa290fc380c254",
+  "bytes": 1002,
+  "chars": 999,
+  "markdown_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-FtCCZ9lG7xZzZzG/20260707-025826-random-coffee-location-link-candidate-b9147d57bc.md",
+  "metadata_path": "/Users/bong/team-attention/cafeicml/versions/luma-description/evt-FtCCZ9lG7xZzZzG/20260707-025826-random-coffee-location-link-candidate-b9147d57bc.json"
+}

@@ -1,0 +1,20 @@
+{
+  "created_at": "2026-07-06T19:00:27.332614+09:00",
+  "image_source": "/Users/bong/Downloads/IMG_0310.png",
+  "image_sha256": "16f545ad234e406e1305972178dbb56226356dcd4a45f8c3b3667aa62e6eaa80",
+  "image_bytes": 10885814,
+  "content_type": "image/png",
+  "luma_file_url": "https://images.lumacdn.com/api-uploads/l1/b9e2484a-6f65-4f40-aa7b-5e779146dfad.png",
+  "put_status": 200,
+  "applied_to_event_ids": [
+    "evt-ZTwPjyFKscWIxF5",
+    "evt-zeYDBIhHdV1BVRP",
+    "evt-FtCCZ9lG7xZzZzG",
+    "evt-sdkGWZrOFrebAgo",
+    "evt-JJWIgaZJZbO4wme",
+    "evt-qtoLl55C2ZMLbAW",
+    "evt-EBjY7OOJBMHaM42",
+    "evt-ai87KwKhQ58eMtu"
+  ],
+  "cancelled_event_id": "evt-Tc6ckFskcvBSQNn"
+}

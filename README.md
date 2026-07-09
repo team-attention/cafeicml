@@ -19,6 +19,12 @@ python3 -m http.server 5173
 # open http://localhost:5173
 ```
 
+## Continuation On Another Mac
+
+Start from `OTHER-MAC-START.md` when resuming Cafe ICML from GitHub. The active
+handoff branch is `codex/qr-guestbook-visit`; do not edit Luma until the live
+description has been fetched and snapshotted.
+
 ## Continuous deployment
 
 Pushes to `main` and manual `workflow_dispatch` runs execute `.github/workflows/cd.yml`.
